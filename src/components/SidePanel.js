@@ -39,8 +39,8 @@ const ComposeLetter = styled.div`
     align-items:center;
     margin:10px 10px;
     font-size:18px;
-    padding:5px 10px;
-    border-radius:0.5rem;
+    padding:10px 10px;
+    border-bottom: 3px solid white;
     .MuiSvgIcon-root{
         margin:0px 10px;
     }
@@ -58,12 +58,8 @@ display:flex;
 `
 
 const SidebarButtonItem = styled.div`
-    // display:grid;
-    // grid-template-columns: 50% auto;
-    // place-items:center;
     display:flex;
     flex-direction:row;
-    
     margin:10px 10px;
     font-size:18px;
     border-radius:0.5rem;

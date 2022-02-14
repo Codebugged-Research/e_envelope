@@ -6,7 +6,7 @@ import CreateIcon from '@material-ui/icons/Create';
 
 function SidePanel() {
   return (
-    <Wrapper>
+    <Wrapper className='bg-dark text-white'>
         <ComposeLetter>
             <CreateIcon/>
             Compose 
@@ -28,7 +28,6 @@ const Wrapper = styled.div`
     display:flex;
     flex-direction:column;
     width:20%;
-    background-color:lightgray;
     border-left:1px solid darkgray;
     `
 
@@ -46,7 +45,6 @@ const ComposeLetter = styled.div`
     }
     :hover{
         font-size:20px;
-        background-color:white;
     }
 `
 
@@ -63,13 +61,12 @@ const SidebarButtonItem = styled.div`
     margin:10px 10px;
     font-size:18px;
     border-radius:0.5rem;
-    background-color:lightgray;
     padding:5px 10px;
     .MuiSvgIcon-root{
         margin:0px 10px;
     }
     :hover{
-        background-color:white;
+        // background-color:white;
     }
 `
 

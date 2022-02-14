@@ -36,15 +36,16 @@ const Wrapper = styled.div`
     display:flex;
     flex-direction:column;
     width:80%;
-    background-color:lightgray;
+    background-color:white;
     border-left:3px solid white;
     `
 
 const TopWrapper = styled.div`
     font-size:16px;
-    margin: 10px 20px;
+    padding: 10px 20px;
+    background-color:lightgray;
 `
 
 const EmailsContainer = styled.div`
-    margin: 10px;
+margin: 0px 10px 10px 10px;
 `

@@ -1,14 +1,14 @@
 import {React,useState} from 'react'
 import styled from 'styled-components'
 import { Modal, Container, Row, Button } from 'react-bootstrap'
-
+import SignUpImage from './signup.jpeg'
 
 function LoginPage() {
     const [lgShow, setLgShow] = useState(false);
 
 
   return (
-        <Row className=' col-12 vh-100'>
+        <Wrapper className='row col-12 vh-100'>
             <div className='col-4 d-flex flex-column justify-content-center shadow'>
             <form className='container text-center mx-1 px-5'>
             <h1 className='text-dark text-start'>Sign In</h1>
@@ -27,15 +27,17 @@ function LoginPage() {
                 </a>
             </form>
             <Modal 
-            className='vh-100 '
+            className='vh-100'
           size="lg"
           show={lgShow}
           onHide={() => setLgShow(false)}
           aria-labelledby="example-modal-sizes-title-lg"
         >
 
-            <Row className='col-12 '>
-                <div className='col-5 shadow '></div>
+            <Row className='col-12 radius-0'>
+                <div className='col-5 shadow '>
+                    <img src={SignUpImage} className="img-fluid w-100 d-block"/>
+                </div>
           
           <div className='col-7'>
                  <Modal.Header closeButton>
@@ -72,8 +74,19 @@ function LoginPage() {
                             <input placeholder='******' type='password' className='form-control' name="repeatPassword"/>
                         </div>
                     </div>
-                    <div className='d-flex flex-row justify-content-between align-items-center my-3'>
-                      {/* checkboxes */}
+                    <div className='d-flex flex-column justify-content-center align-items-start my-3 mx-2'>
+                                            <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="showPassword"/>
+                        <label class="form-check-label" for="showPassword">
+                            Show Password
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="loggedIn"  />
+                        <label class="form-check-label" for="loggedIn">
+                            Keep me logged in
+                        </label>
+                        </div>
                     </div>
                     <div className='d-flex flex-row justify-content-start align-items-center my-3'>
                     <Button className='btn-danger mx-3'>Sign Up</Button>
@@ -91,9 +104,11 @@ function LoginPage() {
                     <h1>Logo Here</h1>
                     
             </div>
-        </Row>
+        </Wrapper>
     )
 }
 
 export default LoginPage
 
+const Wrapper = styled.div`
+`

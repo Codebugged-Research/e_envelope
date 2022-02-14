@@ -38,7 +38,7 @@ export default EmailItem
 
 const Wrapper = styled.div`
     padding-left: 20px;
-    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
     display: grid;
     grid-template-columns: min-content min-content 120px auto min-content;
     align-items: center;

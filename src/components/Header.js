@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import PersonIcon from '@material-ui/icons/Person';
 
 function Header() {
   return (
@@ -18,7 +19,7 @@ function Header() {
         </SearchWrapper>
         <UserWrapper>
             <AddressID>UsernameEE.com</AddressID>
-            <MenuIcon/>
+            <PersonIcon/>
         </UserWrapper>
     </Wrapper>
   )

@@ -9,16 +9,16 @@ function Header() {
     <Wrapper>
         <LogoWrapper>
             <Logo><MenuIcon/></Logo>
-            <Text>E-Envelope</Text>
+            <Text className='text-dark'>E-Envelope</Text>
         </LogoWrapper>
         <SearchWrapper>
-            <SearchBarWrapper>
+            <SearchBarWrapper className=' text-white'>
                 <SearchIcon/>
                 <input placeholder='Search envelopes'/>
             </SearchBarWrapper>
         </SearchWrapper>
         <UserWrapper>
-            <AddressID>UsernameEE.com</AddressID>
+            <AddressID className='text-dark'>UsernameEE.com</AddressID>
             <PersonIcon/>
         </UserWrapper>
     </Wrapper>
@@ -70,7 +70,8 @@ const SearchBarWrapper = styled.div`
     align-items: center;
     margin: 0px 30px;
     padding:5px;
-    background-color:lightgray;
+background:linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
+
     border-radius:5px;
 
     .MuiSvgIcon-root{
@@ -86,8 +87,12 @@ const SearchBarWrapper = styled.div`
         padding:5px;
         border:none;
         font-size:18px;
+        color:white;
         :focus{
             outline:none;
+        }
+        ::placeholder{
+            color:white;
         }
     }
 `

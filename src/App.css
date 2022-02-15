@@ -21,3 +21,11 @@
   border:0px !important;
 
 }
+
+.sideBarIcon{
+  flex:1;
+}
+
+.sideBarText{
+  flex:2;
+}

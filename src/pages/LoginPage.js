@@ -6,11 +6,10 @@ import SignUpImage from './signup.jpeg'
 function LoginPage() {
     const [lgShow, setLgShow] = useState(false);
 
-
   return (
         <Wrapper className='row col-12 vh-100'>
             <div className='col-4 d-flex flex-column justify-content-center shadow'>
-            <form className='container text-center mx-1 px-5'>
+            <form id='loginForm' className='container text-center mx-1 px-5'>
             <h1 className='text-dark text-start'>Sign In</h1>
                 <div>
                     <input placeholder='Username' className='form-control my-3' type='text'/>
@@ -42,7 +41,7 @@ function LoginPage() {
           <div className='col-7'>
                  <Modal.Header closeButton>
                   </Modal.Header>
-                <form className='d-flex flex-column justify-content-center'>
+                <form id='signUpForm' className='d-flex flex-column justify-content-center'>
                     <h1>Lets get you Started!</h1>
                     <div className='d-flex flex-row justify-content-between align-items-center  my-3'>
                         <div className='mx-2'>
@@ -74,19 +73,29 @@ function LoginPage() {
                             <input placeholder='******' type='password' className='form-control' name="repeatPassword"/>
                         </div>
                     </div>
+                    <div className='d-flex flex-row justify-content-start align-items-start my-1'>
+                    <div class="form-check form-check-inline mx-2">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"/>
+                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline mx-2">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"/>
+                        <label class="form-check-label" for="inlineRadio2">Female</label>
+                        </div>
+                    </div>
                     <div className='d-flex flex-column justify-content-center align-items-start my-3 mx-2'>
-                                            <div class="form-check">
+                    {/* <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="showPassword"/>
                         <label class="form-check-label" for="showPassword">
                             Show Password
                         </label>
                         </div>
-                        <div class="form-check">
+                    <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="loggedIn"  />
                         <label class="form-check-label" for="loggedIn">
                             Keep me logged in
                         </label>
-                        </div>
+                    </div> */}
                     </div>
                     <div className='d-flex flex-row justify-content-start align-items-center my-3'>
                     <Button className='btn-danger mx-3'>Sign Up</Button>

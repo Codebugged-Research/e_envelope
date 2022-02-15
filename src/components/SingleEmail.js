@@ -4,7 +4,7 @@ import Person from '@material-ui/icons/Person'
 function SingleEmail() {
   return (
     <>
-    <Wrapper className='d-flex flex-column'>
+    <Wrapper className='d-flex flex-column container '>
         <Subject className='mx-5 my-3'>E-Envelope</Subject>
         <ImageAddressWrapper className='d-flex flex-row mx-1'>
         <Person/>

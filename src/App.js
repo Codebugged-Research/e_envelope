@@ -10,6 +10,7 @@ import Header from  './components/Header'
 import InboxPage from './pages/InboxPage';
 import LoginPage from './pages/LoginPage';
 import EmailPage from './pages/EmailPage';
+import ProfilePage from './pages/ProfilePage'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/login" element={<LoginPage/>} />
           <Route exact path="/" element={ <InboxPage/>} />
           <Route exact path="/email" element={ <EmailPage/>} />
+          <Route exact path="/profile" element={ <ProfilePage/>} />
         </Routes>
     </Router>
     </div>

@@ -2,7 +2,6 @@ import {React, useState} from 'react'
 import styled from 'styled-components'
 import sidebarItems from '../data/sidebarItems'
 import CreateIcon from '@material-ui/icons/Create';
-// import SendMail from './SendMail';
 import InsertPhoto from '@material-ui/icons/InsertPhoto';
 import Attachment from '@material-ui/icons/Attachment';
 import Close from '@material-ui/icons/Close';

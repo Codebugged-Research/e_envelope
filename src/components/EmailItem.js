@@ -12,24 +12,20 @@ const EmailItem = ({ starred, from, subject, message, received, read }) => {
 
     return (
         <Wrapper>
-            <PersonIcon htmlColor='#000' />
+            <PersonIcon htmlColor='#fff' />
             <IconButton onClick={()=> star ? setStar(false) : setStar(true)}>
                 {   star ? (
-                        <StarIcon htmlColor='#f7cb69' />
+                        <StarIcon htmlColor='#fff' />
                     ) : (
-                        <StarBorderIcon />
+                        <StarBorderIcon htmlColor='#fff' />
                     )
                 }
             </IconButton>
-
             <p className={ !read && 'unread'}>{from}</p>
-
             <div>
                 <p className={!read && 'unread'}>{subject}</p> - <span>{message}</span>
             </div>
-
             <p className={!read && 'unread'}>{received}</p>
-
         </Wrapper>
     )
 }
@@ -42,13 +38,18 @@ const Wrapper = styled.div`
     display: grid;
     grid-template-columns: min-content min-content 120px auto min-content;
     align-items: center;
+    background:linear-gradient(195deg,rgb(131 131 134),rgb(84 84 84));
+
+    color:white !important;
+    border-radius:1rem;
+    margin-top:5px;
     cursor: pointer;
     padding-right: 20px;
     div {
         display: flex;
 
         span {
-            color: darkgray;
+            color: white;
         }
     }
 

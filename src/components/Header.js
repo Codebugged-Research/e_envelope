@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
+import { Link } from 'react-router-dom';
+
 
 function Header() {
   return (
@@ -19,7 +21,9 @@ function Header() {
         </SearchWrapper>
         <UserWrapper>
             <AddressID className='text-dark'>UsernameEE.com</AddressID>
+            <Link to='/profile' className='text-dark'>
             <PersonIcon/>
+            </Link>
         </UserWrapper>
     </Wrapper>
   )

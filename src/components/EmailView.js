@@ -9,7 +9,7 @@ const EmailView = () => {
     <Wrapper>
       <TopWrapper>
         <Switch /> SUB PASSWORD FIELD 
-        </TopWrapper>
+      </TopWrapper>
         <EmailsContainer>
                 {
                     emailData.map(({starred, from, subject, message, received, read})=>(
@@ -43,7 +43,8 @@ const Wrapper = styled.div`
 const TopWrapper = styled.div`
     font-size:16px;
     padding: 10px 20px;
-    background-color:lightgray;
+    background-color:#e3e3e3a1;
+    border-radius:1rem;
 `
 
 const EmailsContainer = styled.div`

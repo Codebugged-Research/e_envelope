@@ -6,7 +6,7 @@ import InsertPhoto from '@material-ui/icons/InsertPhoto';
 import Attachment from '@material-ui/icons/Attachment';
 import Close from '@material-ui/icons/Close';
 import { Button } from 'react-bootstrap';
-
+import { Link } from 'react-router-dom';
 
 
 function SidePanel() {
@@ -29,10 +29,10 @@ const [showCompose, setShowCompose] = useState(false);
         </ComposeLetter>
         <SidebarButtonWrapper>
             {sidebarItems.map(item => (
-                <SidebarButtonItem>
+                <Link to={item.link} className='sidebarButtonItem text-white text-decoration-none'>
                     <div className='sideBarIcon'>{item.icon}</div>
                     <div className='sideBarText'>{item.text}</div>
-                </SidebarButtonItem>
+                </Link>
             ))}
         </SidebarButtonWrapper>
     </MainWrapper>
@@ -105,28 +105,28 @@ const SidebarButtonWrapper = styled.div`
 display:flex;
     flex-direction:column;
     justify-content:center;
+    .sidebarButtonItem{
+        cursor:pointer;
+            display:flex;
+            flex-direction:row;
+            margin:10px 10px;
+            font-size:18px;
+            border-radius:0.5rem;
+            padding:5px 10px;
+            transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+            .MuiSvgIcon-root{
+                margin:0px 10px;
+            }
+            :hover{
+                background-color: rgba(255, 255, 255, 0.2);
+                color:white;
+                padding:7px 0px;
+                border-radius: 0.5rem;
+                box-shadow: 0 0.5rem 3rem rgba(255,255,255,.175)!important;
+            }
+        }
 `
 
-const SidebarButtonItem = styled.div`
-cursor:pointer;
-    display:flex;
-    flex-direction:row;
-    margin:10px 10px;
-    font-size:18px;
-    border-radius:0.5rem;
-    padding:5px 10px;
-    transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    .MuiSvgIcon-root{
-        margin:0px 10px;
-    }
-    :hover{
-        background-color: rgba(255, 255, 255, 0.2);
-        color:white;
-        padding:7px 0px;
-        border-radius: 0.5rem;
-        box-shadow: 0 0.5rem 3rem rgba(255,255,255,.175)!important;
-    }
-`
 
 const MainWrapper = styled.div`
 background:linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));

@@ -9,19 +9,24 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
  const sidebarItems = [
     {
         icon: <InboxIcon />,
-        text: 'Inbox'
+        text: 'Inbox',
+        link:'/inbox'
     },{
         icon: <StarIcon />,
-        text: 'Starred'
+        text: 'Starred',
+        link:'/starred'
     },{
         icon: <WatchLaterIcon />,
-        text: 'Important'
+        text: 'Important',
+        link:'/important'
     },{
         icon: <SendIcon />,
-        text: 'Sent'
+        text: 'Sent',
+        link:'/sent'
     },{
         icon: <InsertDriveFileIcon />,
-        text: 'Drafts'
+        text: 'Drafts',
+        link:'/draft'
     },
 ]
 

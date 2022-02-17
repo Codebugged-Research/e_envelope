@@ -2,8 +2,17 @@ import {React,useState} from 'react'
 import styled from 'styled-components'
 import { Modal, Container, Row, Button } from 'react-bootstrap'
 import SignUpImage from './signup.jpeg'
+import { useForm } from "react-hook-form";
+
+
+
 
 function LoginPage() {
+
+    
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const onSubmitSignup = data => console.log(data); 
+
     const [lgShow, setLgShow] = useState(false);
 
     const[loginUsername, setLoginUsername] = useState("");
@@ -65,7 +74,7 @@ function LoginPage() {
                     <div className='col-7'>
                             <Modal.Header closeButton>
                             </Modal.Header>
-                            <form id='signUpForm' className='d-flex flex-column justify-content-center'>
+                            <form id='signUpForm' onSubmit={handleSubmit(onSubmitSignup)} className='d-flex flex-column justify-content-center'>
                                 <h1>Lets get you Started!</h1>
                                 <div className='d-flex flex-row justify-content-between align-items-center  my-3'>
                                     <div className='mx-2'>

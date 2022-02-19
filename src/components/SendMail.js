@@ -4,8 +4,11 @@ import { Button } from 'react-bootstrap';
 import InsertPhoto from '@material-ui/icons/InsertPhoto';
 import Attachment from '@material-ui/icons/Attachment';
 import Close from '@material-ui/icons/Close';
+import { useForm } from "react-hook-form";
 
 function SendMail() {
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const OnSubmitMail = data => console.log(data);
   return (
     <>
     <SendMailWrapper className='container d-flex flex-column p-0'>
@@ -13,23 +16,38 @@ function SendMail() {
             <Heading className='mx-2 my-1'>New Messege</Heading>
             <div className='mx-2 my-1' > <Close/> </div>
         </SendMailHeader>
-        <form className='d-flex flex-column shadow justify-content-center align-items-start'>
+        <form onSubmit={handleSubmit(OnSubmitMail)} className='d-flex flex-column shadow justify-content-center align-items-start'>
             <ToSubjectWrapper className='w-100'>
-                <input type='email' placeholder='To' name='recipient' className='form-control' />
-                <input type='text' placeholder='Subject' name='subject' className='form-control' />
+                <input {...register('recipient', {required:true})}
+                type='email' placeholder='To'
+                name='recipient' className='form-control' />
+                {errors.recipient && "Recipient is required"}
+                <input {...register('subject', {required:true})}
+                 type='text' placeholder='Subject'
+                name='subject' className='form-control' />
+                {errors.subject && "Subject is required"}
             </ToSubjectWrapper>
             <MessegeWrapper className='w-100'>
-                <textarea  placeholder='Messege' name='messege' className='form-control' />
+                <textarea {...register('messege', {required:true})}
+                placeholder='Messege' name='messege'
+                 className='form-control' />
+                {errors.messege && "Messege is required"}
+
             </MessegeWrapper>
 
             <SendButtonWrapper>
-                <SendMailButton className='btn-primary me-3'>Envelope & Send</SendMailButton>
+                <input type="submit" className='me-3' value="Envelope & Send"/>
                 <InsertPhoto className="text-muted me-1" />
                 <Attachment className="text-muted mx-1" />
             </SendButtonWrapper>
         </form>
-    </SendMailWrapper>
+
+        
+        </SendMailWrapper>
+
+
     </>
+
   )
 }
 
@@ -76,7 +94,7 @@ const MessegeWrapper = styled.div`
     textarea{       
 `
 
-const SendMailButton = styled(Button)`
+const SendMailButton = styled.input`
 background:linear-gradient(195deg, rgb(73, 163, 241), rgb(26, 115, 232));
 
 :hover{

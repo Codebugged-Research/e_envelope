@@ -1,26 +1,42 @@
 import React from 'react'
 import styled from 'styled-components'
 import Person from '@material-ui/icons/Person'
-function SingleEmail() {
-  return (
+import emailData from '../data/emailData'
+
+function SingleEmail(props) {
+    
+
+    // emailData.map(({id, starred, from, subject, message, received, read})=>{
+    //     if (id == props.id){
+    //         console.log(id,props.id)
+    //         return (<div>{id}</div>)
+    //     }
+    // })
+
+return (
     <>
-    <Wrapper className='d-flex flex-column container '>
-        <Subject className='mx-5 my-3'>E-Envelope</Subject>
+    {emailData.map(({id, starred, from, subject, message, received, read})=>{
+        if (id == props.id){ 
+            return(
+    <Wrapper key={id} className='d-flex flex-column container '>
+        <Subject className='mx-5 my-3'>{subject}</Subject>
         <ImageAddressWrapper className='d-flex flex-row mx-1'>
         <Person/>
         <AddressTimeWrapper className='d-flex flex-column mx-3'>
-            <AddressID>vivekEE.com</AddressID>
-            <DateTime>Oct 19, 2021, 5:03 PM</DateTime>
+            <AddressID>{from}</AddressID>
+            <DateTime>{received}</DateTime>
         </AddressTimeWrapper>
         </ImageAddressWrapper>
         <MessegeWrapper className="d-flex flex-column mx-5 my-3">
-            <Messege>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Messege>
+            <Messege>{message}</Messege>
         <AttachmentWrapper></AttachmentWrapper>
         </MessegeWrapper>
-    </Wrapper>
+    </Wrapper>)
+     }
+    }) }
     </>
   )
-}
+        }
 
 export default SingleEmail
 

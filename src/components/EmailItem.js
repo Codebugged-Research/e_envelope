@@ -5,12 +5,14 @@ import PersonIcon from '@material-ui/icons/Person';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarIcon from '@material-ui/icons/Star';
 import IconButton from '@material-ui/core/IconButton';
+import { Link } from 'react-router-dom';
 
-const EmailItem = ({ starred, from, subject, message, received, read }) => {
+const EmailItem = ({ id,starred, from, subject, message, received, read }) => {
 
     const [ star, setStar ] = useState(starred);
 
     return (
+        <Link to={`/email/${id}`} className="text-white text-decoration-none">
         <Wrapper>
             <PersonIcon htmlColor='#fff' />
             <IconButton onClick={()=> star ? setStar(false) : setStar(true)}>
@@ -27,6 +29,7 @@ const EmailItem = ({ starred, from, subject, message, received, read }) => {
             </div>
             <p className={!read && 'unread'}>{received}</p>
         </Wrapper>
+        </Link>
     )
 }
 
@@ -41,7 +44,7 @@ const Wrapper = styled.div`
     background:linear-gradient(195deg,rgb(131 131 134),rgb(84 84 84));
 
     color:white !important;
-    border-radius:1rem;
+    border-radius:0.25rem;
     margin-top:5px;
     cursor: pointer;
     padding-right: 20px;

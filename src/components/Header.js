@@ -4,13 +4,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
 import { Link } from 'react-router-dom';
-
+import EmailIcon from '@material-ui/icons/Email';
 
 function Header() {
   return (
     <Wrapper>
         <LogoWrapper>
-            <Logo><MenuIcon/></Logo>
+            <Logo><EmailIcon/></Logo>
             <Text className='text-dark'>E-Envelope</Text>
         </LogoWrapper>
         <SearchWrapper>

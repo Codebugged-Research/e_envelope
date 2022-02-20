@@ -28,8 +28,8 @@ const [showCompose, setShowCompose] = useState(false);
             Compose 
         </ComposeLetter>
         <SidebarButtonWrapper>
-            {sidebarItems.map(item => (
-                <Link to={item.link} className='sidebarButtonItem text-white text-decoration-none'>
+            {sidebarItems.map((item,index) => (
+                <Link key={index} to={item.link} className='sidebarButtonItem text-white text-decoration-none'>
                     <div className='sideBarIcon'>{item.icon}</div>
                     <div className='sideBarText'>{item.text}</div>
                 </Link>

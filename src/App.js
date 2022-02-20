@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<LoginPage/>} />
           <Route exact path="/inbox" element={ <InboxPage/>} />
-          <Route exact path="/email" element={ <EmailPage/>} />
+          <Route exact path="/email/:id" element={ <EmailPage />} />
           <Route exact path="/profile" element={ <ProfilePage/>} />
           <Route exact path="/starred" element={ <StarredPage/>} />
           <Route exact path="/important" element={ <ImportantPage/>} />

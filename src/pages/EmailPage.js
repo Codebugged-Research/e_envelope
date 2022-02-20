@@ -1,22 +1,25 @@
-import React from 'react'
+import {React} from 'react'
 import styled from 'styled-components';
 import SidePanel from '../components/SidePanel';
 import Header from '../components/Header';
 import SingleEmail from '../components/SingleEmail';
+import {useLocation, useParams} from "react-router-dom";
 
-function InboxPage() {
+
+function EmailPage() {
+  let params = useParams();
   return (
   <>
     <Header/>
     <Wrapper>
         <SidePanel/>
-        <SingleEmail/>
+        <SingleEmail id={params.id} />
     </Wrapper>
     </>
   )
 }
 
-export default InboxPage
+export default EmailPage
 
 const Wrapper = styled.div`
 display:flex;

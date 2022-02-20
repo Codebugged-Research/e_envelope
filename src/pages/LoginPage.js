@@ -3,33 +3,49 @@ import styled from 'styled-components'
 import { Modal, Container, Row, Button } from 'react-bootstrap'
 import SignUpImage from './signup.jpeg'
 import { useForm } from "react-hook-form";
-
+import { Link, useNavigate  } from "react-router-dom";
 
 
 
 function LoginPage() {
-
-    
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmitSignup = data => console.log(data); 
+    const navigate  = useNavigate ();
+    const onSubmitSignup = (e) => {
+        e.preventDefault();
+        console.log(signUpForm);  
+        navigate("/inbox")
+    }  
 
     const [lgShow, setLgShow] = useState(false);
 
     const[loginUsername, setLoginUsername] = useState("");
     const[loginPassword, setLoginPassword] = useState("");
-    const [allLoginEntry, setAllLoginEntry] = useState([]);
 
     const submitLoginForm = (e)=>{
+        console.log("logged in")
         e.preventDefault();
         const newLoginEntry = {
             username:loginUsername,
             password:loginPassword
         };
-
-        setAllLoginEntry([...allLoginEntry, newLoginEntry]);
-        console.log(allLoginEntry)
+        console.log(newLoginEntry)
+        navigate("/inbox")
     }
 
+    const[signUpForm, setSignUpForm] = useState({
+        firstName:"",
+        lastName:"",
+        gender:"",
+        phoneNumber:"",
+        email:"",
+        password:"",
+        repeatPassword:"",
+    });
+        let name,value;
+    const HandleSignUpInput = (e)=>{
+        name = e.target.name;
+        value = e.target.value;
+        setSignUpForm({...signUpForm, [name]:value})
+    }
 
   return (
         <Wrapper className='row col-12 vh-100'>
@@ -51,7 +67,7 @@ function LoginPage() {
                         type='password'/>
                 </div>
                 <div className='d-flex flex-row justify-content-between align-items-center'>
-                    <Button className="btn-dark">Sign In</Button>
+                    <Button type="submit" className="btn-dark">Sign In</Button>
                     <a href='#' className='text-decoration-none'>Forget Password</a>
                 </div>
                 <a className='text-primary float-end text-decoration-none' onClick={() => setLgShow(true)}>
@@ -66,7 +82,7 @@ function LoginPage() {
                     aria-labelledby="example-modal-sizes-title-lg"
                     >
 
-                        <Row className='col-12 radius-0'>
+            <Row className='col-12 radius-0'>
                             <div className='col-5 shadow '>
                                 <img src={SignUpImage} className="img-fluid w-100 d-block"/>
                             </div>
@@ -74,45 +90,50 @@ function LoginPage() {
                     <div className='col-7'>
                             <Modal.Header closeButton>
                             </Modal.Header>
-                            <form id='signUpForm' onSubmit={handleSubmit(onSubmitSignup)} className='d-flex flex-column justify-content-center'>
+                            <form id='signUpForm' onSubmit={onSubmitSignup} className='d-flex flex-column justify-content-center'>
                                 <h1>Lets get you Started!</h1>
                                 <div className='d-flex flex-row justify-content-between align-items-center  my-3'>
                                     <div className='mx-2'>
                                         <label htmlFor='firstName'>First Name</label>
-                                        <input className='form-control' placeholder='john' name="firstName"/>
+                                        <input className='form-control'
+                                        onChange={HandleSignUpInput}
+                                        placeholder='john' name="firstName"/>
                                     </div>
                                     <div  className='mx-2'>
                                         <label htmlFor='lastName'>Last Name</label>
-                                        <input placeholder='john' className='form-control' name="lastName"/>
+                                        <input placeholder='john'
+                                        onChange={HandleSignUpInput}
+                                        className='form-control' name="lastName"/>
                                     </div>
                                 </div>
                                 <div className='d-flex flex-row justify-content-between align-items-center my-3'>
                                     <div  className='mx-2'>
                                         <label htmlFor='email'>Email Address</label>
-                                        <input type='email' placeholder='john' className='form-control' name="email"/>
+                                        <input type='email'
+                                        onChange={HandleSignUpInput} placeholder='john' className='form-control' name="email"/>
                                     </div>
                                     <div  className='mx-2'>
                                         <label htmlFor='phoneNumber'>Phone Number</label>
-                                        <input placeholder='7007918XXX' type='tel' className='form-control' name="phoneNumber"/>
+                                        <input placeholder='7007918XXX' onChange={HandleSignUpInput} type='tel' className='form-control' name="phoneNumber"/>
                                     </div>
                                 </div>
                                 <div className='d-flex flex-row justify-content-between align-items-center my-3'>
                                     <div  className='mx-2'>
                                         <label htmlFor='password'>Password</label>
-                                        <input type='password' placeholder='******' className='form-control' name="password"/>
+                                        <input type='password' onChange={HandleSignUpInput} placeholder='******' className='form-control' name="password"/>
                                     </div>
                                     <div  className='mx-2'>
                                         <label htmlFor='repeatPassword'> Repeat Password </label>
-                                        <input placeholder='******' type='password' className='form-control' name="repeatPassword"/>
+                                        <input placeholder='******' onChange={HandleSignUpInput} type='password' className='form-control' name="repeatPassword"/>
                                     </div>
                                 </div>
                                 <div className='d-flex flex-row justify-content-start align-items-start my-1'>
                                 <div class="form-check form-check-inline mx-2">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"/>
+                                    <input class="form-check-input" onChange={HandleSignUpInput} type="radio" name="gender" id="inlineRadio1" value="male"/>
                                     <label class="form-check-label" for="inlineRadio1">Male</label>
                                     </div>
                                     <div class="form-check form-check-inline mx-2">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"/>
+                                    <input class="form-check-input" onChange={HandleSignUpInput} type="radio" name="gender" id="inlineRadio2" value="female"/>
                                     <label class="form-check-label" for="inlineRadio2">Female</label>
                                     </div>
                                 </div>
@@ -131,7 +152,7 @@ function LoginPage() {
                                 </div> */}
                                 </div>
                                 <div className='d-flex flex-row justify-content-start align-items-center my-3'>
-                                <Button className='btn-danger mx-3'>Sign Up</Button>
+                                <Button type="submit" className='btn-danger mx-3'>Sign Up</Button>
                                 <div>Already have an account? <a href="#">Sign In</a></div>
                                 </div>
                                 

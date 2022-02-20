@@ -1,19 +1,33 @@
-import React from 'react'
+import {React} from 'react'
 import styled from 'styled-components';
 import { Switch } from '@material-ui/core';
 import emailData  from '../data/emailData';
 import EmailItem from './EmailItem';
 
 const EmailView = () => {
+
+  const subPassword = () =>{
+    let currValue = localStorage.getItem('SubPassword');
+    console.log(currValue)
+    if (currValue === 'false' || currValue === 'null'){
+      localStorage.setItem('SubPassword', true)
+    }
+    else{
+      localStorage.setItem('SubPassword', false) 
+    }
+
+  }
   return (
     <Wrapper>
       <TopWrapper>
-        <Switch /> SUB PASSWORD FIELD 
+        <Switch onClick={subPassword} /> SUB PASSWORD FIELD 
       </TopWrapper>
         <EmailsContainer>
                 {
-                    emailData.map(({starred, from, subject, message, received, read})=>(
-                        <EmailItem
+                    emailData.map(({id, starred, from, subject, message, received, read})=>(
+                        <EmailItem 
+                          key={id}
+                            id={id}
                             starred={starred}
                             from={from}
                             subject={subject}
@@ -44,7 +58,7 @@ const TopWrapper = styled.div`
     font-size:16px;
     padding: 10px 20px;
     background-color:#e3e3e3a1;
-    border-radius:1rem;
+    border-radius:0.5rem;
 `
 
 const EmailsContainer = styled.div`

@@ -128,25 +128,25 @@ function LoginPage() {
                                     </div>
                                 </div>
                                 <div className='d-flex flex-row justify-content-start align-items-start my-1'>
-                                <div class="form-check form-check-inline mx-2">
-                                    <input class="form-check-input" onChange={HandleSignUpInput} type="radio" name="gender" id="inlineRadio1" value="male"/>
-                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                <div className="form-check form-check-inline mx-2">
+                                    <input className="form-check-input" onChange={HandleSignUpInput} type="radio" name="gender" id="inlineRadio1" value="male"/>
+                                    <label className="form-check-label" for="inlineRadio1">Male</label>
                                     </div>
-                                    <div class="form-check form-check-inline mx-2">
-                                    <input class="form-check-input" onChange={HandleSignUpInput} type="radio" name="gender" id="inlineRadio2" value="female"/>
-                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                    <div className="form-check form-check-inline mx-2">
+                                    <input className="form-check-input" onChange={HandleSignUpInput} type="radio" name="gender" id="inlineRadio2" value="female"/>
+                                    <label className="form-check-label" for="inlineRadio2">Female</label>
                                     </div>
                                 </div>
                                 <div className='d-flex flex-column justify-content-center align-items-start my-3 mx-2'>
-                                {/* <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="showPassword"/>
-                                    <label class="form-check-label" for="showPassword">
+                                {/* <div className="form-check">
+                                    <input className="form-check-input" type="checkbox" value="" id="showPassword"/>
+                                    <label className="form-check-label" for="showPassword">
                                         Show Password
                                     </label>
                                     </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="loggedIn"  />
-                                    <label class="form-check-label" for="loggedIn">
+                                <div className="form-check">
+                                    <input className="form-check-input" type="checkbox" value="" id="loggedIn"  />
+                                    <label className="form-check-label" for="loggedIn">
                                         Keep me logged in
                                     </label>
                                 </div> */}

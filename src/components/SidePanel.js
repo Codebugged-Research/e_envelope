@@ -7,18 +7,41 @@ import Attachment from '@material-ui/icons/Attachment';
 import Close from '@material-ui/icons/Close';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import SendMail from './SendMail';
 
 function SidePanel() {
 
 const [showCompose, setShowCompose] = useState(false);
     function showComposeOnClick () {
-        if (showCompose === true)
+        if (showCompose === true){
+            setMail({
+                recipient:'',
+                subject:'',
+                messege:'',
+            })
         setShowCompose(false);
+        }
         else
-        setShowCompose(true);
+            setShowCompose(true);
+    }
+
+    const [mail,setMail] = useState({
+        recipient:'',
+        subject:'',
+        messege:'',
+    })
+
+    const handleInput = (e) =>{
+       let name = e.target.name;
+       let value = e.target.value;
+      setMail({...mail, [name]:value})
     }
     
+    const sendMail = (e)=> {
+        e.preventDefault();
+        console.log(mail)}
+
+
     return (
     <>
     <Wrapper className='text-white'>
@@ -37,27 +60,27 @@ const [showCompose, setShowCompose] = useState(false);
         </SidebarButtonWrapper>
     </MainWrapper>
     </Wrapper>
-    {showCompose ? <SendMailWrapper className='container d-flex flex-column p-0'>
+    {showCompose ?  <SendMailWrapper className='container d-flex flex-column p-0'>
         <SendMailHeader className='bg-dark text-white p-1 d-flex flex-row justify-content-between align-items-center'>
             <Heading className='mx-2 my-1'>New Messege</Heading>
             <div className='mx-2 my-1' onClick={showComposeOnClick}> <Close /> </div>
         </SendMailHeader>
-        <form className='d-flex flex-column shadow justify-content-center align-items-start'>
+        <form onSubmit={sendMail} className='d-flex flex-column shadow justify-content-center align-items-start'>
             <ToSubjectWrapper className='w-100'>
-                <input type='email' placeholder='To' name='recipient' className='form-control' />
-                <input type='text' placeholder='Subject' name='subject' className='form-control' />
+                <input type='email' onChange={handleInput} placeholder='To' name='recipient' className='form-control' />
+                <input type='text' onChange={handleInput} placeholder='Subject' name='subject' className='form-control' />
             </ToSubjectWrapper>
             <MessegeWrapper className='w-100'>
-                <textarea  placeholder='Messege' name='messege' className='form-control' />
+                <textarea onChange={handleInput}  placeholder='Messege' name='messege' className='form-control' />
             </MessegeWrapper>
 
             <SendButtonWrapper>
-                <SendMailButton className='btn-primary me-3'>Envelope & Send</SendMailButton>
+                <SendMailButton type="submit" className='btn-primary me-3'>Envelope & Send</SendMailButton>
                 <InsertPhoto className="text-muted me-1" />
                 <Attachment className="text-muted mx-1" />
             </SendButtonWrapper>
         </form>
-    </SendMailWrapper> : null}
+    </SendMailWrapper>  : null}
     </>
   )
 }

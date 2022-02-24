@@ -4,33 +4,44 @@ import { Modal, Container, Row, Button } from 'react-bootstrap'
 import SignUpImage from './signup.jpeg'
 import { useForm } from "react-hook-form";
 import { Link, useNavigate  } from "react-router-dom";
+import {loginValidate} from "../components/validation"
 
 
-
-function LoginPage() {
+function LoginPage() { 
     const navigate  = useNavigate ();
-    const onSubmitSignup = (e) => {
-        e.preventDefault();
-        console.log(signUpForm);  
-        navigate("/inbox")
-    }  
-
     const [lgShow, setLgShow] = useState(false);
+    const[error,setError] = useState({
+        loginEmail:'',
+        loginPassword:'',
+        firstName:"",
+        lastName:"",
+        gender:"",
+        phoneNumber:"",
+        email:"",
+        password:"",
+        subPassword:"",
+    })
+    // LOGIN FUNCTIONALITIES
+    const[loginForm, setLoginForm] = useState({
+        loginEmail:'',
+        loginPassword:'',
+    });
+    const HandleLoginInput = (e)=>{
+        setLoginForm({...loginForm, [e.target.name]:e.target.value})
+        // loginValidate();
 
-    const[loginUsername, setLoginUsername] = useState("");
-    const[loginPassword, setLoginPassword] = useState("");
-
-    const submitLoginForm = (e)=>{
-        console.log("logged in")
-        e.preventDefault();
-        const newLoginEntry = {
-            username:loginUsername,
-            password:loginPassword
-        };
-        console.log(newLoginEntry)
-        navigate("/inbox")
     }
-
+    const submitLoginForm = (e) => {
+        e.preventDefault();
+        let errors = loginValidate(loginForm).errors
+        let isValid =  loginValidate(loginForm).isValid
+        setError({...error, ['loginEmail']:errors.loginEmail, ['loginPassword']:errors.loginPassword })
+        if(isValid){
+            console.log("logged in",loginForm)
+            navigate("/inbox")
+        }
+    }
+    // SIGNUP FUNCTIONALITIES
     const[signUpForm, setSignUpForm] = useState({
         firstName:"",
         lastName:"",
@@ -38,33 +49,39 @@ function LoginPage() {
         phoneNumber:"",
         email:"",
         password:"",
-        repeatPassword:"",
+        subPassword:"",
     });
-        let name,value;
     const HandleSignUpInput = (e)=>{
-        name = e.target.name;
-        value = e.target.value;
-        setSignUpForm({...signUpForm, [name]:value})
+        setSignUpForm({...signUpForm, [e.target.name]:e.target.value})
     }
+    const onSubmitSignup = (e) => {
+        e.preventDefault();
+        console.log(signUpForm);  
+        navigate("/inbox")
+    }  
 
   return (
         <Wrapper className='row col-12 vh-100'>
-            <div className='col-4 d-flex flex-column justify-content-center shadow'>
+            <div className='col-12 col-md-6 col-lg-5 d-flex flex-column justify-content-center shadow'>
             <form id='loginForm' className='container text-center mx-1 px-5' onSubmit={submitLoginForm}>
             <h1 className='text-dark text-start'>Sign In</h1>
                 <div>
-                    <input placeholder='Username'
+                    <input placeholder='Email Address'
                     className='form-control my-3'
-                    value={loginUsername}
-                    onChange={(e) => setLoginUsername(e.target.value)}
+                    name='loginEmail'
+                    value={loginForm.loginEmail}
+                    onChange={HandleLoginInput}
                     type='text'/>
+                    <div className='text-danger' >{error.loginEmail}</div>
                 </div>
                 <div>
                     <input placeholder='Password'
                         className='form-control my-3'
-                        value={loginPassword} 
-                        onChange={(e) => setLoginPassword(e.target.value)}                    
+                        name='loginPassword'
+                        value={loginForm.loginPassword}
+                        onChange={HandleLoginInput}                    
                         type='password'/>
+                        <div className='text-danger' >{error.loginPassword}</div>
                 </div>
                 <div className='d-flex flex-row justify-content-between align-items-center'>
                     <Button type="submit" className="btn-dark">Sign In</Button>
@@ -123,8 +140,8 @@ function LoginPage() {
                                         <input type='password' onChange={HandleSignUpInput} placeholder='******' className='form-control' name="password"/>
                                     </div>
                                     <div  className='mx-2'>
-                                        <label htmlFor='repeatPassword'> Repeat Password </label>
-                                        <input placeholder='******' onChange={HandleSignUpInput} type='password' className='form-control' name="repeatPassword"/>
+                                        <label htmlFor='repeatPassword'> Sub Password </label>
+                                        <input placeholder='******' onChange={HandleSignUpInput} type='password' className='form-control' name="subPassword"/>
                                     </div>
                                 </div>
                                 <div className='d-flex flex-row justify-content-start align-items-start my-1'>
@@ -163,7 +180,7 @@ function LoginPage() {
                 </Modal>
             </div>
     
-            <div className='col-8 text-center'>
+            <div className='col-md-6 col-lg-7 8 d-none d-md-block text-center'>
                     <h1>Logo Here</h1>
                     
             </div>

@@ -67,21 +67,21 @@ function LoginPage() {
             <h1 className='text-dark text-start'>Sign In</h1>
                 <div>
                     <input placeholder='Email Address'
-                    className='form-control my-3'
+                    className='form-control mt-3 mb-1'
                     name='loginEmail'
                     value={loginForm.loginEmail}
                     onChange={HandleLoginInput}
                     type='text'/>
-                    <div className='text-danger' >{error.loginEmail}</div>
+                    <p className='text-danger text-start fw-lighter f-13 m-0 fst-italic' >{error.loginEmail}</p>
                 </div>
                 <div>
                     <input placeholder='Password'
-                        className='form-control my-3'
+                        className='form-control mt-3 mb-1'
                         name='loginPassword'
                         value={loginForm.loginPassword}
                         onChange={HandleLoginInput}                    
                         type='password'/>
-                        <div className='text-danger' >{error.loginPassword}</div>
+                        <p className='text-danger text-start fw-lighter f-13 m-0 mb-2 fst-italic' >{error.loginPassword}</p>
                 </div>
                 <div className='d-flex flex-row justify-content-between align-items-center'>
                     <Button type="submit" className="btn-dark">Sign In</Button>
@@ -92,24 +92,25 @@ function LoginPage() {
                 </a>
             </form>
                  <Modal 
-                        className='vh-100'
+                        className='vh-100 modal-fullscreen-lg-down'
                     size="lg"
+                    fullscreen="md-down"
                     show={lgShow}
                     onHide={() => setLgShow(false)}
                     aria-labelledby="example-modal-sizes-title-lg"
                     >
 
-            <Row className='col-12 radius-0'>
-                            <div className='col-5 shadow '>
+            <Row className='col-12 gx-0 radius-0'>
+                            <div className='col-12 col-lg-5 d-none d-lg-block'>
                                 <img src={SignUpImage} className="img-fluid w-100 d-block"/>
                             </div>
                     
-                    <div className='col-7'>
+                    <div className='col-12 col-lg-7'>
                             <Modal.Header closeButton>
                             </Modal.Header>
                             <form id='signUpForm' onSubmit={onSubmitSignup} className='d-flex flex-column justify-content-center'>
-                                <h1>Lets get you Started!</h1>
-                                <div className='d-flex flex-row justify-content-between align-items-center  my-3'>
+                                <h1 className='text-center'>Lets get you Started!</h1>
+                                <div className='d-flex flex-row justify-content-between align-items-center mx-2 my-3'>
                                     <div className='mx-2'>
                                         <label htmlFor='firstName'>First Name</label>
                                         <input className='form-control'
@@ -123,7 +124,7 @@ function LoginPage() {
                                         className='form-control' name="lastName"/>
                                     </div>
                                 </div>
-                                <div className='d-flex flex-row justify-content-between align-items-center my-3'>
+                                <div className='d-flex flex-row justify-content-between align-items-center mx-2 my-3'>
                                     <div  className='mx-2'>
                                         <label htmlFor='email'>Email Address</label>
                                         <input type='email'
@@ -134,7 +135,7 @@ function LoginPage() {
                                         <input placeholder='7007918XXX' onChange={HandleSignUpInput} type='tel' className='form-control' name="phoneNumber"/>
                                     </div>
                                 </div>
-                                <div className='d-flex flex-row justify-content-between align-items-center my-3'>
+                                <div className='d-flex flex-row justify-content-between align-items-center mx-2 my-3'>
                                     <div  className='mx-2'>
                                         <label htmlFor='password'>Password</label>
                                         <input type='password' onChange={HandleSignUpInput} placeholder='******' className='form-control' name="password"/>
@@ -144,7 +145,7 @@ function LoginPage() {
                                         <input placeholder='******' onChange={HandleSignUpInput} type='password' className='form-control' name="subPassword"/>
                                     </div>
                                 </div>
-                                <div className='d-flex flex-row justify-content-start align-items-start my-1'>
+                                <div className='d-flex flex-row justify-content-start align-items-start mx-2 my-1'>
                                 <div className="form-check form-check-inline mx-2">
                                     <input className="form-check-input" onChange={HandleSignUpInput} type="radio" name="gender" id="inlineRadio1" value="male"/>
                                     <label className="form-check-label" for="inlineRadio1">Male</label>

@@ -11,18 +11,18 @@ function Header() {
     <Wrapper>
         <LogoWrapper>
             <Logo><EmailIcon/></Logo>
-            <Text className='text-dark'>E-Envelope</Text>
+            <Text className='text-dark d-none d-md-block'>E-Envelope</Text>
         </LogoWrapper>
         <SearchWrapper>
-            <SearchBarWrapper className=' text-white'>
+            <SearchBarWrapper className=' text-white mx-1 mx-md-3'>
                 <SearchIcon/>
-                <input placeholder='Search envelopes'/>
+                <input placeholder='Search envelopes' className='' />
             </SearchBarWrapper>
         </SearchWrapper>
         <UserWrapper>
-            <AddressID className='text-dark'>UsernameEE.com</AddressID>
+            <AddressID className='text-dark d-none d-md-block'>UsernameEE.com</AddressID>
             <Link to='/profile' className='text-dark'>
-            <PersonIcon/>
+            <PersonIcon className="mx-2 p-0"/>
             </Link>
         </UserWrapper>
     </Wrapper>
@@ -72,9 +72,9 @@ const SearchBarWrapper = styled.div`
     width: 100%;
     justify-content: center;
     align-items: center;
-    margin: 0px 30px;
+    // margin: 0px 30px;
     padding:5px;
-background:linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
+    background:linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
 
     border-radius:5px;
 
@@ -111,8 +111,9 @@ const UserWrapper = styled.div`
     justify-content:start;
     align-items:center;
     .MuiSvgIcon-root{
-        margin-right:20px;
-        margin-left:20px;
+        // margin-right:20px;
+        padding-right:5px;
+        margin-left:10px;
     }
     
 `

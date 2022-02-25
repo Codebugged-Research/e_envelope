@@ -4,15 +4,15 @@ const emailData = [
         starred: true,
         from: 'Naz',
         subject: 'Yoooo',
-        message: 'sup bro',
+        message: 'sa',
         received: '08:20',
         read: true
     }, {
         id:2,
         starred: true,
-        from: 'Qazi',
-        subject: 'Yoooo',
-        message: 'sup broooooo',
+        from: 'Ashutosh Jaiswal',
+        subject: 'E envelope',
+        message: 'sup broooooo vdvaevdv',
         received: '08:30',
         read: true
     }, {
@@ -20,7 +20,7 @@ const emailData = [
         starred: false,
         from: 'Amaanath',
         subject: 'Yoooo',
-        message: 'sup breh',
+        message: 'sup breh ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
         received: '09:25',
         read: false
     },

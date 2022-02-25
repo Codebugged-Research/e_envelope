@@ -12,24 +12,26 @@ const EmailItem = ({ id,starred, from, subject, message, received, read }) => {
     const [ star, setStar ] = useState(starred);
 
     return (
-        <Link to={`/email/${id}`} className="text-white text-decoration-none">
         <Wrapper>
-            <PersonIcon htmlColor='#fff' />
+            <div>
             <IconButton onClick={()=> star ? setStar(false) : setStar(true)}>
                 {   star ? (
-                        <StarIcon htmlColor='#fff' />
+                    <StarIcon htmlColor='#fff' />
                     ) : (
                         <StarBorderIcon htmlColor='#fff' />
                     )
                 }
             </IconButton>
+            </div>
+        <Link to={`/email/${id}`} className="main-msg d-flex flex-row text-white text-decoration-none">
             <p className={ !read && 'unread'}>{from}</p>
-            <div>
-                <p className={!read && 'unread'}>{subject}</p> - <span>{message}</span>
+            <div className="d-flex flex-column mx-3 subject-msg">
+            <p className={!read && 'unread'}>{subject.substring(0,3)+'...'}</p> 
+            <p className={!read && 'unread'}>{message.substring(0,3)+'...'}</p> 
             </div>
             <p className={!read && 'unread'}>{received}</p>
-        </Wrapper>
         </Link>
+        </Wrapper>
     )
 }
 
@@ -37,12 +39,11 @@ export default EmailItem
 
 const Wrapper = styled.div`
     padding-left: 20px;
+    height:10vh;
     border-bottom: 1px solid lightgray;
-    display: grid;
-    grid-template-columns: min-content min-content 120px auto min-content;
-    align-items: center;
+    display: flex;
+    flex-direction:row;
     background:linear-gradient(195deg,rgb(131 131 134),rgb(84 84 84));
-
     color:white !important;
     border-radius:0.25rem;
     margin-top:5px;
@@ -55,7 +56,15 @@ const Wrapper = styled.div`
             color: white;
         }
     }
-
+    .main-msg{
+        flex:2;
+        justify-content: space-between;
+        align-items: center;
+        .subject-msg{
+            flex: 2;
+        align-items: flex-start;
+        }
+    }
     .unread{
         color: black;
         font-weight: bolder;

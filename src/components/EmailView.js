@@ -1,26 +1,28 @@
-import {React} from 'react'
+import {React, useState} from 'react'
 import styled from 'styled-components';
 import { Switch } from '@material-ui/core';
 import emailData  from '../data/emailData';
 import EmailItem from './EmailItem';
 
 const EmailView = () => {
-
+  const [checked,setChecked] = useState(false)
   const subPassword = () =>{
-    let currValue = localStorage.getItem('SubPassword');
-    console.log(currValue)
-    if (currValue === 'false' || currValue === 'null'){
+    if (checked === false)
+    {
       localStorage.setItem('SubPassword', true)
+      setChecked(true)
     }
-    else{
-      localStorage.setItem('SubPassword', false) 
+    else 
+    {
+      localStorage.setItem('SubPassword', false)
+      setChecked(false)
+    } 
+    
     }
-
-  }
   return (
     <Wrapper>
       <TopWrapper>
-        <Switch onClick={subPassword} /> SUB PASSWORD FIELD 
+        <Switch checked={checked} onChange={subPassword} /> <input className='form-control w-25 d-inline' placeholder='Sub Password' type="password" maxlength='2' />
       </TopWrapper>
         <EmailsContainer>
                 {
@@ -49,7 +51,7 @@ const Wrapper = styled.div`
     height:  calc( 100vh - 70px );
     display:flex;
     flex-direction:column;
-    width:80%;
+    width:80vw;
     background-color:white;
     border-left:3px solid white;
     `

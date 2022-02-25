@@ -171,7 +171,7 @@ function LoginPage() {
                                 </div>
                                 <div className='d-flex flex-row justify-content-start align-items-center my-3'>
                                 <Button type="submit" className='btn-danger mx-3'>Sign Up</Button>
-                                <div>Already have an account? <a href="#">Sign In</a></div>
+                                <div>Already have an account? <a href='' className='text-decoration-none' onClick={() => setLgShow(false)}>Sign In</a></div>
                                 </div>
                                 
                             </form>

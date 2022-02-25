@@ -16,7 +16,9 @@
   border:0px !important;
   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
-
+p{
+  margin:0 !important;
+}
 .modal-header {
   border:0px !important;
 
@@ -33,3 +35,4 @@
 .f-13{
   font-size:13px !important;
 }
+

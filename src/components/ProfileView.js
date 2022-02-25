@@ -18,7 +18,7 @@ const ProfileView = () => {
         </UserImageWrapper>
 
         <ProfileWrapper className='d-flex flex-column'>
-            <NameWrapper className='profile-items my-1 '>
+            <NameWrapper className='profile-items my-1 d-flex flex-column flex-md-row'>
             <div className='mx-5 flex-fill'>
                 <label htmlFor='firstName'>First Name</label>
                 <input className='form-control' placeholder='' name="firstName"/>
@@ -28,15 +28,16 @@ const ProfileView = () => {
                 <input placeholder='' className='form-control' name="lastName"/>
             </div>
             </NameWrapper>
-            <EmailPasswordWrapper className='profile-items my-3'>
+            <EmailPasswordWrapper className='profile-items my-3 d-flex flex-column flex-md-row'>
             <div  className='mx-5 flex-fill'>
                 <label htmlFor='email'>Phone Number</label>
                 <input type='email' placeholder='' className='form-control' name="email"/>
             </div>
             <div  className='mx-5  flex-fill'>
-                <label htmlFor='password'>Password</label>
+                <label htmlFor='password'>Login Password</label>
                 <input type='password' placeholder='******' className='form-control' name="password"/>
             </div>
+           
             </EmailPasswordWrapper>
         </ProfileWrapper>
     </Wrapper>
@@ -49,7 +50,7 @@ const Wrapper = styled.div`
     height:  calc( 100vh - 70px );
     display:flex;
     flex-direction:column;
-    width:80%;
+    width:80vw;
     background-color:white;
     border-left:3px solid white;
 background:linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
@@ -65,8 +66,6 @@ const Name = styled.h5``
 const AddressID = styled.h6`` 
 const ProfileWrapper = styled.div`
 .profile-items{
-    display:flex;
-    flex:row;
     align-items:center;
     div input{
         margin-top:5px;

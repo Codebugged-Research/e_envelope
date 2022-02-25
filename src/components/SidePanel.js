@@ -46,15 +46,15 @@ const [showCompose, setShowCompose] = useState(false);
     <>
     <Wrapper className='text-white'>
     <MainWrapper>
-        <ComposeLetter onClick={showComposeOnClick}>
-            <CreateIcon/>
-            Compose 
+        <ComposeLetter onClick={showComposeOnClick} className="d-flex flex-row">
+            <CreateIcon className="sideBarIcon" />
+            <span className='d-none d-lg-block sideBarText'> Compose </span> 
         </ComposeLetter>
         <SidebarButtonWrapper>
             {sidebarItems.map((item,index) => (
                 <Link key={index} to={item.link} className='sidebarButtonItem text-white text-decoration-none'>
                     <div className='sideBarIcon'>{item.icon}</div>
-                    <div className='sideBarText'>{item.text}</div>
+                    <div className='sideBarText d-none d-md-block'>{item.text}</div>
                 </Link>
             ))}
         </SidebarButtonWrapper>
@@ -92,26 +92,25 @@ const Wrapper = styled.div`
     height:  calc( 100vh - 70px );
     display:flex;
     flex-direction:column;
-    width:20%;
+    width:20vw;
     border-left:1px solid darkgray;
     `
 
 const ComposeLetter = styled.div`
     display:flex;
     flex-direction:row;
-    justify-content:center;
-    align-items:center;
-    margin:10px 10px;
+    // justify-content:center;
+    // align-items:center;
+    margin:10px 5px;
     font-size:18px;
-    padding:10px 10px;
+    padding:5px 10px;
     background:linear-gradient(195deg, rgb(73, 163, 241), rgb(26, 115, 232));
     border-radius:0.5rem;
     color:white;
-    font-size:900;
+    // font-size:900;
     cursor:pointer;
     transition: all 150ms ease-in 0s;
     .MuiSvgIcon-root{
-        margin:0px 10px;
     }
 
     :hover{
@@ -132,10 +131,9 @@ display:flex;
         cursor:pointer;
             display:flex;
             flex-direction:row;
-            margin:10px 10px;
             font-size:18px;
             border-radius:0.5rem;
-            padding:5px 10px;
+            padding:5px;
             transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
             .MuiSvgIcon-root{
                 margin:0px 10px;
@@ -143,7 +141,6 @@ display:flex;
             :hover{
                 background-color: rgba(255, 255, 255, 0.2);
                 color:white;
-                padding:7px 0px;
                 border-radius: 0.5rem;
                 box-shadow: 0 0.5rem 3rem rgba(255,255,255,.175)!important;
             }

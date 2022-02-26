@@ -30,8 +30,8 @@ const ProfileView = () => {
             </NameWrapper>
             <EmailPasswordWrapper className='profile-items my-3 d-flex flex-column flex-md-row'>
             <div  className='mx-5 flex-fill'>
-                <label htmlFor='email'>Phone Number</label>
-                <input type='email' placeholder='' className='form-control' name="email"/>
+                <label htmlFor='phoneNumber'>Phone Number</label>
+                <input type='tel' placeholder='' className='form-control' name="phoneNumber"/>
             </div>
             <div  className='mx-5  flex-fill'>
                 <label htmlFor='password'>Login Password</label>

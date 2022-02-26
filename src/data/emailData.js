@@ -23,6 +23,31 @@ const emailData = [
         message: 'sup breh ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
         received: '09:25',
         read: false
+    },{
+        id:4,
+        starred: false,
+        from: 'Amaanath',
+        subject: 'Yoooo',
+        message: 'sup breh ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
+        received: '09:25',
+        read: false
+    },
+    {
+        id:5,
+        starred: false,
+        from: 'Amaanath',
+        subject: 'Yoooo',
+        message: 'sup breh ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
+        received: '09:25',
+        read: false
+    },{
+        id:6,
+        starred: false,
+        from: 'Amaanath',
+        subject: 'Yoooo',
+        message: 'sup breh ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
+        received: '09:25',
+        read: false
     },
 ]
 

@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import { Switch } from '@material-ui/core';
 import emailData  from '../data/emailData';
 import EmailItem from './EmailItem';
-
+import LockIcon from '@material-ui/icons/Lock';
 const EmailView = () => {
+
+  const [showSubPassword, setShowSubPassword] = useState(false)
   const [checked,setChecked] = useState(false)
   const subPassword = () =>{
     if (checked === false)
@@ -21,8 +23,9 @@ const EmailView = () => {
     }
   return (
     <Wrapper>
-      <TopWrapper>
-        <Switch checked={checked} onChange={subPassword} /> <input className='form-control w-25 d-inline' placeholder='Sub Password' type="password" maxlength='2' />
+      <TopWrapper className='d-flex flex-row justify-content-start align-items-center'>
+        <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} /> { showSubPassword ? <div><Switch checked={checked} onChange={subPassword} /> 
+        <input className='form-control w-50 d-inline' placeholder='Sub Password' type="password" maxLength='2' /></div> : null }
       </TopWrapper>
         <EmailsContainer>
                 {

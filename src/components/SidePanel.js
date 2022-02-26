@@ -25,6 +25,15 @@ const [showCompose, setShowCompose] = useState(false);
             setShowCompose(true);
     }
 
+    const CloseOrDraft = () => {
+        if (showCompose === true){
+        if (mail.recipient!=='' && mail.subject!==''){
+            console.log("save to draft")
+        }
+        setShowCompose(false);
+        }
+
+    }
     const [mail,setMail] = useState({
         recipient:'',
         subject:'',
@@ -60,10 +69,10 @@ const [showCompose, setShowCompose] = useState(false);
         </SidebarButtonWrapper>
     </MainWrapper>
     </Wrapper>
-    {showCompose ?  <SendMailWrapper className='container d-flex flex-column p-0'>
+    {showCompose ?  <SendMailWrapper className='send-mail-wrapper container d-flex flex-column p-0'>
         <SendMailHeader className='bg-dark text-white p-1 d-flex flex-row justify-content-between align-items-center'>
             <Heading className='mx-2 my-1'>New Messege</Heading>
-            <div className='mx-2 my-1' onClick={showComposeOnClick}> <Close /> </div>
+            <div className='mx-2 my-1' onClick={CloseOrDraft}> <Close /> </div>
         </SendMailHeader>
         <form onSubmit={sendMail} className='d-flex flex-column shadow justify-content-center align-items-start'>
             <ToSubjectWrapper className='w-100'>
@@ -167,6 +176,14 @@ width:550px;
 height:500px;
 border-radius: 1rem 1rem 0 0;
 
+@media (max-width: 767.98px) {
+    border-radius: 0;
+    width:100vw !important;
+    height:100vh !important;
+    max-width:100% !important;
+    right: 0;
+
+  }
     form{
         flex:auto;
         textarea{
@@ -190,6 +207,10 @@ border-radius: 1rem 1rem 0 0;
 `
 const SendMailHeader = styled.div`
     border-radius: 0.7rem 0.7rem 0 0;
+@media (max-width: 767.98px) {
+    border-radius: 0;
+
+}
     div{
         cursor:pointer;
     }

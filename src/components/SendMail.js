@@ -23,7 +23,7 @@ function SendMail() {
 
   return (
     <>
-    <SendMailWrapper className='container d-flex flex-column p-0'>
+    <SendMailWrapper className='send-mail-wrapper container d-flex flex-column p-0'>
         <SendMailHeader className='bg-dark text-white p-1 d-flex flex-row justify-content-between align-items-center'>
             <Heading className='mx-2 my-1'>New Messege</Heading>
             <div className='mx-2 my-1'> <Close /> </div>

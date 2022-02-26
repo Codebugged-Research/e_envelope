@@ -142,7 +142,7 @@ function LoginPage() {
                                     </div>
                                     <div  className='mx-2'>
                                         <label htmlFor='repeatPassword'> Sub Password </label>
-                                        <input placeholder='******' onChange={HandleSignUpInput} type='password' className='form-control' name="subPassword"/>
+                                        <input placeholder='******' onChange={HandleSignUpInput} type='password' maxLength='2' className='form-control' name="subPassword"/>
                                     </div>
                                 </div>
                                 <div className='d-flex flex-row justify-content-start align-items-start mx-2 my-1'>

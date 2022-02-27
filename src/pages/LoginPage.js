@@ -12,6 +12,11 @@ axios.defaults.baseURL = 'http://64.227.177.238/';
 
 function LoginPage() { 
     const navigate  = useNavigate ();
+    let userObject = sessionStorage.getItem('user')
+    let token = sessionStorage.getItem('token')
+    
+    if (userObject && token)
+        navigate('/inbox/')
     const [lgShow, setLgShow] = useState(false);
     const[error,setError] = useState({
         loginEmail:'',
@@ -53,9 +58,10 @@ function LoginPage() {
         }
     }
     // SIGNUP FUNCTIONALITIES
+    const [email, setEmail] = useState('')
     const[signUpForm, setSignUpForm] = useState({
         firstName:"",
-        lastName:"",
+        username:"",
         gender:"",
         phoneNumber:"",
         email:"",
@@ -65,11 +71,29 @@ function LoginPage() {
     const HandleSignUpInput = (e)=>{
         setSignUpForm({...signUpForm, [e.target.name]:e.target.value})
     }
-    const onSubmitSignup = (e) => {
+    const HandleUsernameInput = (e)=>{
+        setSignUpForm({...signUpForm, [e.target.name]:e.target.value})
+    }
+    const onSubmitSignup = async (e) => {
         e.preventDefault();
-        console.log(signUpForm);  
-        navigate("/inbox")
-    }  
+        let data = {  "email":email,
+        "password":signUpForm.password,
+        "name":signUpForm.firstName,
+        "gender":signUpForm.gender,
+        "phone":signUpForm.phoneNumber,
+        "subpassword":signUpForm.subPassword,
+    }    
+    console.log(data);  
+        // await axios.post('api/auth/signup',
+        //      data).then(response => {
+        //          sessionStorage.setItem('token', response.data.token)
+        //          sessionStorage.setItem('refreshToken', response.data.refreshToken)
+        //          sessionStorage.setItem('user', JSON.stringify(response.data.user))
+        //          console.log(response)
+        //          navigate("/inbox")
+        //      })
+        //      .catch(err => console.log(err))
+        }
 
   return (
         <Wrapper className='row col-12 vh-100'>
@@ -123,23 +147,23 @@ function LoginPage() {
                                 <h1 className='text-center'>Lets get you Started!</h1>
                                 <div className='d-flex flex-row justify-content-between align-items-center mx-2 my-3'>
                                     <div className='mx-2'>
-                                        <label htmlFor='firstName'>First Name</label>
+                                        <label htmlFor='name'>Name</label>
                                         <input className='form-control'
                                         onChange={HandleSignUpInput}
-                                        placeholder='john' name="firstName"/>
+                                        placeholder='john' name="name"/>
                                     </div>
                                     <div  className='mx-2'>
-                                        <label htmlFor='lastName'>Last Name</label>
-                                        <input placeholder='john'
-                                        onChange={HandleSignUpInput}
-                                        className='form-control' name="lastName"/>
+                                        <label htmlFor='username'>Username</label>
+                                        <input placeholder='ashuxldr'
+                                        onChange={ e=>setEmail(e.target.value+'EE.com')}
+                                        className='form-control' name="username"/>
                                     </div>
                                 </div>
                                 <div className='d-flex flex-row justify-content-between align-items-center mx-2 my-3'>
                                     <div  className='mx-2'>
                                         <label htmlFor='email'>Email Address</label>
-                                        <input type='email'
-                                        onChange={HandleSignUpInput} placeholder='john' className='form-control' name="email"/>
+                                        <input type='email' disabled
+                                         value={email!=='EE.com'?email:''} placeholder='' className='form-control' name="email"/>
                                     </div>
                                     <div  className='mx-2'>
                                         <label htmlFor='phoneNumber'>Phone Number</label>

@@ -4,6 +4,8 @@ import { Person, Done } from '@material-ui/icons';
 import { Button } from 'react-bootstrap';
 const ProfileView = () => {
 
+    const UpdateProfile = () => {}
+
     const [user,setUser] = useState({});
     useEffect(() => {
         data();
@@ -30,25 +32,25 @@ const ProfileView = () => {
             <SaveButton href='#' className='text-white text-decoration-none '> <Done className="save-button-icon" /></SaveButton>
         </UserImageWrapper>
 
-        <ProfileWrapper className='d-flex flex-column'>
+        <ProfileWrapper onSubmit={UpdateProfile} className='d-flex flex-column'>
             <NameWrapper className='profile-items my-1 d-flex flex-column flex-md-row'>
             <div className='mx-5 flex-fill'>
-                <label htmlFor='firstName'>First Name</label>
-                <input className='form-control' value={user.name} placeholder='' name="firstName"/>
+                <label htmlFor='firstName'>Name</label>
+                <input className='form-control' value={user.name} placeholder='' name="Name"/>
             </div>
-            <div  className='mx-5 flex-fill'>
-                <label htmlFor='lastName'>Last Name</label>
-                <input placeholder='' className='form-control' value={user.name} name="lastName"/>
-            </div>
-            </NameWrapper>
-            <EmailPasswordWrapper className='profile-items my-3 d-flex flex-column flex-md-row'>
             <div  className='mx-5 flex-fill'>
                 <label htmlFor='phoneNumber'>Phone Number</label>
                 <input type='tel' placeholder='' value={user.phoneNumber} className='form-control' name="phoneNumber"/>
             </div>
+            </NameWrapper>
+            <EmailPasswordWrapper className='profile-items my-3 d-flex flex-column flex-md-row'>
             <div  className='mx-5  flex-fill'>
                 <label htmlFor='password'>Login Password</label>
-                <input type='password' placeholder='******' value={user.password} className='form-control' name="password"/>
+                <input type='password' placeholder='******' className='form-control' name="password"/>
+            </div>
+            <div  className='mx-5  flex-fill'>
+                <label htmlFor='password'>Sub Password</label>
+                <input type='password' placeholder='**' maxLength='2'  className='form-control' name="subpassword"/>
             </div>
            
             </EmailPasswordWrapper>
@@ -77,7 +79,7 @@ const UserImage = styled.div``
 const UserDetails = styled.div`` 
 const Name = styled.h5`` 
 const AddressID = styled.h6`` 
-const ProfileWrapper = styled.div`
+const ProfileWrapper = styled.form`
 .profile-items{
     align-items:center;
     div input{

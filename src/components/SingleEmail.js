@@ -15,7 +15,7 @@ function SingleEmail(props) {
 
 return (
     <>
-    {emailData.map(({id, starred, from, subject, message, received, read})=>{
+    {emailData.map(({id, from, subject, body, createdAt})=>{
         if (id == props.id){ 
             return(
     <Wrapper key={id} className='d-flex flex-column container '>
@@ -24,11 +24,11 @@ return (
         <Person/>
         <AddressTimeWrapper className='d-flex flex-column mx-3'>
             <AddressID>{from}</AddressID>
-            <DateTime>{received}</DateTime>
+            <DateTime>{createdAt}</DateTime>
         </AddressTimeWrapper>
         </ImageAddressWrapper>
         <MessegeWrapper className="d-flex flex-column mx-5 my-3">
-            <Messege>{message}</Messege>
+            <Messege>{body}</Messege>
         <AttachmentWrapper></AttachmentWrapper>
         </MessegeWrapper>
     </Wrapper>)

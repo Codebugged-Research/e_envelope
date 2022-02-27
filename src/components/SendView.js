@@ -2,10 +2,10 @@ import {React, useState} from 'react'
 import styled from 'styled-components';
 import { Switch } from '@material-ui/core';
 import emailData  from '../data/emailData';
-import EmailItem from './EmailItem';
+import SendItem from './SendItem';
 import LockIcon from '@material-ui/icons/Lock';
 
-const EmailView = (props) => {
+const SendView = (props) => {
   console.log(props.messeges.data)
   const messeges = props.messeges.data
   const [showSubPassword, setShowSubPassword] = useState(false)
@@ -33,11 +33,11 @@ const EmailView = (props) => {
         <EmailsContainer>
                 {
                   messeges?
-                    messeges.map(({_id,  from, subject, body, createdAt})=>(
-                        <EmailItem 
+                    messeges.map(({_id, to, from, subject, body, createdAt})=>(
+                        <SendItem 
                             key={_id}
                             id={_id}
-                            from={from}
+                            to={to}
                             subject={subject}
                             body={body}
                             createdAt={createdAt}
@@ -50,7 +50,7 @@ const EmailView = (props) => {
   )
 }
 
-export default EmailView
+export default SendView
 
 const Wrapper = styled.div`
     height:  calc( 100vh - 70px );

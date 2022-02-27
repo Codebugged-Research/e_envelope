@@ -21,8 +21,8 @@ function InboxPage() {
         navigate('/')
       }
       const token = await sessionStorage.getItem('token')
-      console.log(axios.defaults.baseURL+`api/mail/sender/${res._id}`)
-        const messege = await axios.get(axios.defaults.baseURL+`api/mail/sender/${res._id}`, {"headers":{ 
+      console.log(axios.defaults.baseURL+`api/mail/sender/${res.email}`)
+        const messege = await axios.get(axios.defaults.baseURL+`api/mail/sender/${res.email}`, {"headers":{ 
           "x-access-token": token,
         }
       })

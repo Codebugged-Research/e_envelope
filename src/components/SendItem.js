@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom';
 
 // const EmailItem = ({ id,starred, from, subject, message, received, read }) => {
-const EmailItem = ({id,  from, subject, body, createdAt}) => {
+const SendItem = ({id, to, subject, body, createdAt}) => {
 
     // const [ star, setStar ] = useState(starred);
 
@@ -25,7 +25,7 @@ const EmailItem = ({id,  from, subject, body, createdAt}) => {
             </IconButton> */}
             </div>
         <Link to={`/email/${id}`} className="main-msg d-flex flex-row text-white text-decoration-none">
-            <p className={ 'unread'}>{from}</p>
+            <p className={ 'unread'}>{to}</p>
             <div className="d-flex flex-column mx-3 subject-msg">
             <p className={'unread'}>{subject.substring(0,3)+'...'}</p> 
             <p className={'unread'}>{body.substring(0,3)+'...'}</p> 
@@ -36,7 +36,7 @@ const EmailItem = ({id,  from, subject, body, createdAt}) => {
     )
 }
 
-export default EmailItem
+export default SendItem
 
 const Wrapper = styled.div`
     padding-left: 20px;

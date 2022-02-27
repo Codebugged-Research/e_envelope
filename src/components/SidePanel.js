@@ -8,9 +8,16 @@ import Close from '@material-ui/icons/Close';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import SendMail from './SendMail';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function SidePanel() {
-
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    const token = sessionStorage.getItem('token');
+        if(!user && !token){
+            navigate('/');
+        }
+    const navigate = useNavigate();
 const [showCompose, setShowCompose] = useState(false);
     function showComposeOnClick () {
         if (showCompose === true){
@@ -45,10 +52,22 @@ const [showCompose, setShowCompose] = useState(false);
        let value = e.target.value;
       setMail({...mail, [name]:value})
     }
-    
-    const sendMail = (e)=> {
+    const url = axios.defaults.baseURL+'api/mail/'
+    const sendMail = async (e)=> {
+        
         e.preventDefault();
-        console.log(mail)}
+        console.log(mail)
+        const newMail = {
+            to:mail.recipient,
+            from:user.email,
+            subject:mail.subject,
+            body:mail.messege,
+            lable:'inbox'
+        }
+            await axios.post(url, newMail, {"headers":{ 
+                "x-access-token": token
+              }}).then(res => console.log(res)).catch(err => console.log(err))
+    }
 
 
     return (

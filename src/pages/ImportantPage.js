@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import SidePanel from '../components/SidePanel';
 import EmailView from '../components/EmailView';
 import Header from '../components/Header';
-
+import {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
 
 function ImportantPage() {
   return (<>

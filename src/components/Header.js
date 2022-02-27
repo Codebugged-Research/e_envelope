@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -7,6 +7,17 @@ import { Link } from 'react-router-dom';
 import EmailIcon from '@material-ui/icons/Email';
 
 function Header() {
+
+    const [user,setUser] = useState({});
+    useEffect(() => {
+        data();
+    }, [])
+    const data = () => {
+        const res = JSON.parse(sessionStorage.getItem('user'))
+        setUser(res);
+
+        }
+
   return (
     <Wrapper>
         <LogoWrapper>
@@ -20,7 +31,7 @@ function Header() {
             </SearchBarWrapper>
         </SearchWrapper>
         <UserWrapper>
-            <AddressID className='text-dark d-none d-md-block'>UsernameEE.com</AddressID>
+            <AddressID className='text-dark d-none d-md-block'>{user.email}</AddressID>
             <Link to='/profile' className='text-dark'>
             <PersonIcon className="mx-2 p-0"/>
             </Link>

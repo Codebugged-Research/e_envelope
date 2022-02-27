@@ -5,7 +5,10 @@ import SignUpImage from './signup.jpeg'
 import { useForm } from "react-hook-form";
 import { Link, useNavigate  } from "react-router-dom";
 import {loginValidate} from "../components/validation"
+import axios from "axios";
 
+
+axios.defaults.baseURL = 'http://64.227.177.238/';
 
 function LoginPage() { 
     const navigate  = useNavigate ();
@@ -31,14 +34,22 @@ function LoginPage() {
         // loginValidate();
 
     }
-    const submitLoginForm = (e) => {
+    const submitLoginForm = async (e) => {
         e.preventDefault();
         let errors = loginValidate(loginForm).errors
         let isValid =  loginValidate(loginForm).isValid
         setError({...error, ['loginEmail']:errors.loginEmail, ['loginPassword']:errors.loginPassword })
-        if(isValid){
-            console.log("logged in",loginForm)
-            navigate("/inbox")
+        if(isValid){ 
+            await axios.post('api/auth/login',
+             {"email":loginForm.loginEmail, "password":loginForm.loginPassword})
+             .then(response => {
+                 sessionStorage.setItem('token', response.data.token)
+                 sessionStorage.setItem('refreshToken', response.data.refreshToken)
+                 sessionStorage.setItem('user', JSON.stringify(response.data.user))
+                 console.log(response)
+                 navigate("/inbox")
+             })
+             .catch(err => console.log(err))
         }
     }
     // SIGNUP FUNCTIONALITIES

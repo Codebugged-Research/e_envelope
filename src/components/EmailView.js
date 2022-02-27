@@ -4,8 +4,9 @@ import { Switch } from '@material-ui/core';
 import emailData  from '../data/emailData';
 import EmailItem from './EmailItem';
 import LockIcon from '@material-ui/icons/Lock';
-const EmailView = () => {
 
+const EmailView = (props) => {
+  console.log(props)
   const [showSubPassword, setShowSubPassword] = useState(false)
   const [checked,setChecked] = useState(false)
   const subPassword = () =>{
@@ -21,6 +22,7 @@ const EmailView = () => {
     } 
     
     }
+    
   return (
     <Wrapper>
       <TopWrapper className='d-flex flex-row justify-content-start align-items-center'>

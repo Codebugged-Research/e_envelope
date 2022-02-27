@@ -1,17 +1,30 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import { Person, Done } from '@material-ui/icons';
 import { Button } from 'react-bootstrap';
 const ProfileView = () => {
+
+    const [user,setUser] = useState({});
+    useEffect(() => {
+        data();
+        console.log(user)
+        
+    }, [])
+    const data = () => {
+        const res = JSON.parse(sessionStorage.getItem('user'))
+        setUser(res);
+        
+        }
+
   return (
     <Wrapper className='container text-white'>
         <UserImageWrapper className="container d-flex flex-row justify-content-between shadow p-4 my-4">
             <div className='d-flex flex-row'>
             <UserImage><Person/></UserImage>
             <UserDetails className="d-flex flex-column">
-                <Name>Vivek Singhal</Name>
-                <AddressID>vivek55.com</AddressID>
-                <Gender>Male</Gender>
+                <Name>{user.name}</Name>
+                <AddressID>{user.email}</AddressID>
+                <Gender>{user.gender}</Gender>
             </UserDetails>
             </div>
             <SaveButton href='#' className='text-white text-decoration-none '> <Done className="save-button-icon" /></SaveButton>
@@ -21,21 +34,21 @@ const ProfileView = () => {
             <NameWrapper className='profile-items my-1 d-flex flex-column flex-md-row'>
             <div className='mx-5 flex-fill'>
                 <label htmlFor='firstName'>First Name</label>
-                <input className='form-control' placeholder='' name="firstName"/>
+                <input className='form-control' value={user.name} placeholder='' name="firstName"/>
             </div>
             <div  className='mx-5 flex-fill'>
                 <label htmlFor='lastName'>Last Name</label>
-                <input placeholder='' className='form-control' name="lastName"/>
+                <input placeholder='' className='form-control' value={user.name} name="lastName"/>
             </div>
             </NameWrapper>
             <EmailPasswordWrapper className='profile-items my-3 d-flex flex-column flex-md-row'>
             <div  className='mx-5 flex-fill'>
                 <label htmlFor='phoneNumber'>Phone Number</label>
-                <input type='tel' placeholder='' className='form-control' name="phoneNumber"/>
+                <input type='tel' placeholder='' value={user.phoneNumber} className='form-control' name="phoneNumber"/>
             </div>
             <div  className='mx-5  flex-fill'>
                 <label htmlFor='password'>Login Password</label>
-                <input type='password' placeholder='******' className='form-control' name="password"/>
+                <input type='password' placeholder='******' value={user.password} className='form-control' name="password"/>
             </div>
            
             </EmailPasswordWrapper>

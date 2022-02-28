@@ -31,8 +31,12 @@ const ProfileView = () => {
         const newProfileData = await axios.put(axios.defaults.baseURL+`api/user/update/${user._id}`, dataObj, {"headers":{ 
             "x-access-token": token
           }})
-          sessionStorage.setItem('user', JSON.stringify(newProfileData));
+          const newUser = JSON.parse(sessionStorage.getItem('user'));
+          newUser.name = dataObj.name;
+          newUser.phone = dataObj.phone;
+          sessionStorage.setItem('user', JSON.stringify(newUser));
           navigate('/profile');
+          window.location.reload();
           console.log(newProfileData)
     }
 

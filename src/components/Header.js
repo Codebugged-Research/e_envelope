@@ -18,8 +18,8 @@ function Header() {
         setUser(res);
         }
     const Logout = () => {
-        sessionStorage.setItem('token', null);
-        sessionStorage.setItem('user', null);
+        sessionStorage.setItem('token', '');
+        sessionStorage.setItem('user', '');
         navigate('/')
     }
 

@@ -15,14 +15,6 @@ const EmailItem = ({id,  from, subject, body, createdAt}) => {
     return (
         <Wrapper>
             <div>
-            {/* <IconButton onClick={()=> star ? setStar(false) : setStar(true)}>
-                {   star ? (
-                    <StarIcon htmlColor='#fff' />
-                    ) : (
-                        <StarBorderIcon htmlColor='#fff' />
-                    )
-                }
-            </IconButton> */}
             </div>
         <Link to={`/email/${id}`} className="main-msg d-flex flex-row text-white text-decoration-none">
             <p className={ 'unread'}>{from}</p>
@@ -30,7 +22,7 @@ const EmailItem = ({id,  from, subject, body, createdAt}) => {
             <p className={'unread'}>{subject.substring(0,3)+'...'}</p> 
             <p className={'unread'}>{body.substring(0,3)+'...'}</p> 
             </div>
-            <p className={'unread'}>{createdAt}</p>
+            <p className={'unread'}>{createdAt.substring(11,16)}</p>
         </Link>
         </Wrapper>
     )
@@ -44,7 +36,7 @@ const Wrapper = styled.div`
     border-bottom: 1px solid lightgray;
     display: flex;
     flex-direction:row;
-    background:linear-gradient(195deg,rgb(131 131 134),rgb(84 84 84));
+    background: linear-gradient(195deg,rgb(221 221 221),rgb(221 221 221));
     color:white !important;
     border-radius:0.25rem;
     margin-top:5px;

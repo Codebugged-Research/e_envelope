@@ -51,6 +51,7 @@ const [showCompose, setShowCompose] = useState(false);
        let name = e.target.name;
        let value = e.target.value;
       setMail({...mail, [name]:value})
+      console.log(mail)
     }
     const url = axios.defaults.baseURL+'api/mail/'
     const sendMail = async (e)=> {
@@ -66,7 +67,14 @@ const [showCompose, setShowCompose] = useState(false);
         }
             await axios.post(url, newMail, {"headers":{ 
                 "x-access-token": token
-              }}).then(res => console.log(res)).catch(err => console.log(err))
+              }}).then(res => {
+                  console.log(res)
+                    setMail({
+                        recipient:'',
+                        subject:'',
+                        messege:'',
+                    })
+                }).catch(err => console.log(err))
     }
 
 
@@ -95,11 +103,11 @@ const [showCompose, setShowCompose] = useState(false);
         </SendMailHeader>
         <form onSubmit={sendMail} className='d-flex flex-column shadow justify-content-center align-items-start'>
             <ToSubjectWrapper className='w-100'>
-                <input type='email' onChange={handleInput} placeholder='To' name='recipient' className='form-control' />
-                <input type='text' onChange={handleInput} placeholder='Subject' name='subject' className='form-control' />
+                <input type='text' onChange={handleInput} value={mail.recipient} placeholder='To' name='recipient' className='form-control' />
+                <input type='text' onChange={handleInput} value={mail.subject} placeholder='Subject' name='subject' className='form-control' />
             </ToSubjectWrapper>
             <MessegeWrapper className='w-100'>
-                <textarea onChange={handleInput}  placeholder='Messege' name='messege' className='form-control' />
+                <textarea onChange={handleInput} value={mail.messege}  placeholder='Messege' name='messege' className='form-control' />
             </MessegeWrapper>
 
             <SendButtonWrapper>

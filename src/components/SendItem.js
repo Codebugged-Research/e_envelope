@@ -44,7 +44,7 @@ const Wrapper = styled.div`
     border-bottom: 1px solid lightgray;
     display: flex;
     flex-direction:row;
-    background:linear-gradient(195deg,rgb(131 131 134),rgb(84 84 84));
+    background: linear-gradient(195deg,rgb(221 221 221),rgb(221 221 221));
     color:white !important;
     border-radius:0.25rem;
     margin-top:5px;

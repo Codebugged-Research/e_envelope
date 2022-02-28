@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Person from '@material-ui/icons/Person'
 import emailData from '../data/emailData'
+import SubPassword from '../components/SubPassword';
 
 function SingleEmail(props) {
     
@@ -15,6 +16,7 @@ function SingleEmail(props) {
 
 return (
     <>
+    <SubPassword/>
     {emailData.map(({id, from, subject, body, createdAt})=>{
         if (id == props.id){ 
             return(

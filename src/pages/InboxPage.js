@@ -5,6 +5,7 @@ import SidePanel from '../components/SidePanel';
 import EmailView from '../components/EmailView';
 import Header from '../components/Header';
 import axios from 'axios';
+import SubPassword from '../components/SubPassword';
 
 
 function InboxPage() {

@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
 import { Link } from 'react-router-dom';
 import EmailIcon from '@material-ui/icons/Email';
-import {Dropdown, ButtonGroup, Button} from 'react-bootstrap';
-// import LogoutIcon from '@material-ui/icons/Logout';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { useNavigate } from 'react-router-dom';
 function Header() {
+    const navigate = useNavigate();
 
     const [user,setUser] = useState({});
     useEffect(() => {
@@ -17,8 +16,13 @@ function Header() {
     const data = () => {
         const res = JSON.parse(sessionStorage.getItem('user'))
         setUser(res);
-
         }
+    const Logout = () => {
+        sessionStorage.setItem('token', null);
+        sessionStorage.setItem('user', null);
+        navigate('/')
+    }
+
 
   return (
     <Wrapper>
@@ -34,15 +38,8 @@ function Header() {
         </SearchWrapper>
         <UserWrapper>
             <AddressID className='text-dark d-none d-md-block'>{user.email}</AddressID>
-                <Dropdown as={ButtonGroup}>
-                <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
-
-                <Dropdown.Menu>
-                <Dropdown href="#/action-3" className=""><Link to='/profile' className='text-dark'><PersonIcon className="mx-2 p-0"/></Link></Dropdown>
-                    <Dropdown href="#/action-3" className=""><ExitToAppIcon/></Dropdown>
-                </Dropdown.Menu>
-                </Dropdown>
-            
+                    <Link to='/profile' className='text-dark'><PersonIcon className="mx-2 p-0"/></Link>
+                    <ExitToAppIcon onClick={Logout} className='mx-2 p-0' />
         </UserWrapper>
     </Wrapper>
   )

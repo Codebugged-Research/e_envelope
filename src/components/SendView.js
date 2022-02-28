@@ -8,8 +8,10 @@ import LockIcon from '@material-ui/icons/Lock';
 const SendView = (props) => {
   console.log(props.messeges.data)
   const messeges = props.messeges.data
+  let SubPassword = sessionStorage.getItem('subpassword')
   const [showSubPassword, setShowSubPassword] = useState(false)
   const [checked,setChecked] = useState(false)
+  console.log(checked)
   const subPassword = () =>{
     if (checked === false)
     {
@@ -27,7 +29,8 @@ const SendView = (props) => {
   return (
     <Wrapper>
       <TopWrapper className='d-flex flex-row justify-content-start align-items-center'>
-        <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} /> { showSubPassword ? <div><Switch checked={checked} onChange={subPassword} /> 
+        <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
+         { showSubPassword ? <div><Switch checked={checked} onChange={subPassword} /> 
         <input className='form-control w-50 d-inline' placeholder='Sub Password' type="password" maxLength='2' /></div> : null }
       </TopWrapper>
         <EmailsContainer>
@@ -38,8 +41,8 @@ const SendView = (props) => {
                             key={_id}
                             id={_id}
                             to={to}
-                            subject={subject}
-                            body={body}
+                            subject={ checked ? subject : '#'.repeat(subject.length)}
+                            body={ checked ? body : '#'.repeat(body.length)}
                             createdAt={createdAt}
                         />
                         

@@ -1,14 +1,17 @@
 import {React, useState} from 'react'
 import styled from 'styled-components';
-import { Switch } from '@material-ui/core';
-import emailData  from '../data/emailData';
 import EmailItem from './EmailItem';
+import SubPassword from './SubPassword';
+import { Switch } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
+
 
 const EmailView = (props) => {
   const messeges = props.messeges.data
+  let SubPassword = sessionStorage.getItem('subpassword')
   const [showSubPassword, setShowSubPassword] = useState(false)
   const [checked,setChecked] = useState(false)
+  console.log(checked)
   const subPassword = () =>{
     if (checked === false)
     {
@@ -22,13 +25,14 @@ const EmailView = (props) => {
     } 
     
     }
-    
   return (
     <Wrapper>
       <TopWrapper className='d-flex flex-row justify-content-start align-items-center'>
-        <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} /> { showSubPassword ? <div><Switch checked={checked} onChange={subPassword} /> 
+        <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
+         { showSubPassword ? <div><Switch checked={checked} onChange={subPassword} /> 
         <input className='form-control w-50 d-inline' placeholder='Sub Password' type="password" maxLength='2' /></div> : null }
       </TopWrapper>
+      {/* <SubPassword/> */}
         <EmailsContainer>
                 {
                   messeges?
@@ -37,8 +41,8 @@ const EmailView = (props) => {
                             key={_id}
                             id={_id}
                             from={ from }
-                            subject={subject}
-                            body={body}
+                            subject={ checked ? subject : '#'.repeat(subject.length)}
+                            body={ checked ? body : '#'.repeat(body.length)}
                             createdAt={createdAt}
                         />
                         
@@ -59,8 +63,7 @@ const Wrapper = styled.div`
     background-color:white;
     border-left:3px solid white;
     `
-
-const TopWrapper = styled.div`
+    const TopWrapper = styled.div`
     font-size:16px;
     padding: 10px 20px;
     background-color:#e3e3e3a1;

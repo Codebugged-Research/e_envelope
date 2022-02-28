@@ -5,7 +5,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
 import { Link } from 'react-router-dom';
 import EmailIcon from '@material-ui/icons/Email';
-
+import {Dropdown, ButtonGroup, Button} from 'react-bootstrap';
+// import LogoutIcon from '@material-ui/icons/Logout';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 function Header() {
 
     const [user,setUser] = useState({});
@@ -32,9 +34,15 @@ function Header() {
         </SearchWrapper>
         <UserWrapper>
             <AddressID className='text-dark d-none d-md-block'>{user.email}</AddressID>
-            <Link to='/profile' className='text-dark'>
-            <PersonIcon className="mx-2 p-0"/>
-            </Link>
+                <Dropdown as={ButtonGroup}>
+                <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+
+                <Dropdown.Menu>
+                <Dropdown href="#/action-3" className=""><Link to='/profile' className='text-dark'><PersonIcon className="mx-2 p-0"/></Link></Dropdown>
+                    <Dropdown href="#/action-3" className=""><ExitToAppIcon/></Dropdown>
+                </Dropdown.Menu>
+                </Dropdown>
+            
         </UserWrapper>
     </Wrapper>
   )

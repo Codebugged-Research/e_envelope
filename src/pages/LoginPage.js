@@ -60,7 +60,7 @@ function LoginPage() {
     // SIGNUP FUNCTIONALITIES
     const [email, setEmail] = useState('')
     const[signUpForm, setSignUpForm] = useState({
-        firstName:"",
+        name:"",
         username:"",
         gender:"",
         phoneNumber:"",
@@ -78,21 +78,21 @@ function LoginPage() {
         e.preventDefault();
         let data = {  "email":email,
         "password":signUpForm.password,
-        "name":signUpForm.firstName,
+        "name":signUpForm.name,
         "gender":signUpForm.gender,
         "phone":signUpForm.phoneNumber,
         "subpassword":signUpForm.subPassword,
     }    
-    console.log(data);  
-        // await axios.post('api/auth/signup',
-        //      data).then(response => {
-        //          sessionStorage.setItem('token', response.data.token)
-        //          sessionStorage.setItem('refreshToken', response.data.refreshToken)
-        //          sessionStorage.setItem('user', JSON.stringify(response.data.user))
-        //          console.log(response)
-        //          navigate("/inbox")
-        //      })
-        //      .catch(err => console.log(err))
+    // console.log(data);  
+        await axios.post('api/auth/signup',
+             data).then(response => {
+                 sessionStorage.setItem('token', response.data.token)
+                 sessionStorage.setItem('refreshToken', response.data.refreshToken)
+                 sessionStorage.setItem('user', JSON.stringify(response.data.user))
+                 console.log(response)
+                 navigate("/inbox")
+             })
+             .catch(err => console.log(err))
         }
 
   return (
@@ -154,7 +154,7 @@ function LoginPage() {
                                     </div>
                                     <div  className='mx-2'>
                                         <label htmlFor='username'>Username</label>
-                                        <input placeholder='ashuxldr'
+                                        <input placeholder='username'
                                         onChange={ e=>setEmail(e.target.value+'EE.com')}
                                         className='form-control' name="username"/>
                                     </div>

@@ -11,12 +11,12 @@ export const loginValidate = (loginForm)=>{
         isValid = false;
         errors['loginEmail'] = "Please Enter your email";
     }
-    else{
-        if (!pattern.test(loginForm["loginEmail"])) {
-        isValid = false;
-        errors['loginEmail'] = "Please Enter a valid email";
-    }
-}
+    // else{
+    //     if (!pattern.test(loginForm["loginEmail"])) {
+    //     isValid = false;
+    //     errors['loginEmail'] = "Please Enter a valid email";
+    // }
+// }
 if(!loginForm['loginPassword']){
     isValid = false;
     errors['loginPassword'] = "Please Enter your Password";

@@ -6,7 +6,6 @@ import EmailItem from './EmailItem';
 import LockIcon from '@material-ui/icons/Lock';
 
 const EmailView = (props) => {
-  console.log(props.messeges.data)
   const messeges = props.messeges.data
   const [showSubPassword, setShowSubPassword] = useState(false)
   const [checked,setChecked] = useState(false)
@@ -37,7 +36,7 @@ const EmailView = (props) => {
                         <EmailItem 
                             key={_id}
                             id={_id}
-                            from={from}
+                            from={ from }
                             subject={subject}
                             body={body}
                             createdAt={createdAt}

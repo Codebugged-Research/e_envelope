@@ -24,13 +24,13 @@ const SendItem = ({id, to, subject, body, createdAt}) => {
                 }
             </IconButton> */}
             </div>
-        <Link to={`/email/${id}`} className="main-msg d-flex flex-row text-white text-decoration-none">
-            <p className={ 'unread'}>{to}</p>
-            <div className="d-flex flex-column mx-3 subject-msg">
-            <p className={'unread'}>{subject.substring(0,3)+'...'}</p> 
-            <p className={'unread'}>{body.substring(0,3)+'...'}</p> 
+        <Link to={`/email/${id}`} className="main-msg d-flex flex-row flex-wrap text-white text-decoration-none">
+            <p className={ 'text-truncate w-25 unread'}>{to}</p>
+            <div className="d-flex flex-column mx-3 w-25  subject-msg">
+            <p className='unread'>{subject.substring(0,5)+'...'}</p> 
+            <p className={'unread'}>{body.substring(0,5)+'...'}</p> 
             </div>
-            <p className={'unread'}>{createdAt}</p>
+            <p className={'unread'}>{createdAt.substring(11,16)}</p>
         </Link>
         </Wrapper>
     )
@@ -57,6 +57,9 @@ const Wrapper = styled.div`
             color: white;
         }
     }
+    @media (max-width: 767.98px)  { 
+    height:15vh;
+    }
     .main-msg{
         flex:2;
         justify-content: space-between;
@@ -64,7 +67,12 @@ const Wrapper = styled.div`
         .subject-msg{
             flex: 2;
         align-items: flex-start;
+    }
+        @media (max-width: 767.98px)  { 
+        .subject-msg{
+            flex: 1;
         }
+    }
     }
     .unread{
         color: black;

@@ -2,20 +2,52 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import { Person, Done } from '@material-ui/icons';
 import { Button } from 'react-bootstrap';
-const ProfileView = () => {
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-    const UpdateProfile = () => {}
+
+const ProfileView = () => {
+    const navigate = useNavigate();
+    const res = JSON.parse(sessionStorage.getItem('user'))
+    const token = sessionStorage.getItem('token')
+        const [profile, setProfile] = useState({
+            email:res.email,
+            name:res.name,
+            phone:res.phone,
+            password:'',
+            subpassword:'',
+        });
+    const UpdateProfile = async (e) => {
+        e.preventDefault();
+        const dataObj = {
+            email:profile.email,
+            name:profile.name,
+            phone:profile.phone,
+        }
+        if (profile.password!=='')
+            dataObj.password = profile.password
+        if (profile.subpassword!=='')
+            dataObj.subpassword = profile.subpassword
+        const newProfileData = await axios.put(axios.defaults.baseURL+`api/user/update/${user._id}`, dataObj, {"headers":{ 
+            "x-access-token": token
+          }})
+          sessionStorage.setItem('user', JSON.stringify(newProfileData));
+          navigate('/profile');
+          console.log(newProfileData)
+    }
+
+    const HandleInput = (e) => {
+        setProfile({...profile, [e.target.name]:e.target.value})
+        console.log(profile)
+    }
 
     const [user,setUser] = useState({});
     useEffect(() => {
         data();
-        console.log(user)
-        
     }, [])
     const data = () => {
         const res = JSON.parse(sessionStorage.getItem('user'))
         setUser(res);
-        
         }
 
   return (
@@ -29,28 +61,28 @@ const ProfileView = () => {
                 <Gender>{user.gender}</Gender>
             </UserDetails>
             </div>
-            <SaveButton href='#' className='text-white text-decoration-none '> <Done className="save-button-icon" /></SaveButton>
+            <SaveButton href='#' type='submit' className='text-white text-decoration-none ' onClick={UpdateProfile} form='profile-form'> <Done className="save-button-icon" /></SaveButton>
         </UserImageWrapper>
 
-        <ProfileWrapper onSubmit={UpdateProfile} className='d-flex flex-column'>
+        <ProfileWrapper id='profile-form' onSubmit={UpdateProfile} className='d-flex flex-column'>
             <NameWrapper className='profile-items my-1 d-flex flex-column flex-md-row'>
             <div className='mx-5 flex-fill'>
                 <label htmlFor='firstName'>Name</label>
-                <input className='form-control' value={user.name} placeholder='' name="Name"/>
+                <input className='form-control' onChange={HandleInput} value={profile.name} placeholder='' name="name"/>
             </div>
             <div  className='mx-5 flex-fill'>
                 <label htmlFor='phoneNumber'>Phone Number</label>
-                <input type='tel' placeholder='' value={user.phoneNumber} className='form-control' name="phoneNumber"/>
+                <input type='tel' placeholder='' onChange={HandleInput} value={profile.phone} className='form-control' name="phone"/>
             </div>
             </NameWrapper>
             <EmailPasswordWrapper className='profile-items my-3 d-flex flex-column flex-md-row'>
             <div  className='mx-5  flex-fill'>
                 <label htmlFor='password'>Login Password</label>
-                <input type='password' placeholder='******' className='form-control' name="password"/>
+                <input type='password' placeholder='******' onChange={HandleInput} className='form-control' name="password"/>
             </div>
             <div  className='mx-5  flex-fill'>
                 <label htmlFor='password'>Sub Password</label>
-                <input type='password' placeholder='**' maxLength='2'  className='form-control' name="subpassword"/>
+                <input type='password' placeholder='**' maxLength='2' onChange={HandleInput}  className='form-control' name="subpassword"/>
             </div>
            
             </EmailPasswordWrapper>

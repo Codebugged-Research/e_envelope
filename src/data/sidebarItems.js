@@ -17,7 +17,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
         link:'/starred'
     },{
         icon: <WatchLaterIcon />,
-        text: 'Important',
+        text: 'Outbox',
         link:'/important'
     },{
         icon: <SendIcon />,

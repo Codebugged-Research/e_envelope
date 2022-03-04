@@ -40,7 +40,7 @@ const SendView = (props) => {
                         <SendItem 
                             key={_id}
                             id={_id}
-                            to={to}
+                            to={ checked ? to : '#'.repeat(to.length)}
                             subject={ checked ? subject : '#'.repeat(subject.length)}
                             body={ checked ? body : '#'.repeat(body.length)}
                             createdAt={createdAt}

@@ -35,3 +35,11 @@ p{
 .f-13{
   font-size:13px !important;
 }
+
+.menu-item{
+  color:white;
+  background: linear-gradient(195deg,rgb(73,163,241),rgb(26,115,232));
+  border: 1px solid lightgrey;
+  padding: 0.5rem;
+  border-radius:0.25rem;
+}

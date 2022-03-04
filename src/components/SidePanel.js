@@ -72,7 +72,8 @@ function SidePanel() {
             subject: mail.subject,
             body: mail.messege,
             attachments: attachments,
-            lable: 'inbox'
+            lable: 'inbox',
+            isSent: true
         }
         await axios.post(url, newMail, {
             "headers": {

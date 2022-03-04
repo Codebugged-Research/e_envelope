@@ -4,23 +4,36 @@ import EmailItem from './EmailItem';
 import SubPassword from './SubPassword';
 import { Switch } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
+import axios from 'axios';
 
 
 const EmailView = (props) => {
   const messeges = props.messeges.data
-  let SubPassword = sessionStorage.getItem('subpassword')
   const [showSubPassword, setShowSubPassword] = useState(false)
   const [checked,setChecked] = useState(false)
+  const [SubPassword,setSubPassword] = useState('')
+
   console.log(checked)
-  const subPassword = () =>{
+  const subPassword = async () =>{
     if (checked === false)
     {
-      localStorage.setItem('SubPassword', true)
-      setChecked(true)
+      const user = JSON.parse(sessionStorage.getItem('user'))
+      const token = sessionStorage.getItem('token')
+      console.log(user._id ,token)
+      const data = {
+        _id:user._id, 
+        subpassword:SubPassword,
+      }
+      await axios.post(axios.defaults.baseURL+`api/auth/chkSubPassword/`, data, {"headers":{ 
+        "x-access-token": token,
+      }
+    }).then(res=> {
+        sessionStorage.setItem('SubPassword', true)
+        setChecked(true)}).catch(err=> console.log(err))
     }
     else 
     {
-      localStorage.setItem('SubPassword', false)
+      sessionStorage.setItem('SubPassword', false)
       setChecked(false)
     } 
     
@@ -30,7 +43,9 @@ const EmailView = (props) => {
       <TopWrapper className='d-flex flex-row justify-content-start align-items-center'>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
          { showSubPassword ? <div><Switch checked={checked} onChange={subPassword} /> 
-        <input className='form-control w-50 d-inline' placeholder='Sub Password' type="password" maxLength='2' /></div> : null }
+        <input className='form-control w-50 d-inline' placeholder='Sub Password' 
+        value={SubPassword} onChange={(e)=> setSubPassword(e.target.value)}
+        type="password" maxLength='2' /></div> : null }
       </TopWrapper>
       {/* <SubPassword/> */}
         <EmailsContainer>
@@ -40,7 +55,7 @@ const EmailView = (props) => {
                         <EmailItem 
                             key={_id}
                             id={_id}
-                            from={ from }
+                            from={ checked ? from : '#'.repeat(from.length) }
                             subject={ checked ? subject : '#'.repeat(subject.length)}
                             body={ checked ? body : '#'.repeat(body.length)}
                             createdAt={createdAt}

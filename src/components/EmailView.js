@@ -8,19 +8,29 @@ import LockIcon from '@material-ui/icons/Lock';
 
 const EmailView = (props) => {
   const messeges = props.messeges.data
-  let SubPassword = sessionStorage.getItem('subpassword')
   const [showSubPassword, setShowSubPassword] = useState(false)
   const [checked,setChecked] = useState(false)
+  const [SubPassword,setSubPassword] = useState('')
+
   console.log(checked)
   const subPassword = () =>{
     if (checked === false)
     {
-      localStorage.setItem('SubPassword', true)
-      setChecked(true)
+    //   const messege = await axios.get(axios.defaults.baseURL+`api/mail/sender/${res.email}`, {"headers":{ 
+    //     "x-access-token": token,
+    //   }
+    // })
+    const messege = false;
+      console.log(messege)
+      if(messege===true){
+        sessionStorage.setItem('SubPassword', true)
+        setChecked(true)
+      }
+      
     }
     else 
     {
-      localStorage.setItem('SubPassword', false)
+      sessionStorage.setItem('SubPassword', false)
       setChecked(false)
     } 
     
@@ -40,7 +50,7 @@ const EmailView = (props) => {
                         <EmailItem 
                             key={_id}
                             id={_id}
-                            from={ from }
+                            from={ checked ? from : '#'.repeat(from.length) }
                             subject={ checked ? subject : '#'.repeat(subject.length)}
                             body={ checked ? body : '#'.repeat(body.length)}
                             createdAt={createdAt}

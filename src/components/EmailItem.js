@@ -1,18 +1,22 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import PersonIcon from '@material-ui/icons/Person';
-// import { Checkbox } from '@material-ui/core'
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarIcon from '@material-ui/icons/Star';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 
 // const EmailItem = ({ id,starred, from, subject, message, received, read }) => {
 const EmailItem = ({id,  from, subject, body, createdAt}) => {
 
     // const [ star, setStar ] = useState(starred);
-
+    function handleClick(e, data) {
+        console.log(data);
+      }
     return (
+        <>
+             <ContextMenuTrigger id={id}>
         <Wrapper>
             <div>
             </div>
@@ -25,6 +29,21 @@ const EmailItem = ({id,  from, subject, body, createdAt}) => {
             <p className={'unread'}>{createdAt.substring(11,16)}</p>
         </Link>
         </Wrapper>
+
+      </ContextMenuTrigger>
+        <ContextMenu id={id}>
+        <MenuItem className="menu-item" data={{label:'trash'}} onClick={handleClick}>
+          Move to Trash
+        </MenuItem>
+        <MenuItem className="menu-item" data={{label:'outbox'}} onClick={handleClick}>
+        Move to Outbox
+        </MenuItem>
+        <MenuItem divider />
+        <MenuItem className="menu-item" data={{label:'spam'}} onClick={handleClick}>
+        Move to Spam
+        </MenuItem>
+      </ContextMenu>
+        </>
     )
 }
 

@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function StarredPage() {
+function SpamPage() {
   if( new Date().getTime() - sessionStorage.getItem('time') > 150000 ){
     sessionStorage.setItem('SubPassword', false)
   }
@@ -16,14 +16,11 @@ function StarredPage() {
   }, []);
   const data = async () => {
       const res = JSON.parse(sessionStorage.getItem('user'))
-
       const token = await sessionStorage.getItem('token') 
-        const messege = await axios.get(axios.defaults.baseURL+`api/mail/user/${res.email}/label/stared`, {"headers":{ 
+        const messege = await axios.get(axios.defaults.baseURL+`api/mail/user/${res.email}/label/spam`, {"headers":{ 
           "x-access-token": token,
         }
       })
-        // const messege = [{'to':'ashuxldr'}]
-        console.log(messege)
         setMesseges(messege)
       }
   return (<>
@@ -36,7 +33,7 @@ function StarredPage() {
   )
 }
 
-export default StarredPage
+export default SpamPage
 
 const Wrapper = styled.div`
 display:flex;

@@ -1,25 +1,27 @@
-import React from 'react'
+import {React} from 'react'
 import styled from 'styled-components';
 import SidePanel from '../components/SidePanel';
-import ProfileView from '../components/ProfileView';
 import Header from '../components/Header';
+import SingleSentEmail from '../components/SingleSentEmail';
+import { useParams} from "react-router-dom";
 
-
-function ProfilePage() {
+function SentEmailPage() {
   if( new Date().getTime() - sessionStorage.getItem('time') > 150000 ){
     sessionStorage.setItem('SubPassword', false)
   }
-  return (<>
+  let params = useParams();
+  return (
+  <>
     <Header/>
     <Wrapper>
-      <SidePanel/>
-      <ProfileView/>
+        <SidePanel/>
+        <SingleSentEmail id={params.id} />
     </Wrapper>
     </>
   )
 }
 
-export default ProfilePage
+export default SentEmailPage
 
 const Wrapper = styled.div`
 display:flex;

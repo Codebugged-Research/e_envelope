@@ -43,3 +43,6 @@ p{
   padding: 0.5rem;
   border-radius:0.25rem;
 }
+.w-80{
+  width:80% !important;
+}

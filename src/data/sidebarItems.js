@@ -5,7 +5,10 @@ import SendIcon from '@material-ui/icons/Send';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 import LabelIcon from '@material-ui/icons/Label';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import ReportIcon from '@material-ui/icons/Report';
+import ArchiveIcon from '@material-ui/icons/Archive';
+import DraftsIcon from '@material-ui/icons/Drafts';
  const sidebarItems = [
     {
         icon: <InboxIcon />,
@@ -16,17 +19,27 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
         text: 'Starred',
         link:'/starred'
     },{
-        icon: <WatchLaterIcon />,
+        icon: <ArchiveIcon />,
         text: 'Outbox',
-        link:'/important'
+        link:'/outbox'
     },{
         icon: <SendIcon />,
         text: 'Sent',
         link:'/sent'
     },{
-        icon: <InsertDriveFileIcon />,
+        icon: <DraftsIcon />,
         text: 'Drafts',
         link:'/draft'
+    },
+    {
+        icon: <DeleteIcon />,
+        text: 'Trash',
+        link:'/trash'
+    },
+    {
+        icon: <ReportIcon />,
+        text: 'Spam',
+        link:'/spam'
     },
 ]
 

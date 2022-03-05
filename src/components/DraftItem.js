@@ -8,55 +8,38 @@ import { Link } from 'react-router-dom';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import axios from 'axios';
 
-const EmailItem = ({id,  from, subject, body, createdAt}) => {
+const DraftItem = ({id, to, subject, body, createdAt, onClick}) => {
     const token = sessionStorage.getItem('token')
-    const handleClick = async (e, data) => {
-        console.log(data.label, data.id);
-        let newMail = {
-            lable: data.label,
+      const handleDraft = ()=>{
+        console.log("clicked")
+        let draftMail = {
+            id:id,
+            to:to,
+            subject:subject,
+            body:body,
         }
-        await axios.put(axios.defaults.baseURL + `api/mail/${data.id}`, newMail, {
-            "headers": {
-                "x-access-token": token
-            }
-        }).then(res => {
-            console.log(res)
-        }).catch(err => console.log(err))
-      }
+        sessionStorage.setItem('mail',JSON.stringify(draftMail));
+        sessionStorage.setItem('openPostCard', JSON.parse(sessionStorage.getItem('openPostCard'))? false:true);
+        console.log(JSON.parse(sessionStorage.getItem('openPostCard')))
+        window.location.reload();
+    }
     return (
         <>
-    <ContextMenuTrigger id={id}>
-        <Wrapper>
-            <div>
-            </div>
-        <Link to={`/email/${id}`} className="main-msg d-flex flex-row text-white text-decoration-none">
-            <p className={ 'unread'}>{from}</p>
+        <Wrapper onClick={onClick}>
+        <div id={id} className="main-msg d-flex flex-row text-white text-decoration-none">
+            <p className={ 'unread'}>{to}</p>
             <div className="d-flex flex-column mx-3 subject-msg">
             <p className={'unread'}>{subject.substring(0,3)+'...'}</p> 
             <p className={'unread'}>{body.substring(0,3)+'...'}</p> 
             </div>
             <p className={'unread'}>{createdAt.substring(11,16)}</p>
-        </Link>
+        </div>
         </Wrapper>
-
-      </ContextMenuTrigger>
-        <ContextMenu id={id}>
-        <MenuItem className="menu-item" data={{label:'trash', id:id}} onClick={handleClick}>
-          Move to Trash
-        </MenuItem>
-        <MenuItem className="menu-item" data={{label:'stared', id:id}} onClick={handleClick}>
-        Move to Starred
-        </MenuItem>
-        <MenuItem divider />
-        <MenuItem className="menu-item" data={{label:'spam', id:id}} onClick={handleClick}>
-        Move to Spam
-        </MenuItem>
-      </ContextMenu>
         </>
     )
 }
 
-export default EmailItem
+export default DraftItem
 
 const Wrapper = styled.div`
     padding-left: 20px;

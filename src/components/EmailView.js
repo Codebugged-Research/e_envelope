@@ -10,7 +10,7 @@ import axios from 'axios';
 const EmailView = (props) => {
   const messeges = props.messeges.data
   const [showSubPassword, setShowSubPassword] = useState(false)
-  const [checked,setChecked] = useState(false)
+  const [checked,setChecked] = useState(JSON.parse(sessionStorage.getItem('SubPassword')))
   const [SubPassword,setSubPassword] = useState('')
 
   console.log(checked)
@@ -29,6 +29,7 @@ const EmailView = (props) => {
       }
     }).then(res=> {
         sessionStorage.setItem('SubPassword', true)
+    sessionStorage.setItem('time', new Date().getTime())
         setChecked(true)}).catch(err=> console.log(err))
     }
     else 
@@ -36,7 +37,6 @@ const EmailView = (props) => {
       sessionStorage.setItem('SubPassword', false)
       setChecked(false)
     } 
-    
     }
   return (
     <Wrapper>
@@ -47,7 +47,6 @@ const EmailView = (props) => {
         value={SubPassword} onChange={(e)=> setSubPassword(e.target.value)}
         type="password" maxLength='2' /></div> : null }
       </TopWrapper>
-      {/* <SubPassword/> */}
         <EmailsContainer>
                 {
                   messeges?

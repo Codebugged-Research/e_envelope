@@ -13,24 +13,44 @@ import EmailPage from './pages/EmailPage';
 import ProfilePage from './pages/ProfilePage'
 import DraftPage from './pages/DraftPage'
 import SendPage from './pages/SendPage'
-import ImportantPage from './pages/ImportantPage'
+import OutboxPage from './pages/OutboxPage'
 import StarredPage from './pages/StarredPage'
+import TrashPage from './pages/TrashPage'
+import SpamPage from './pages/SpamPage'
+import SentEmailPage from './pages/SentEmailPage'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import {useLocation, Navigate, Outlet} from 'react-router-dom'
 
 function App() {
+
+  const CallAuth=()=> {
+    let location = useLocation();
+    const token = sessionStorage.getItem("token");
+    console.log(token)
+    if(!token){
+      return <Navigate to={'/'} state={{from :location}}/>
+    }
+    return <Outlet />;
+}
+
   return (
     <div className="App">
       <Router>
           
         <Routes>
           <Route exact path="/" element={<LoginPage/>} />
-          <Route exact path="/inbox" element={ <InboxPage/>} />
-          <Route exact path="/email/:id" element={ <EmailPage />} />
-          <Route exact path="/profile" element={ <ProfilePage/>} />
-          <Route exact path="/starred" element={ <StarredPage/>} />
-          <Route exact path="/important" element={ <ImportantPage/>} />
-          <Route exact path="/draft" element={ <DraftPage/>} />
-          <Route exact path="/sent" element={ <SendPage/>} />
+          <Route element={<CallAuth/>}>
+            <Route exact path="/inbox" element={ <InboxPage/>} />
+            <Route exact path="/email/:id" element={ <EmailPage />} />
+            <Route exact path="/sent/:id" element={ <SentEmailPage />} />
+            <Route exact path="/profile" element={ <ProfilePage/>} />
+            <Route exact path="/starred" element={ <StarredPage/>} />
+            <Route exact path="/outbox" element={ <OutboxPage/>} />
+            <Route exact path="/spam" element={ <SpamPage/>} />
+            <Route exact path="/trash" element={ <TrashPage/>} />
+            <Route exact path="/draft" element={ <DraftPage/>} />
+            <Route exact path="/sent" element={ <SendPage/>} />
+          </Route>
         </Routes>
     </Router>
     </div>

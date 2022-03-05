@@ -8,6 +8,9 @@ import {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 
 function EmailPage() {
+  if( new Date().getTime() - sessionStorage.getItem('time') > 150000 ){
+    sessionStorage.setItem('SubPassword', false)
+  }
   let params = useParams();
   return (
   <>

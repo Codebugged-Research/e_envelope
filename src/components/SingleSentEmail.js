@@ -8,13 +8,13 @@ import LockIcon from '@material-ui/icons/Lock';
 import axios from 'axios';
 import { useEffect,useState } from 'react';
 
-const SingleEmail = (props) => 
+const SingleSentEmail = (props) => 
 {
     const [showSubPassword, setShowSubPassword] = useState(false)
     const [checked,setChecked] = useState(JSON.parse(sessionStorage.getItem('SubPassword')))
     const [SubPassword,setSubPassword] = useState('')
     const [messeges,setMesseges] = useState({
-        from:'',
+        to:'',
         subject:'',
         body:''
     })
@@ -68,7 +68,7 @@ return (
         <ImageAddressWrapper className='d-flex flex-row mx-1'>
         <Person/>
         <AddressTimeWrapper className='d-flex flex-column mx-3'>
-            <AddressID>{ checked ? messeges.from : '#'.repeat(messeges.from.length) }</AddressID>
+            <AddressID>{ checked ? messeges.to : '#'.repeat(messeges.to.length) }</AddressID>
             <DateTime>{messeges.createdAt}</DateTime>
         </AddressTimeWrapper>
         </ImageAddressWrapper>
@@ -82,7 +82,7 @@ return (
   )
 }
 
-export default SingleEmail
+export default SingleSentEmail
 
 const Wrapper = styled.div`
     height:  calc( 100vh - 70px );

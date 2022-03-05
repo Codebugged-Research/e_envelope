@@ -7,14 +7,12 @@ import { Link, useNavigate  } from "react-router-dom";
 import {loginValidate} from "../components/validation"
 import axios from "axios";
 
-
 axios.defaults.baseURL = 'http://64.227.177.238/';
 
 function LoginPage() { 
     const navigate  = useNavigate ();
     let userObject = sessionStorage.getItem('user')
     let token = sessionStorage.getItem('token')
-    
     if (userObject && token)
         navigate('/inbox/')
     const [lgShow, setLgShow] = useState(false);
@@ -44,12 +42,13 @@ function LoginPage() {
         let errors = loginValidate(loginForm).errors
         let isValid =  loginValidate(loginForm).isValid
         setError({...error, ['loginEmail']:errors.loginEmail, ['loginPassword']:errors.loginPassword })
-        if(isValid){ 
+        if(isValid){
             await axios.post('api/auth/login',
              {"email":loginForm.loginEmail, "password":loginForm.loginPassword})
              .then(response => {
                  sessionStorage.setItem('token', response.data.token)
-                 sessionStorage.setItem('refreshToken', response.data.refreshToken)
+                 sessionStorage.setItem('SubPassword', false)
+                 sessionStorage.setItem('time', new Date().getTime())
                  sessionStorage.setItem('user', JSON.stringify(response.data.user))
                  console.log(response)
                  navigate("/inbox")

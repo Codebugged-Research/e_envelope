@@ -4,26 +4,35 @@ import { Switch } from '@material-ui/core';
 import emailData  from '../data/emailData';
 import SendItem from './SendItem';
 import LockIcon from '@material-ui/icons/Lock';
+import axios from 'axios';
 
 const SendView = (props) => {
-  console.log(props.messeges.data)
   const messeges = props.messeges.data
   let SubPassword = sessionStorage.getItem('subpassword')
   const [showSubPassword, setShowSubPassword] = useState(false)
-  const [checked,setChecked] = useState(false)
-  console.log(checked)
-  const subPassword = () =>{
+  const [checked,setChecked] = useState(JSON.parse(sessionStorage.getItem('SubPassword')))
+  const user = JSON.parse(sessionStorage.getItem('user'))
+  const token = sessionStorage.getItem('token')
+  const subPassword = async () =>{
     if (checked === false)
     {
-      localStorage.setItem('SubPassword', true)
-      setChecked(true)
+    const data = {
+    _id:user._id, 
+    subpassword:SubPassword,
+    }
+    await axios.post(axios.defaults.baseURL+`api/auth/chkSubPassword/`, data, {"headers":{ 
+    "x-access-token": token,
+    }
+    }).then(res=> {
+    sessionStorage.setItem('SubPassword', true)
+    sessionStorage.setItem('time', new Date().getTime())
+    setChecked(true)}).catch(err=> console.log(err))
     }
     else 
     {
-      localStorage.setItem('SubPassword', false)
-      setChecked(false)
+    sessionStorage.setItem('SubPassword', false)
+    setChecked(false)
     } 
-    
     }
     
   return (

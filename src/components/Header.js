@@ -6,16 +6,19 @@ import { Link } from 'react-router-dom';
 import EmailIcon from '@material-ui/icons/Email';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useNavigate } from 'react-router-dom';
+import Other from '../pages/other.jpeg'
+import Male1 from '../pages/male1.png'
+import Male2 from '../pages/male2.jpg'
+import Female1 from '../pages/male1.png'
+import Female2 from '../pages/female2.jpg'
 import axios from 'axios';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 function Header() {
     const navigate = useNavigate();
     const token = sessionStorage.getItem('token');
-    if (!token) {
-        navigate('/');
-    }
     const [user, setUser] = useState({});
     const [userSearchList, setUserList] = useState([]);
+    const IMG = user.gender==="other" ? Other:(user.gender === 'male' ? (user.photoType===1?Male1:Male2):(user.photoType===1?Female1:Female2))
     useEffect(() => {
         data();
     }, []);
@@ -89,7 +92,7 @@ function Header() {
             </SearchWrapper>
             <UserWrapper>
                 <AddressID className='text-dark d-none d-md-block'>{user.email}</AddressID>
-                <Link to='/profile' className='text-dark'><PersonIcon className="mx-2 p-0" /></Link>
+                <Link to='/profile' className='text-dark'><img src={IMG} className="img-item p-2" /></Link>
                 <ExitToAppIcon onClick={Logout} className='mx-2 p-0' />
             </UserWrapper>
         </Wrapper>

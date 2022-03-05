@@ -6,6 +6,10 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate  } from "react-router-dom";
 import {loginValidate} from "../components/validation"
 import axios from "axios";
+import Male1 from './male1.png';
+import Male2 from './male2.jpg';
+import Female1 from './female1.png';
+import Female2 from './female2.jpg';
 
 axios.defaults.baseURL = 'http://64.227.177.238/';
 
@@ -62,6 +66,7 @@ function LoginPage() {
         name:"",
         username:"",
         gender:"",
+        photoType:0,
         phoneNumber:"",
         email:"",
         password:"",
@@ -69,6 +74,7 @@ function LoginPage() {
     });
     const HandleSignUpInput = (e)=>{
         setSignUpForm({...signUpForm, [e.target.name]:e.target.value})
+        console.log(signUpForm)
     }
     const HandleUsernameInput = (e)=>{
         setSignUpForm({...signUpForm, [e.target.name]:e.target.value})
@@ -119,7 +125,7 @@ function LoginPage() {
                 </div>
                 <div className='d-flex flex-row justify-content-between align-items-center'>
                     <Button type="submit" className="btn-dark">Sign In</Button>
-                    <a href='#' className='text-decoration-none'>Forget Password</a>
+                    <Link to='/forget' className='text-decoration-none'>Forget Password</Link>
                 </div>
                 <a className='text-primary float-end text-decoration-none' onClick={() => setLgShow(true)}>
                     Create an account?
@@ -154,7 +160,7 @@ function LoginPage() {
                                     <div  className='mx-2'>
                                         <label htmlFor='username'>Username</label>
                                         <input placeholder='username'
-                                        onChange={ e=>setEmail(e.target.value+'EE.com')}
+                                        onChange={ e=>setEmail('#'+e.target.value+'EE.com')}
                                         className='form-control' name="username"/>
                                     </div>
                                 </div>
@@ -162,7 +168,7 @@ function LoginPage() {
                                     <div  className='mx-2'>
                                         <label htmlFor='email'>Email Address</label>
                                         <input type='email' disabled
-                                         value={email!=='EE.com'?email:''} placeholder='' className='form-control' name="email"/>
+                                         value={email!=='#EE.com'?email:''} placeholder='' className='form-control' name="email"/>
                                     </div>
                                     <div  className='mx-2'>
                                         <label htmlFor='phoneNumber'>Phone Number</label>
@@ -181,27 +187,35 @@ function LoginPage() {
                                 </div>
                                 <div className='d-flex flex-row justify-content-start align-items-start mx-2 my-1'>
                                 <div className="form-check form-check-inline mx-2">
-                                    <input className="form-check-input" onChange={HandleSignUpInput} type="radio" name="gender" id="inlineRadio1" value="male"/>
+                                    <input className="form-check-input" onChange={HandleSignUpInput} type="radio" name="gender" id="male" value="male"/>
                                     <label className="form-check-label" for="inlineRadio1">Male</label>
                                     </div>
                                     <div className="form-check form-check-inline mx-2">
-                                    <input className="form-check-input" onChange={HandleSignUpInput} type="radio" name="gender" id="inlineRadio2" value="female"/>
+                                    <input className="form-check-input" onChange={HandleSignUpInput} type="radio" name="gender" id="female" value="female"/>
                                     <label className="form-check-label" for="inlineRadio2">Female</label>
                                     </div>
-                                </div>
-                                <div className='d-flex flex-column justify-content-center align-items-start my-3 mx-2'>
-                                {/* <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="" id="showPassword"/>
-                                    <label className="form-check-label" for="showPassword">
-                                        Show Password
-                                    </label>
+                                    <div className="form-check form-check-inline mx-2">
+                                    <input className="form-check-input" onChange={HandleSignUpInput} type="radio" name="gender" id="other" value="other"/>
+                                    <label className="form-check-label" for="inlineRadio2">Other</label>
                                     </div>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="" id="loggedIn"  />
-                                    <label className="form-check-label" for="loggedIn">
-                                        Keep me logged in
-                                    </label>
-                                </div> */}
+                                </div>
+                                <div className='d-flex flex-row justify-content-start align-items-start my-3 mx-2'>
+                                    {signUpForm.gender==='male' || signUpForm.gender==='female' ?<>
+                                    <div className='d-flex flex-column justify-content-center align-items-center'> 
+                                        <img src={signUpForm.gender==='male'? Male1 : Female1} className="img-item" />
+                                        <div>
+                                        <input className="form-check-input mx-1" onChange={HandleSignUpInput} type="radio" name="photoType" id="gender-dp-casual" value="2"/>
+                                        <label>Casual</label>
+                                        </div>
+                                    </div>
+                                    <div className='d-flex flex-column justify-content-center align-items-center mx-2'>
+                                        <img src={signUpForm.gender==='male'? Male2 : Female2} className="img-item" />
+                                        <div>
+                                        <input className="form-check-input mx-1" onChange={HandleSignUpInput} type="radio" name="photoType" id="gender-dp-formal" value="1"/>
+                                        <label>Formal</label>
+                                        </div>
+                                    </div>
+                                    </>:null}
                                 </div>
                                 <div className='d-flex flex-row justify-content-start align-items-center my-3'>
                                 <Button type="submit" className='btn-danger mx-3'>Sign Up</Button>

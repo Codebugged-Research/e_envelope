@@ -4,19 +4,24 @@ import { Person, Done } from '@material-ui/icons';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import Other from '../pages/other.jpeg'
+import Male1 from '../pages/male1.png'
+import Male2 from '../pages/male2.jpg'
+import Female1 from '../pages/male1.png'
+import Female2 from '../pages/female2.jpg'
 
 const ProfileView = () => {
     const navigate = useNavigate();
     const res = JSON.parse(sessionStorage.getItem('user'))
     const token = sessionStorage.getItem('token')
-        const [profile, setProfile] = useState({
-            email:res.email,
-            name:res.name,
-            phone:res.phone,
-            password:'',
-            subpassword:'',
-        });
+    const IMG = res.gender==="other" ? Other:(res.gender === 'male' ? (res.photoType===1?Male1:Male2):(res.photoType===1?Female1:Female2))
+    const [profile, setProfile] = useState({
+        email:res.email,
+        name:res.name,
+        phone:res.phone,
+        password:'',
+        subpassword:'',
+    });
     const UpdateProfile = async (e) => {
         e.preventDefault();
         const dataObj = {
@@ -58,7 +63,9 @@ const ProfileView = () => {
     <Wrapper className='container text-white'>
         <UserImageWrapper className="container d-flex flex-row justify-content-between shadow p-4 my-4">
             <div className='d-flex flex-row'>
-            <UserImage><Person/></UserImage>
+            <UserImage>
+                <img src={IMG} className="img-item mx-3 my-3" />
+                </UserImage>
             <UserDetails className="d-flex flex-column">
                 <Name>{user.name}</Name>
                 <AddressID>{user.email}</AddressID>

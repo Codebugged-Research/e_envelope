@@ -43,6 +43,7 @@ const DraftView = (props) => {
         }
         else
             setShowCompose(true);
+
     }
 
     const [mail, setMail] = useState({
@@ -184,7 +185,7 @@ const DraftView = (props) => {
                             onClick={event => { handleClick(event, {_id,to,subject,body})} }
                             key={_id}
                             id={_id}
-                            from={ checked ? to : '#'.repeat(to.length) }
+                            to={ checked ? to : '#'.repeat(to.length) }
                             subject={ checked ? subject : '#'.repeat(subject.length)}
                             body={ checked ? body : '#'.repeat(body.length)}
                             createdAt={createdAt}

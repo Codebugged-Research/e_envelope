@@ -18,6 +18,7 @@ import StarredPage from './pages/StarredPage'
 import TrashPage from './pages/TrashPage'
 import SpamPage from './pages/SpamPage'
 import SentEmailPage from './pages/SentEmailPage'
+import ForgetPassword from './pages/ForgetPassword'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import {useLocation, Navigate, Outlet} from 'react-router-dom'
 
@@ -39,6 +40,7 @@ function App() {
           
         <Routes>
           <Route exact path="/" element={<LoginPage/>} />
+          <Route exact path="/forget" element={<ForgetPassword/>} />
           <Route element={<CallAuth/>}>
             <Route exact path="/inbox" element={ <InboxPage/>} />
             <Route exact path="/email/:id" element={ <EmailPage />} />

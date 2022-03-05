@@ -29,7 +29,7 @@ const EmailView = (props) => {
       }
     }).then(res=> {
         sessionStorage.setItem('SubPassword', true)
-    sessionStorage.setItem('time', new Date().getTime())
+        sessionStorage.setItem('time', new Date().getTime())
         setChecked(true)}).catch(err=> console.log(err))
     }
     else 
@@ -45,7 +45,7 @@ const EmailView = (props) => {
          { showSubPassword ? <div><Switch checked={checked} onChange={subPassword} /> 
         <input className='form-control w-50 d-inline' placeholder='Sub Password' 
         value={SubPassword} onChange={(e)=> setSubPassword(e.target.value)}
-        type="password" maxLength='2' /></div> : null }
+        type="password" name="subpassword" maxLength='2' /></div> : null }
       </TopWrapper>
         <EmailsContainer>
                 {

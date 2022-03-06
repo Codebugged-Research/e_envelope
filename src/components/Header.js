@@ -63,8 +63,8 @@ function Header() {
     const formatResult = (item) => {
         return (
             <>
-                <span style={{ display: 'block', textAlign: 'left' }}>name: {item.name}</span>
-                <span style={{ display: 'block', textAlign: 'left' }}>id: {item.email}</span>
+                <span style={{ display: 'block', textAlign: 'left' }}>{item.name}</span>
+                <span style={{ display: 'block', textAlign: 'left' }}>{item.email}</span>
             </>
         )
     }

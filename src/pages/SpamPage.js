@@ -17,7 +17,7 @@ function SpamPage() {
   const data = async () => {
       const res = JSON.parse(sessionStorage.getItem('user'))
       const token = await sessionStorage.getItem('token') 
-        const messege = await axios.get(axios.defaults.baseURL+`api/mail/user/${res.email}/label/spam`, {"headers":{ 
+        const messege = await axios.post(axios.defaults.baseURL+`api/mail/user/label`,{"id": res.email, "label": "spam"}, {"headers":{ 
           "x-access-token": token,
         }
       })

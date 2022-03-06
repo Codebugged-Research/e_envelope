@@ -18,7 +18,7 @@ function StarredPage() {
       const res = JSON.parse(sessionStorage.getItem('user'))
 
       const token = await sessionStorage.getItem('token') 
-        const messege = await axios.get(axios.defaults.baseURL+`api/mail/user/${res.email}/label/stared`, {"headers":{ 
+        const messege = await axios.post(axios.defaults.baseURL+`api/mail/user/label`,{"id": res.email, "label": "stared"}, {"headers":{ 
           "x-access-token": token,
         }
       })

@@ -41,6 +41,9 @@ const EmailItem = ({id,  from, subject, body, createdAt}) => {
 
       </ContextMenuTrigger>
         <ContextMenu id={id}>
+        <MenuItem className="menu-item" data={{label:'inbox', id:id}} onClick={handleClick}>
+          Move to Inbox
+        </MenuItem>
         <MenuItem className="menu-item" data={{label:'trash', id:id}} onClick={handleClick}>
           Move to Trash
         </MenuItem>

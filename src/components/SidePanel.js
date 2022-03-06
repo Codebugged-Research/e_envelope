@@ -234,7 +234,7 @@ function SidePanel() {
 export default SidePanel
 
 const Wrapper = styled.div`
-    height:  calc( 100vh - 70px );
+    // height:  calc( 100vh - 70px );
     display:flex;
     flex-direction:column;
     width:20vw;

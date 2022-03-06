@@ -7,7 +7,12 @@ import { Switch } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
 import axios from 'axios';
 import { useEffect,useState } from 'react';
-
+import ImageIcon from '@material-ui/icons/Image';
+import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
+import ArticleIcon from '@material-ui/icons/FileCopy';
+import AudioFileIcon from '@material-ui/icons/Audiotrack';
+import Attachment from '@material-ui/icons/Attachment';
+import { Card } from 'react-bootstrap';
 const SingleSentEmail = (props) => 
 {
     const [showSubPassword, setShowSubPassword] = useState(false)
@@ -16,8 +21,23 @@ const SingleSentEmail = (props) =>
     const [messeges,setMesseges] = useState({
         to:'',
         subject:'',
-        body:''
+        body:'',
+        attachments:[]
     })
+    const getAttachmentIcon = (type) => {
+        switch (type) {
+            case 'image':
+                return <ImageIcon />;
+            case 'video':
+                return <VideoLibraryIcon />;
+            case 'audio':
+                return <AudioFileIcon />;
+            case 'file':
+                return <ArticleIcon />;
+            default:
+                return <ArticleIcon />;
+        }
+    }
     const user = JSON.parse(sessionStorage.getItem('user'))
     const token = sessionStorage.getItem('token')
     console.log(checked)
@@ -74,7 +94,21 @@ return (
         </ImageAddressWrapper>
         <MessegeWrapper className="d-flex flex-column mx-5 my-3">
             <Messege>{ checked ? messeges.body : '#'.repeat(messeges.body.length) }</Messege>
-        <AttachmentWrapper></AttachmentWrapper>
+         {/*show attachments  */}
+         <div className='d-flex flex-row justify-content-between align-items-center'>
+                        <span className='mx-2 my-1'>Attachments</span>
+                        <span className='mx-2 my-1'>{messeges.attachments.length}</span>
+                    </div>
+                    {/* attachments grid */}
+                    <div className='d-flex flex-row justify-content-between align-items-center'>
+                        {messeges.attachments.map((item, index) => (
+                            <div key={index} className='d-flex flex-column align-items-center'>
+                                <div className='d-flex flex-row align-items-center'>
+                                    <Card variant="outlined"><a target={checked ?"_blank":''} href={checked ? item.fileUrl:'#'} className="p-3"> {getAttachmentIcon(item.fileType)} </a></Card>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
         </MessegeWrapper>
     </Wrapper>
     </div>

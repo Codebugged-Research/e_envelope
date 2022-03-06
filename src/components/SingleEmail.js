@@ -7,7 +7,12 @@ import { Switch } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
 import axios from 'axios';
 import { useEffect,useState } from 'react';
-
+import ImageIcon from '@material-ui/icons/Image';
+import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
+import ArticleIcon from '@material-ui/icons/FileCopy';
+import AudioFileIcon from '@material-ui/icons/Audiotrack';
+import Attachment from '@material-ui/icons/Attachment';
+import { Card } from 'react-bootstrap';
 const SingleEmail = (props) => 
 {
     const [showSubPassword, setShowSubPassword] = useState(false)
@@ -16,11 +21,25 @@ const SingleEmail = (props) =>
     const [messeges,setMesseges] = useState({
         from:'',
         subject:'',
-        body:''
+        body:'',
+        attachments:[],
     })
     const user = JSON.parse(sessionStorage.getItem('user'))
     const token = sessionStorage.getItem('token')
-    console.log(checked)
+    const getAttachmentIcon = (type) => {
+        switch (type) {
+            case 'image':
+                return <ImageIcon />;
+            case 'video':
+                return <VideoLibraryIcon />;
+            case 'audio':
+                return <AudioFileIcon />;
+            case 'file':
+                return <ArticleIcon />;
+            default:
+                return <ArticleIcon />;
+        }
+    }
     const subPassword = async () =>{
     if (checked === false)
     {
@@ -51,7 +70,10 @@ const SingleEmail = (props) =>
         await axios.get(axios.defaults.baseURL+`api/mail/${props.id}`, {"headers":{ 
             "x-access-token": token,
           }
-        }).then(res=>{console.log(res); setMesseges(res.data);})
+        }).then(res=>{console.log(res); setMesseges(res.data);
+            console.log(messeges)
+            console.log(messeges)
+        })
         }
 return (
     <>
@@ -74,7 +96,22 @@ return (
         </ImageAddressWrapper>
         <MessegeWrapper className="d-flex flex-column mx-5 my-3">
             <Messege>{ checked ? messeges.body : '#'.repeat(messeges.body.length) }</Messege>
-        <AttachmentWrapper></AttachmentWrapper>
+         {/*show attachments  */}
+         <div className='d-flex flex-row justify-content-between align-items-center'>
+                        <span className='mx-2 my-1'>Attachments</span>
+                        <span className='mx-2 my-1'>{messeges.attachments.length}</span>
+                    </div>
+                    {/* attachments grid */}
+                    <div className='d-flex flex-row justify-content-between align-items-center'>
+                        {messeges.attachments.map((item, index) => (
+                            <div key={index} className='d-flex flex-column align-items-center'>
+                                <div className='d-flex flex-row align-items-center'>
+                                    <Card variant="outlined"><a target="_blank" href={
+                                        item.fileUrl} className="p-3"> {getAttachmentIcon(item.fileType)} </a></Card>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
         </MessegeWrapper>
     </Wrapper>
     </div>

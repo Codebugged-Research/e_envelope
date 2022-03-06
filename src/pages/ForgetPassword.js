@@ -1,6 +1,6 @@
 import {React,useState} from 'react'
 import styled from 'styled-components'
-import SignUpImage from './signup.jpeg'
+import SignUpImage from '../assets/logo.png'
 import { useForm } from "react-hook-form";
 import { Link, Navigate, useNavigate  } from "react-router-dom";
 import axios from "axios";

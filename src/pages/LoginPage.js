@@ -1,15 +1,17 @@
 import {React,useState} from 'react'
 import styled from 'styled-components'
 import { Modal, Container, Row, Button } from 'react-bootstrap'
-import SignUpImage from './signup.jpeg'
+import SignUpImage from '../assets/logo.png'
+import Logo from '../assets/logo.png'
 import { useForm } from "react-hook-form";
 import { Link, useNavigate  } from "react-router-dom";
 import {loginValidate} from "../components/validation"
 import axios from "axios";
-import Male1 from './male1.png';
-import Male2 from './male2.jpg';
-import Female1 from './female1.png';
-import Female2 from './female2.jpg';
+import Other from '../assets/other.jpeg'
+import Male1 from '../assets/male1.png'
+import Male2 from '../assets/male2.jpg'
+import Female1 from '../assets/female1.png'
+import Female2 from '../assets/female2.jpg'
 
 axios.defaults.baseURL = 'http://64.227.177.238/';
 
@@ -54,6 +56,8 @@ function LoginPage() {
                  sessionStorage.setItem('SubPassword', false)
                  sessionStorage.setItem('time', new Date().getTime())
                  sessionStorage.setItem('user', JSON.stringify(response.data.user))
+                 let username = response.data.user.email.substring(1,response.data.user.email.length-6)
+                 sessionStorage.setItem('username', username)
                  console.log(response)
                  navigate("/inbox")
              })
@@ -102,7 +106,11 @@ function LoginPage() {
 
   return (
         <Wrapper className='row col-12 vh-100'>
-            <div className='col-12 col-md-6 col-lg-5 d-flex flex-column justify-content-center shadow'>
+            <div className='col-12 col-md-6 col-lg-5 d-flex flex-column justify-content-evenly shadow'>
+                <div className='d-flex flex-row justify-content-center align-items-center '>
+                    <img src={Logo} className="img-fluid d-block img-50 "/>
+                    <h3>E-Envelope</h3>
+                </div>
             <form id='loginForm' className='container text-center mx-1 px-5' onSubmit={submitLoginForm}>
             <h1 className='text-dark text-start'>Sign In</h1>
                 <div>
@@ -142,7 +150,7 @@ function LoginPage() {
 
             <Row className='col-12 gx-0 radius-0'>
                             <div className='col-12 col-lg-5 d-none d-lg-block'>
-                                <img src={SignUpImage} className="img-fluid w-100 d-block"/>
+                                <img src={SignUpImage} className="my-5rem w-100 img-fluid d-block"/>
                             </div>
                     
                     <div className='col-12 col-lg-7'>
@@ -204,15 +212,15 @@ function LoginPage() {
                                     <div className='d-flex flex-column justify-content-center align-items-center'> 
                                         <img src={signUpForm.gender==='male'? Male1 : Female1} className="img-item" />
                                         <div>
-                                        <input className="form-check-input mx-1" onChange={HandleSignUpInput} type="radio" name="photoType" id="gender-dp-casual" value="2"/>
-                                        <label>Casual</label>
+                                        <input className="form-check-input mx-1" onChange={HandleSignUpInput} type="radio" name="photoType" id="gender-dp-casual" value="1"/>
+                                        <label> Formal </label>
                                         </div>
                                     </div>
                                     <div className='d-flex flex-column justify-content-center align-items-center mx-2'>
                                         <img src={signUpForm.gender==='male'? Male2 : Female2} className="img-item" />
                                         <div>
-                                        <input className="form-check-input mx-1" onChange={HandleSignUpInput} type="radio" name="photoType" id="gender-dp-formal" value="1"/>
-                                        <label>Formal</label>
+                                        <input className="form-check-input mx-1" onChange={HandleSignUpInput} type="radio" name="photoType" id="gender-dp-formal" value="2"/>
+                                        <label> Casual </label>
                                         </div>
                                     </div>
                                     </>:null}
@@ -229,9 +237,8 @@ function LoginPage() {
                 </Modal>
             </div>
     
-            <div className='col-md-6 col-lg-7 8 d-none d-md-block text-center'>
-                    <h1>Logo Here</h1>
-                    
+            <div className='col-md-6 col-lg-7 8 d-none d-md-flex flex-row justify-content-center align-items-center'>
+                    <img src={Logo} className="img-fluid d-block w-75" />
             </div>
         </Wrapper>
     )

@@ -4,11 +4,11 @@ import { Person, Done } from '@material-ui/icons';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Other from '../pages/other.jpeg'
-import Male1 from '../pages/male1.png'
-import Male2 from '../pages/male2.jpg'
-import Female1 from '../pages/male1.png'
-import Female2 from '../pages/female2.jpg'
+import Other from '../assets/other.jpeg'
+import Male1 from '../assets/male1.png'
+import Male2 from '../assets/male2.jpg'
+import Female1 from '../assets/female1.png'
+import Female2 from '../assets/female2.jpg'
 
 const ProfileView = () => {
     const navigate = useNavigate();
@@ -64,7 +64,7 @@ const ProfileView = () => {
         <UserImageWrapper className="container d-flex flex-row justify-content-between shadow p-4 my-4">
             <div className='d-flex flex-row'>
             <UserImage>
-                <img src={IMG} className="img-item mx-3 my-3" />
+                <img src={IMG} className="img-item mx-3 my-3 circle" />
                 </UserImage>
             <UserDetails className="d-flex flex-column">
                 <Name>{user.name}</Name>

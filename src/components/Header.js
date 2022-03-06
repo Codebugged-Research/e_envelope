@@ -6,11 +6,12 @@ import { Link } from 'react-router-dom';
 import EmailIcon from '@material-ui/icons/Email';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useNavigate } from 'react-router-dom';
-import Other from '../pages/other.jpeg'
-import Male1 from '../pages/male1.png'
-import Male2 from '../pages/male2.jpg'
-import Female1 from '../pages/male1.png'
-import Female2 from '../pages/female2.jpg'
+import logo from "../assets/logo.png"
+import Other from '../assets/other.jpeg'
+import Male1 from '../assets/male1.png'
+import Male2 from '../assets/male2.jpg'
+import Female1 from '../assets/female1.png'
+import Female2 from '../assets/female2.jpg'
 import axios from 'axios';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 function Header() {
@@ -18,7 +19,7 @@ function Header() {
     const token = sessionStorage.getItem('token');
     const [user, setUser] = useState({});
     const [userSearchList, setUserList] = useState([]);
-    const IMG = user.gender==="other" ? Other:(user.gender === 'male' ? (user.photoType===1?Male1:Male2):(user.photoType===1?Female1:Female2))
+    const IMG = user.gender==="other" ? Other :(user.gender === 'male' ? (user.photoType===1?Male1:Male2):(user.photoType===1?Female1:Female2));
     useEffect(() => {
         data();
     }, []);
@@ -72,7 +73,7 @@ function Header() {
     return (
         <Wrapper>
             <LogoWrapper>
-                <Logo><EmailIcon /></Logo>
+                <Logo><img src={logo}/></Logo>
                 <Text className='text-dark d-none d-md-block'>E-Envelope</Text>
             </LogoWrapper>
             <SearchWrapper>
@@ -91,8 +92,8 @@ function Header() {
                 </SearchBarWrapper>
             </SearchWrapper>
             <UserWrapper>
-                <AddressID className='text-dark d-none d-md-block'>{user.email}</AddressID>
-                <Link to='/profile' className='text-dark'><img src={IMG} className="img-item p-2" /></Link>
+                <AddressID className='text-dark d-none d-md-block'><span className='hashtag'>#</span>{sessionStorage.getItem('username')}<span className='EEcom'>EE.com</span></AddressID>
+                <Link to='/profile' className='text-dark'><img src={IMG} className="img-item p-2 circle " /></Link>
                 <ExitToAppIcon onClick={Logout} className='mx-2 p-0' />
             </UserWrapper>
         </Wrapper>
@@ -112,7 +113,9 @@ const Wrapper = styled.div`
 `
 const LogoWrapper = styled.div`
     display:flex;    
-
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
     .MuiSvgIcon-root{
         margin:0px 20px;
     }
@@ -120,6 +123,10 @@ const LogoWrapper = styled.div`
 `
 const Logo = styled.div`
     display:grid;    
+    img{
+        width: 50px;
+        height: 50px;
+    }
 `
 // const MenuIcon = styled.div`
 //     display:grid;    

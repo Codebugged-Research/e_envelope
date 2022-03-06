@@ -2,10 +2,11 @@ import {React,useState} from 'react'
 import styled from 'styled-components'
 import SignUpImage from './signup.jpeg'
 import { useForm } from "react-hook-form";
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, Navigate, useNavigate  } from "react-router-dom";
 import axios from "axios";
 
 function ForgetPassword() { 
+    const navigate = useNavigate();
     const [verified, setVerified] = useState(false);
     const [input, setInput] = useState({
         email:'',
@@ -32,12 +33,13 @@ function ForgetPassword() {
         var user = JSON.parse(sessionStorage.getItem('user'))
         var token = sessionStorage.getItem('token')
         if(input.password1 === input.password2){
-            await axios.post(axios.defaults.baseURL+`api/user/update/${user._id}`,
+            await axios.put(axios.defaults.baseURL+`api/user/update/${user._id}`,
             {password:input.password1}, {"headers":{
                 'x-access-token':token
             }})
             .then(res => {
                 console.log(res)
+                navigate('/inbox');
             }).catch(err=>{
                 console.log(err)
             })

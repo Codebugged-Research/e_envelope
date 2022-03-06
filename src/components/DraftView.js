@@ -165,7 +165,6 @@ const DraftView = (props) => {
           subject: subject,
           messege: body,
       })
-        // console.log("hello")
     }
   return (
 

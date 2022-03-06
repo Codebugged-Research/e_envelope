@@ -25,15 +25,15 @@ const DraftItem = ({id, to, subject, body, createdAt, onClick}) => {
     }
     return (
         <>
-        <Wrapper onClick={onClick}>
-        <div id={id} className="main-msg d-flex flex-row text-white text-decoration-none">
+        <Wrapper>
+        <Link to={`/draft/${id}`} id={id} className="main-msg d-flex flex-row text-white text-decoration-none">
             <p className={ 'unread'}>{to}</p>
             <div className="d-flex flex-column mx-3 subject-msg">
             <p className={'unread'}>{subject.substring(0,3)+'...'}</p> 
             <p className={'unread'}>{body.substring(0,3)+'...'}</p> 
             </div>
             <p className={'unread'}>{createdAt.substring(11,16)}</p>
-        </div>
+        </Link>
         </Wrapper>
         </>
     )

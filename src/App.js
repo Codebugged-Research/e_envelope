@@ -18,6 +18,7 @@ import StarredPage from './pages/StarredPage'
 import TrashPage from './pages/TrashPage'
 import SpamPage from './pages/SpamPage'
 import SentEmailPage from './pages/SentEmailPage'
+import DraftEmailPage from './pages/DraftEmailPage'
 import ForgetPassword from './pages/ForgetPassword'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import {useLocation, Navigate, Outlet} from 'react-router-dom'
@@ -45,6 +46,7 @@ function App() {
             <Route exact path="/inbox" element={ <InboxPage/>} />
             <Route exact path="/email/:id" element={ <EmailPage />} />
             <Route exact path="/sent/:id" element={ <SentEmailPage />} />
+            <Route exact path="/draft/:id" element={ <DraftEmailPage />} />
             <Route exact path="/profile" element={ <ProfilePage/>} />
             <Route exact path="/starred" element={ <StarredPage/>} />
             <Route exact path="/outbox" element={ <OutboxPage/>} />

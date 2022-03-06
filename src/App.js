@@ -28,7 +28,6 @@ function App() {
   const CallAuth=()=> {
     let location = useLocation();
     const token = sessionStorage.getItem("token");
-    console.log(token)
     if(!token){
       return <Navigate to={'/'} state={{from :location}}/>
     }

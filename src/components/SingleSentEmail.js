@@ -83,7 +83,7 @@ return (
         value={SubPassword} onChange={(e)=> setSubPassword(e.target.value)}
         type="password" maxLength='2' /></div> : null }
       </TopWrapper>
-    <Wrapper key={messeges._id} className='d-flex flex-column container rounded shadow my-3'>
+    <Wrapper key={messeges._id} className='d-flex flex-column mx-3 rounded  my-3'>
         <Subject className='mx-5 my-3'>{ checked ? messeges.subject : '#'.repeat(messeges.subject.length) }</Subject>
         <ImageAddressWrapper className='d-flex flex-row mx-1'>
         <Person/>
@@ -93,7 +93,7 @@ return (
         </AddressTimeWrapper>
         </ImageAddressWrapper>
         <MessegeWrapper className="d-flex flex-column mx-5 my-3">
-            <Messege>{ checked ? messeges.body : '#'.repeat(messeges.body.length) }</Messege>
+            <Messege className='line-break-anywhere'>{ checked ? messeges.body : '#'.repeat(messeges.body.length) }</Messege>
          {/*show attachments  */}
          <div className='d-flex flex-row justify-content-between align-items-center'>
                         <span className='mx-2 my-1'>Attachments</span>

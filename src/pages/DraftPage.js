@@ -22,19 +22,20 @@ function DraftPage() {
       setUser(res);
       const token = await sessionStorage.getItem('token')
       // for draft new api for {from:email, lable:'draft' }  
-      const messege = await axios.get(axios.defaults.baseURL+`api/mail/drafts/${res.email}`, {"headers":{ 
+      const messege = await axios.post(axios.defaults.baseURL+`api/mail/drafts/`, {'from':res.email} ,{"headers":{ 
         "x-access-token": token,
       }
     })
         setMesseges(messege)
       }
-  return (<>
+  return (
+  <>
     <Header/>
     <Wrapper>
       <SidePanel/>
       <DraftView messeges={messeges} />
     </Wrapper>
-    </>
+  </>
   )
 }
 

@@ -33,13 +33,14 @@ function Header() {
         navigate('/')
     }
     const search = async (value) => {
-        var resp = await axios.get(`http://64.227.177.238/api/user/search/${value}`,
+        var resp = await axios.post(`http://64.227.177.238/api/mail/searchquery`,{from:value, self:user.email},
             {
                 headers: {
                     "x-access-token": token,
                 },
             });
         setUserList(resp.data);
+        console.log(resp.data)
     }
 
     const handleOnSearch = (string, results) => {

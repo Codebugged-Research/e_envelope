@@ -69,3 +69,6 @@ p{
   color:maroon;
   font-weight: bolder;
 }
+.line-break-anywhere{
+  line-break: anywhere !important;
+}

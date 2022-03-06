@@ -17,8 +17,8 @@ function OutboxPage() {
   const data = async () => {
       const res = JSON.parse(sessionStorage.getItem('user'))
       const token = await sessionStorage.getItem('token')
-      console.log(axios.defaults.baseURL+`api/mail/sender/${res.email}`)
-        const messege = await axios.post(axios.defaults.baseURL+`api/mail/user/label`,{"id": res.email, "label": "outbox"}, {"headers":{ 
+
+      const messege = await axios.post(axios.defaults.baseURL+`api/mail/user/label`,{"id": res.email, "label": "outbox"}, {"headers":{ 
           "x-access-token": token,
         }
       })

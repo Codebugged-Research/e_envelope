@@ -7,31 +7,32 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function TrashPage() {
-  if( new Date().getTime() - sessionStorage.getItem('time') > 150000 ){
+  if (new Date().getTime() - sessionStorage.getItem('time') > 150000) {
     sessionStorage.setItem('SubPassword', false)
   }
-  const [messeges,setMesseges] = useState([]);
+  const [messeges, setMesseges] = useState([]);
   useEffect(() => {
-      data();
+    data();
   }, []);
   const data = async () => {
-      const res = JSON.parse(sessionStorage.getItem('user'))
-      const token = await sessionStorage.getItem('token') 
-        const messege = await axios.get(axios.defaults.baseURL+`api/mail/user/${res.email}/label/trash`, {"headers":{ 
-          "x-access-token": token,
-        }
-      })
-        // const messege = [{'to':'ashuxldr'}]
-        console.log(messege)
-        setMesseges(messege)
+    const res = JSON.parse(sessionStorage.getItem('user'))
+    const token = await sessionStorage.getItem('token')
+    const messege = await axios.post(axios.defaults.baseURL + `api/mail/user/label`, { "id": res.email, "label": "trash" }, {
+      "headers": {
+        "x-access-token": token,
       }
+    })
+    // const messege = [{'to':'ashuxldr'}]
+    console.log(messege)
+    setMesseges(messege)
+  }
   return (<>
-    <Header/>
+    <Header />
     <Wrapper>
-      <SidePanel/>
+      <SidePanel />
       <EmailView messeges={messeges} />
     </Wrapper>
-    </>
+  </>
   )
 }
 

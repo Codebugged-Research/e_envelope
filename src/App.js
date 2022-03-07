@@ -37,7 +37,6 @@ function App() {
   return (
     <div className="App">
       <Router>
-          
         <Routes>
           <Route exact path="/" element={<LoginPage/>} />
           <Route exact path="/forget" element={<ForgetPassword/>} />

@@ -9,7 +9,9 @@ import SubPassword from '../components/SubPassword';
 
 
 function InboxPage() {
-  if (new Date().getTime() - sessionStorage.getItem('time') > 150000) {
+  let timer = JSON.parse(JSON.parse(sessionStorage.getItem('user')).timmer)
+
+  if( new Date().getTime() - sessionStorage.getItem('time') > timer*60*1000){
     sessionStorage.setItem('SubPassword', false)
   }
   const navigate = useNavigate();

@@ -195,7 +195,10 @@ export default DraftSinglePage
 const Wrapper = styled.div`
     height:  calc( 100vh - 70px );
     width:80%;
-    background-color:white;
+    @media (max-width: 767.98px) {
+        width:100%;
+    }
+        background-color:white;
     align-content: center;
     justify-content: flex-start;
     align-items: flex-start;

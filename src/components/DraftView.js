@@ -14,7 +14,7 @@ import ArticleIcon from '@material-ui/icons/FileCopy';
 import AudioFileIcon from '@material-ui/icons/Audiotrack';
 import Attachment from '@material-ui/icons/Attachment';
 import Close from '@material-ui/icons/Close';
-import { Button, Modal, ProgressBar, Card } from 'react-bootstrap';
+import { Button, Modal, ProgressBar, Card, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import SendMail from './SendMail';
 import axios from 'axios';
@@ -171,10 +171,11 @@ const DraftView = (props) => {
     <Wrapper>
       <TopWrapper className='d-flex flex-row justify-content-start align-items-center'>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
-         { showSubPassword ? <div><Switch checked={checked} onChange={subPassword} /> 
-        <input className='form-control w-50 d-inline' placeholder='Sub Password' 
+         { showSubPassword ? <><div><Switch checked={checked} onChange={subPassword} /> 
+        <input className='form-control w-25 d-inline' placeholder='Sub Password' 
         value={SubPassword} onChange={(e)=> setSubPassword(e.target.value)}
-        type="password" maxLength='2' /></div> : null }
+        type="password" maxLength='2' /></div></>
+         : null }
       </TopWrapper>
         <EmailsContainer>
                 {

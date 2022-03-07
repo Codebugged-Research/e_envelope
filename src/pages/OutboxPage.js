@@ -7,7 +7,9 @@ import axios from 'axios';
 
 
 function OutboxPage() {
-  if( new Date().getTime() - sessionStorage.getItem('time') > 150000 ){
+  let timer = JSON.parse(JSON.parse(sessionStorage.getItem('user')).timmer)
+
+  if( new Date().getTime() - sessionStorage.getItem('time') > timer*60*1000){
     sessionStorage.setItem('SubPassword', false)
   }
   const [messeges,setMesseges] = useState([]);
@@ -22,6 +24,7 @@ function OutboxPage() {
           "x-access-token": token,
         }
       })
+      console.log(messege)
         setMesseges(messege)
       }
 

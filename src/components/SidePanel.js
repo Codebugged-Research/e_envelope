@@ -11,7 +11,6 @@ import Attachment from '@material-ui/icons/Attachment';
 import Close from '@material-ui/icons/Close';
 import { Button, Modal, ProgressBar, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import SendMail from './SendMail';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FileUploader } from "react-drag-drop-files";
@@ -61,11 +60,14 @@ function SidePanel() {
                         messege: '',
                         attachments: []
                     })
+                    let path = window.location.pathname;
+                    if(path==='/draft')
+                        window.location.reload();
+                    navigate('/draft')
                 }).catch(err => console.log(err))
             }
             setShowCompose(false);
         }
-
     }
     const [mail, setMail] = useState({
         recipient: '',
@@ -101,6 +103,10 @@ function SidePanel() {
                 messege: '',
                 attachments: []
             })
+            let path = window.location.pathname;
+            if(path==='/sent')
+                window.location.reload();
+            navigate('/sent')
         }).catch(err => console.log(err))
     }
     const [progress, setProgress] = useState();

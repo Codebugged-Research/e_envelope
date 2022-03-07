@@ -21,6 +21,7 @@ const ProfileView = () => {
         phone:res.phone,
         password:'',
         subpassword:'',
+        timmer:''
     });
     const UpdateProfile = async (e) => {
         e.preventDefault();
@@ -28,6 +29,7 @@ const ProfileView = () => {
             email:profile.email,
             name:profile.name,
             phone:profile.phone,
+            timmer:profile.timmer
         }
         if (profile.password!=='')
             dataObj.password = profile.password
@@ -39,6 +41,7 @@ const ProfileView = () => {
           const newUser = JSON.parse(sessionStorage.getItem('user'));
           newUser.name = dataObj.name;
           newUser.phone = dataObj.phone;
+          newUser.timmer = dataObj.timmer;
           sessionStorage.setItem('user', JSON.stringify(newUser));
           navigate('/profile');
           window.location.reload();
@@ -95,8 +98,18 @@ const ProfileView = () => {
                 <label htmlFor='password'>Sub Password</label>
                 <input type='password' placeholder='**' maxLength='2' onChange={HandleInput}  className='form-control' name="subpassword"/>
             </div>
-           
             </EmailPasswordWrapper>
+            <h6 className="form-check form-check-inline mx-5">Sub Password Activate Timer</h6>
+            <div className='profile-items my-3 d-flex flex-column flex-md-row'>
+                <div className="form-check form-check-inline mx-5">
+                <input className="form-check-input" onChange={HandleInput} type="radio" name="timmer" id="2min" value={2}/>
+                <label className="form-check-label" for="2min">2 minute</label>
+                </div>
+                <div className="form-check form-check-inline mx-5">
+                <input className="form-check-input" onChange={HandleInput} type="radio" name="timmer" id="5min" value={5}/>
+                <label className="form-check-label" for="5min">5 minute</label>
+                </div>
+            </div>
         </ProfileWrapper>
     </Wrapper>
   )

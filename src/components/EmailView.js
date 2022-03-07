@@ -13,7 +13,6 @@ const EmailView = (props) => {
   const [checked,setChecked] = useState(JSON.parse(sessionStorage.getItem('SubPassword')))
   const [SubPassword,setSubPassword] = useState('')
 
-  console.log(checked)
   const subPassword = async () =>{
     if (checked === false)
     {

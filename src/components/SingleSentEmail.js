@@ -89,7 +89,7 @@ return (
         <Person/>
         <AddressTimeWrapper className='d-flex flex-column mx-3'>
             <AddressID>{ checked ? messeges.to : '#'.repeat(messeges.to.length) }</AddressID>
-            <DateTime>{messeges.createdAt}</DateTime>
+            <DateTime>{new Date(messeges.createdAt).toLocaleString()}</DateTime>
         </AddressTimeWrapper>
         </ImageAddressWrapper>
         <MessegeWrapper className="d-flex flex-column mx-5 my-3">

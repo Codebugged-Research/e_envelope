@@ -8,30 +8,33 @@ import axios from 'axios';
 
 const SendView = (props) => {
   const messeges = props.messeges.data
-  let SubPassword = sessionStorage.getItem('subpassword')
+  // let SubPassword = sessionStorage.getItem('subpassword')
   const [showSubPassword, setShowSubPassword] = useState(false)
   const [checked,setChecked] = useState(JSON.parse(sessionStorage.getItem('SubPassword')))
+  const [SubPassword,setSubPassword] = useState('')
   const user = JSON.parse(sessionStorage.getItem('user'))
   const token = sessionStorage.getItem('token')
   const subPassword = async () =>{
     if (checked === false)
     {
-    const data = {
-    _id:user._id, 
-    subpassword:SubPassword,
-    }
-    await axios.post(axios.defaults.baseURL+`api/auth/chkSubPassword/`, data, {"headers":{ 
-    "x-access-token": token,
-    }
+      const user = JSON.parse(sessionStorage.getItem('user'))
+      const token = sessionStorage.getItem('token')
+      const data = {
+        _id:user._id, 
+        subpassword:SubPassword,
+      }
+      await axios.post(axios.defaults.baseURL+`api/auth/chkSubPassword/`, data, {"headers":{ 
+        "x-access-token": token,
+      }
     }).then(res=> {
-    sessionStorage.setItem('SubPassword', true)
-    sessionStorage.setItem('time', new Date().getTime())
-    setChecked(true)}).catch(err=> console.log(err))
+        sessionStorage.setItem('SubPassword', true)
+        sessionStorage.setItem('time', new Date().getTime())
+        setChecked(true)}).catch(err=> console.log(err))
     }
     else 
     {
-    sessionStorage.setItem('SubPassword', false)
-    setChecked(false)
+      sessionStorage.setItem('SubPassword', false)
+      setChecked(false)
     } 
     }
     
@@ -40,7 +43,9 @@ const SendView = (props) => {
       <TopWrapper className='d-flex flex-row justify-content-start align-items-center'>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
          { showSubPassword ? <div><Switch checked={checked} onChange={subPassword} /> 
-        <input className='form-control w-50 d-inline' placeholder='Sub Password' type="password" maxLength='2' /></div> : null }
+        <input className='form-control w-50 d-inline' placeholder='Sub Password' 
+        value={SubPassword} onChange={(e)=> setSubPassword(e.target.value)}
+        type="password" name="subpassword" maxLength='2' /></div> : null }
       </TopWrapper>
         <EmailsContainer>
                 {

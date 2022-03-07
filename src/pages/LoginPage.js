@@ -5,13 +5,16 @@ import SignUpImage from '../assets/logo.png'
 import Logo from '../assets/logo.png'
 import { useForm } from "react-hook-form";
 import { Link, useNavigate  } from "react-router-dom";
-import {loginValidate} from "../components/validation"
+import {loginValidate, SignUpValidate} from "../components/validation"
 import axios from "axios";
 import Other from '../assets/other.jpeg'
 import Male1 from '../assets/male1.png'
 import Male2 from '../assets/male2.jpg'
 import Female1 from '../assets/female1.png'
 import Female2 from '../assets/female2.jpg'
+import CloseIcon from '@material-ui/icons/Close';
+import DoneIcon from '@material-ui/icons/Done';
+import PasswordChecklist from "react-password-checklist"
 
 axios.defaults.baseURL = 'http://64.227.177.238/';
 
@@ -30,9 +33,25 @@ function LoginPage() {
         gender:"",
         phoneNumber:"",
         email:"",
-        password:"",
-        subPassword:"",
+        password:false,
+        subPassword:false,
     })
+    // password.includes(x)
+    const checkSubPassword = (pwd)=>{
+        let valid = true;
+        if(pwd.length<2)
+            valid=false
+        for (let i in pwd) {
+            if(!signUpForm.password.includes(pwd[i]))
+            {
+                valid = false
+          }  }
+        if(valid)
+            setError({...error, subPassword:true})
+        else
+            setError({...error, subPassword:false})
+
+    }
     // LOGIN FUNCTIONALITIES
     const[loginForm, setLoginForm] = useState({
         loginEmail:'',
@@ -40,8 +59,6 @@ function LoginPage() {
     });
     const HandleLoginInput = (e)=>{
         setLoginForm({...loginForm, [e.target.name]:e.target.value})
-        // loginValidate();
-
     }
     const submitLoginForm = async (e) => {
         e.preventDefault();
@@ -77,31 +94,45 @@ function LoginPage() {
         subPassword:"",
     });
     const HandleSignUpInput = (e)=>{
-        setSignUpForm({...signUpForm, [e.target.name]:e.target.value})
         console.log(signUpForm)
+        setSignUpForm({...signUpForm, [e.target.name]:e.target.value})
+        if(e.target.name==="subPassword")
+            checkSubPassword(e.target.value)
+        else
+            checkSubPassword(signUpForm.subPassword)
     }
     const HandleUsernameInput = (e)=>{
         setSignUpForm({...signUpForm, [e.target.name]:e.target.value})
     }
     const onSubmitSignup = async (e) => {
         e.preventDefault();
-        let data = {  "email":email,
+        let data = {  
+        "email":email,
         "password":signUpForm.password,
         "name":signUpForm.name,
         "gender":signUpForm.gender,
         "phone":signUpForm.phoneNumber,
         "subpassword":signUpForm.subPassword,
-    }    
-    // console.log(data);  
+    }
+    console.log(data)
+    let isValid = SignUpValidate(data);
+    console.log(isValid,error.password,error.subPassword,signUpForm.password,signUpForm.subPassword)
+    if(isValid && error.password && signUpForm.password && error.subPassword && signUpForm.subPassword){
         await axios.post('api/auth/signup',
              data).then(response => {
                  sessionStorage.setItem('token', response.data.token)
-                 sessionStorage.setItem('refreshToken', response.data.refreshToken)
                  sessionStorage.setItem('user', JSON.stringify(response.data.user))
+                 sessionStorage.setItem('SubPassword', false)
+                 sessionStorage.setItem('time', new Date().getTime())
+                 let username = response.data.user.email.substring(1,response.data.user.email.length-6)
+                 sessionStorage.setItem('username', username)
                  console.log(response)
                  navigate("/inbox")
-             })
+
+                })
              .catch(err => console.log(err))
+    }
+
         }
 
   return (
@@ -166,32 +197,52 @@ function LoginPage() {
                                         placeholder='john' name="name"/>
                                     </div>
                                     <div  className='mx-2'>
+                                        <label htmlFor='phoneNumber'>Phone Number</label>
+                                        <input placeholder='7007918XXX' onChange={HandleSignUpInput} type='tel' className='form-control' name="phoneNumber"/>
+                                    </div>
+                                    
+                                </div>
+                                <div className='d-flex flex-row justify-content-between align-items-center mx-2 my-3'>
+                                <div  className='mx-2'>
                                         <label htmlFor='username'>Username</label>
                                         <input placeholder='username'
                                         onChange={ e=>setEmail('#'+e.target.value+'EE.com')}
                                         className='form-control' name="username"/>
+                                        <div className='my-1'>  {email!=='#EE.com'? "Email:"+ email:''}</div>
                                     </div>
-                                </div>
-                                <div className='d-flex flex-row justify-content-between align-items-center mx-2 my-3'>
                                     <div  className='mx-2'>
+                                        <label htmlFor='repeatPassword'> Sub Password </label>
+                                        <input placeholder='******' onChange={HandleSignUpInput} type='password' maxLength='2' className='form-control' name="subPassword"/>
+                                        {error.subPassword?'':<span className='text-danger'><CloseIcon/> Sub Password Invalid</span>}
+                                    </div>
+                                    {/* <div  className='mx-2'>
                                         <label htmlFor='email'>Email Address</label>
                                         <input type='email' disabled
                                          value={email!=='#EE.com'?email:''} placeholder='' className='form-control' name="email"/>
-                                    </div>
-                                    <div  className='mx-2'>
-                                        <label htmlFor='phoneNumber'>Phone Number</label>
-                                        <input placeholder='7007918XXX' onChange={HandleSignUpInput} type='tel' className='form-control' name="phoneNumber"/>
-                                    </div>
+                                    </div> */}
+                                    
                                 </div>
                                 <div className='d-flex flex-row justify-content-between align-items-center mx-2 my-3'>
                                     <div  className='mx-2'>
                                         <label htmlFor='password'>Password</label>
                                         <input type='password' onChange={HandleSignUpInput} placeholder='******' className='form-control' name="password"/>
+                                        <PasswordChecklist
+                                            rules={["minLength","specialChar","number","capital","lowercase"]}
+                                            minLength={6}
+                                            value={signUpForm.password}
+                                            onChange={(isValid) => {
+                                                if (isValid)
+                                                    setError({...error, password:true})
+                                                else
+                                                    setError({...error, password:false})
+                                               }}
+                                        />
                                     </div>
-                                    <div  className='mx-2'>
+                                    {/* <div  className='mx-2'>
                                         <label htmlFor='repeatPassword'> Sub Password </label>
                                         <input placeholder='******' onChange={HandleSignUpInput} type='password' maxLength='2' className='form-control' name="subPassword"/>
-                                    </div>
+                                        {error.subPassword?'':<span className='text-danger'><CloseIcon/> Sub Password Invalid</span>}
+                                    </div> */}
                                 </div>
                                 <div className='d-flex flex-row justify-content-start align-items-start mx-2 my-1'>
                                 <div className="form-check form-check-inline mx-2">

@@ -71,8 +71,6 @@ const SingleEmail = (props) =>
             "x-access-token": token,
           }
         }).then(res=>{console.log(res); setMesseges(res.data);
-            console.log(messeges)
-            console.log(messeges)
         })
         }
 return (
@@ -91,7 +89,7 @@ return (
         <Person/>
         <AddressTimeWrapper className='d-flex flex-column mx-3'>
             <AddressID>{ checked ? messeges.from : '#'.repeat(messeges.from.length) }</AddressID>
-            <DateTime>{messeges.createdAt}</DateTime>
+            <DateTime>{new Date(messeges.createdAt).toLocaleString()}</DateTime>
         </AddressTimeWrapper>
         </ImageAddressWrapper>
         <MessegeWrapper className="d-flex flex-column mx-5 my-3">

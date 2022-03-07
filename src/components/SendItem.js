@@ -7,17 +7,17 @@ import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom';
 
 const SendItem = ({id, to, subject, body, createdAt}) => {
+    createdAt = new Date(createdAt).toLocaleString()
+    createdAt = createdAt.substr(0,8)
     return (
         <Wrapper>
-            <div>
-            </div>
         <Link to={`/sent/${id}`} className="main-msg d-flex flex-row flex-wrap text-white text-decoration-none">
             <p className={ 'text-truncate w-25 unread'}>{to}</p>
             <div className="d-flex flex-column mx-3 w-25  subject-msg">
             <p className='unread'>{subject.substring(0,5)+'...'}</p> 
             <p className={'unread'}>{body.substring(0,5)+'...'}</p> 
             </div>
-            <p className={'unread'}>{createdAt.substring(11,16)}</p>
+            <p className={'unread'}>{createdAt}</p>
         </Link>
         </Wrapper>
     )
@@ -45,14 +45,17 @@ const Wrapper = styled.div`
         }
     }
     @media (max-width: 767.98px)  { 
-    height:15vh;
+    height:20vh;
     }
     .main-msg{
-        flex:2;
-        justify-content: space-between;
-        align-items: center;
+        flex:1;
+        display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: space-evenly;
+            align-items: center;
         .subject-msg{
-            flex: 2;
         align-items: flex-start;
     }
         @media (max-width: 767.98px)  { 

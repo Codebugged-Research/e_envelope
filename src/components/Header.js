@@ -18,7 +18,7 @@ function Header() {
     const navigate = useNavigate();
     const token = sessionStorage.getItem('token');
     const [user, setUser] = useState({});
-    const [userSearchList, setUserList] = useState([]);
+    const [userSearchList, setUserSearchList] = useState([]);
     const IMG = user.gender==="other" ? Other :(user.gender === 'male' ? (user.photoType===1?Male1:Male2):(user.photoType===1?Female1:Female2));
     useEffect(() => {
         data();
@@ -39,8 +39,9 @@ function Header() {
                     "x-access-token": token,
                 },
             });
-        setUserList(resp.data);
-        console.log(resp.data)
+
+            setUserSearchList(resp.data);
+            console.log(resp.data)
     }
 
     const handleOnSearch = (string, results) => {
@@ -64,8 +65,8 @@ function Header() {
     const formatResult = (item) => {
         return (
             <>
-                <span style={{ display: 'block', textAlign: 'left' }}>{item.name}</span>
-                <span style={{ display: 'block', textAlign: 'left' }}>{item.email}</span>
+                <span style={{ display: 'block', textAlign: 'left' }}>{item.from}</span>
+                <span style={{ display: 'block', textAlign: 'left' }}>{item.body}</span>
             </>
         )
     }

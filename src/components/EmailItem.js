@@ -4,11 +4,12 @@ import PersonIcon from '@material-ui/icons/Person';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarIcon from '@material-ui/icons/Star';
 import IconButton from '@material-ui/core/IconButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import axios from 'axios';
 
 const EmailItem = ({id,  from, subject, body, createdAt}) => {
+    const navigate = useNavigate();
     createdAt = new Date(createdAt).toLocaleString()
     createdAt = createdAt.substr(0,8)
     const token = sessionStorage.getItem('token')
@@ -23,6 +24,7 @@ const EmailItem = ({id,  from, subject, body, createdAt}) => {
             }
         }).then(res => {
             console.log(res)
+            window.location.reload()
         }).catch(err => console.log(err))
       }
     return (

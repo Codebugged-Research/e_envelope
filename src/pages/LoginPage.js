@@ -1,6 +1,6 @@
 import {React,useState} from 'react'
 import styled from 'styled-components'
-import { Modal, Container, Row, Button } from 'react-bootstrap'
+import { Modal, Container, Row, Button, Alert } from 'react-bootstrap'
 import SignUpImage from '../assets/logo.png'
 import Logo from '../assets/logo.png'
 import { Link, useNavigate  } from "react-router-dom";
@@ -32,6 +32,8 @@ function LoginPage() {
         email:"",
         password:false,
         subPassword:false,
+        LoginAuthentication:false,
+        SignupAuthentication:false,
     })
     // password.includes(x)
     const checkSubPassword = (pwd)=>{
@@ -66,6 +68,8 @@ function LoginPage() {
             await axios.post('api/auth/login',
              {"email":loginForm.loginEmail, "password":loginForm.loginPassword})
              .then(response => {
+                console.log(response)
+                setError({...error, ['LoginAuthentication']:false})
                  sessionStorage.setItem('token', response.data.token)
                  sessionStorage.setItem('SubPassword', false)
                  sessionStorage.setItem('time', new Date().getTime())
@@ -75,7 +79,7 @@ function LoginPage() {
                  console.log(response)
                  navigate("/inbox")
              })
-             .catch(err => console.log(err))
+             .catch(err => setError({...error, ['LoginAuthentication']:true}))
         }
     }
     // SIGNUP FUNCTIONALITIES
@@ -110,6 +114,7 @@ function LoginPage() {
         "gender":signUpForm.gender,
         "phone":signUpForm.phoneNumber,
         "subpassword":signUpForm.subPassword,
+        "photoType":signUpForm.photoType
     }
     console.log(data)
     let isValid = SignUpValidate(data);
@@ -117,6 +122,8 @@ function LoginPage() {
     if(isValid && error.password && signUpForm.password && error.subPassword && signUpForm.subPassword){
         await axios.post('api/auth/signup',
              data).then(response => {
+                setError({...error, ['SignupAuthentication']:false})
+                 console.log(response)
                  sessionStorage.setItem('token', response.data.token)
                  sessionStorage.setItem('user', JSON.stringify(response.data.user))
                  sessionStorage.setItem('SubPassword', false)
@@ -127,10 +134,13 @@ function LoginPage() {
                  navigate("/inbox")
 
                 })
-             .catch(err => console.log(err))
+             .catch(err => {
+                 setError({...error, ['SignupAuthentication']:true})
+             })
     }
-
-        }
+    else {setError({...error, ['SignupAuthentication']:true})
+}       
+}
 
   return (
         <Wrapper className='row col-12 vh-100'>
@@ -141,6 +151,8 @@ function LoginPage() {
                 </div>
             <form id='loginForm' className='container text-center mx-1 px-5' onSubmit={submitLoginForm}>
             <h1 className='text-dark text-start'>Sign In</h1>
+            {error.LoginAuthentication?<Alert variant='danger' className='p-2'>Unauthorised</Alert>:""}
+
                 <div>
                     <input placeholder='Email Address'
                     autoComplete="new-password"
@@ -162,11 +174,14 @@ function LoginPage() {
                 </div>
                 <div className='d-flex flex-row justify-content-between align-items-center'>
                     <Button type="submit" className="btn-dark">Sign In</Button>
+                
                     <Link to='/forget' className='text-decoration-none'>Forget Password</Link>
                 </div>
+
                 <a className='text-primary float-end text-decoration-none' onClick={() => setLgShow(true)}>
                     Create an account?
                 </a>
+
             </form>
                  <Modal 
                         className='vh-100 modal-fullscreen-lg-down'
@@ -184,9 +199,12 @@ function LoginPage() {
                     
                     <div className='col-12 col-lg-7'>
                             <Modal.Header closeButton>
+
                             </Modal.Header>
                             <form id='signUpForm' onSubmit={onSubmitSignup} className='d-flex flex-column justify-content-center'>
                                 <h1 className='text-center'>Lets get you Started!</h1>
+            {error.SignupAuthentication?<Alert variant='danger' className='p-2 text-center'>Please Enter Valid Details To Sign Up</Alert>:""}
+                                
                                 <div className='d-flex flex-row justify-content-between align-items-center mx-2 my-3'>
                                     <div className='mx-2'>
                                         <label htmlFor='name'>Name</label>
@@ -250,14 +268,14 @@ function LoginPage() {
                                     <div className='d-flex flex-column justify-content-center align-items-center'> 
                                         <img src={signUpForm.gender==='male'? Male1 : Female1} className="img-item" />
                                         <div>
-                                        <input className="form-check-input mx-1" onChange={HandleSignUpInput} type="radio" name="photoType" id="gender-dp-casual" value="1"/>
+                                        <input className="form-check-input mx-1" onChange={HandleSignUpInput} type="radio" name="photoType" id="gender-dp-casual" value={1}/>
                                         <label> Formal </label>
                                         </div>
                                     </div>
                                     <div className='d-flex flex-column justify-content-center align-items-center mx-2'>
                                         <img src={signUpForm.gender==='male'? Male2 : Female2} className="img-item" />
                                         <div>
-                                        <input className="form-check-input mx-1" onChange={HandleSignUpInput} type="radio" name="photoType" id="gender-dp-formal" value="2"/>
+                                        <input className="form-check-input mx-1" onChange={HandleSignUpInput} type="radio" name="photoType" id="gender-dp-formal" value={2}/>
                                         <label> Casual </label>
                                         </div>
                                     </div>

@@ -190,7 +190,7 @@ const DraftView = (props) => {
                             body={ checked ? body : '#'.repeat(body.length)}
                             createdAt={createdAt}
                         />
-                    )):null
+                    )):''
                 }
                 {showCompose ? <SendMailWrapper className='send-mail-wrapper container d-flex flex-column p-0'>
                 <SendMailHeader className='bg-dark text-white p-1 d-flex flex-row justify-content-between align-items-center'>

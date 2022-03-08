@@ -16,6 +16,7 @@ const fileTypes = ["JPG", "PNG", "GIF", "PDF", "MP3", "MP4", "DOC", "DOCX", "XLS
 
 const DraftSinglePage = (props) => 
 {
+    const navigate = useNavigate();
     console.log(props)
     const [lgShow, setLgShow] = useState(false);
     const [attachments, setAttachmeny] = useState([]);
@@ -54,6 +55,7 @@ const DraftSinglePage = (props) =>
                 messege: '',
                 attachments: []
             })
+            navigate('/sent')
         }).catch(err => console.log(err))
     }
     const [progress, setProgress] = useState();

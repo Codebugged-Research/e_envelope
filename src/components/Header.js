@@ -57,6 +57,7 @@ function Header() {
                             id="autocompleteLocations"
                             options={userSearchList}
                             fullWidth
+                            autoComplete="new-password"
                             getOptionLabel={option => option.from || ''}
                             renderOption={(option) => (
                                 <div key={option._id}>

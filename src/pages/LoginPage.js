@@ -146,6 +146,7 @@ function LoginPage() {
             <h1 className='text-dark text-start'>Sign In</h1>
                 <div>
                     <input placeholder='Email Address'
+                    autoComplete="new-password"
                     className='form-control mt-3 mb-1'
                     name='loginEmail'
                     value={loginForm.loginEmail}
@@ -154,7 +155,7 @@ function LoginPage() {
                     <p className='text-danger text-start fw-lighter f-13 m-0 fst-italic' >{error.loginEmail}</p>
                 </div>
                 <div>
-                    <input placeholder='Password'
+                    <input autoComplete="new-password" placeholder='Password'
                         className='form-control mt-3 mb-1'
                         name='loginPassword'
                         value={loginForm.loginPassword}
@@ -192,34 +193,34 @@ function LoginPage() {
                                 <div className='d-flex flex-row justify-content-between align-items-center mx-2 my-3'>
                                     <div className='mx-2'>
                                         <label htmlFor='name'>Name</label>
-                                        <input className='form-control'
+                                        <input autoComplete="new-password"  className='form-control'
                                         onChange={HandleSignUpInput}
                                         placeholder='john' name="name"/>
                                     </div>
                                     <div  className='mx-2'>
                                         <label htmlFor='phoneNumber'>Phone Number</label>
-                                        <input placeholder='7007918XXX' onChange={HandleSignUpInput} type='tel' className='form-control' name="phoneNumber"/>
+                                        <input autoComplete="new-password" placeholder='7007918XXX' onChange={HandleSignUpInput} type='tel' className='form-control' name="phoneNumber"/>
                                     </div>
                                     
                                 </div>
                                 <div className='d-flex flex-row justify-content-between align-items-center mx-2 my-3'>
                                 <div  className='mx-2'>
                                         <label htmlFor='username'>Username</label>
-                                        <input placeholder='username'
+                                        <input autoComplete="new-password" placeholder='username'
                                         onChange={ e=>setEmail('#'+e.target.value+'EE.com')}
                                         className='form-control' name="username"/>
-                                        <div className='my-1'>  {email!=='#EE.com'? "Email:"+ email:''}</div>
+                                        <div className='my-1 fw-12'>  {email!=='#EE.com'? "Email:"+ email:''}</div>
                                     </div>
                                     <div  className='mx-2'>
                                         <label htmlFor='repeatPassword'> Sub Password </label>
-                                        <input placeholder='******' onChange={HandleSignUpInput} type='password' maxLength='2' className='form-control' name="subPassword"/>
-                                        {error.subPassword?'':<span className='text-danger'><CloseIcon/> Sub Password Invalid eg. v@, vk, v3</span>}
+                                        <input placeholder='******' autoComplete="new-password" onChange={HandleSignUpInput} type='password' maxLength='2' className='form-control' name="subPassword"/>
+                                        {error.subPassword?'':<span className='text-danger fw-10'><CloseIcon/> Sub Password Invalid eg. v@, vk, v3</span>}
                                     </div>
                                 </div>
                                 <div className='d-flex flex-row justify-content-between align-items-center mx-2 my-3'>
                                     <div  className='mx-2'>
                                         <label htmlFor='password'>Password</label>
-                                        <input type='password' onChange={HandleSignUpInput} placeholder='eg. Vivek@1234' className='form-control' name="password"/>
+                                        <input type='password' autoComplete="new-password" onChange={HandleSignUpInput} placeholder='eg. Vivek@1234' className='form-control' name="password"/>
                                         <PasswordChecklist
                                             rules={["minLength","specialChar","number","capital","lowercase"]}
                                             minLength={6}

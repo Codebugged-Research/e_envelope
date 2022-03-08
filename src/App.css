@@ -72,3 +72,9 @@ p{
 .line-break-anywhere{
   line-break: anywhere !important;
 }
+.fw-10{
+  font-size: 10px!important;
+}
+.fw-12{
+  font-size: 12px!important;
+}

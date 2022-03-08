@@ -80,7 +80,7 @@ return (
     <TopWrapper className='d-flex flex-row justify-content-start align-items-center '>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
          { showSubPassword ? <div className='p-0' ><Switch checked={checked} onChange={subPassword} /> 
-        <input className='form-control w-50 d-inline' placeholder='Sub Password' 
+        <input autoComplete="new-password" className='form-control w-50 d-inline' placeholder='Sub Password' 
         value={SubPassword} onChange={(e)=> setSubPassword(e.target.value)}
         type="password" maxLength='2' /></div> : null }
       </TopWrapper>

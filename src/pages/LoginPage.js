@@ -3,20 +3,17 @@ import styled from 'styled-components'
 import { Modal, Container, Row, Button } from 'react-bootstrap'
 import SignUpImage from '../assets/logo.png'
 import Logo from '../assets/logo.png'
-import { useForm } from "react-hook-form";
 import { Link, useNavigate  } from "react-router-dom";
 import {loginValidate, SignUpValidate} from "../components/validation"
 import axios from "axios";
-import Other from '../assets/other.jpeg'
 import Male1 from '../assets/male1.png'
 import Male2 from '../assets/male2.jpg'
 import Female1 from '../assets/female1.png'
 import Female2 from '../assets/female2.jpg'
 import CloseIcon from '@material-ui/icons/Close';
-import DoneIcon from '@material-ui/icons/Done';
 import PasswordChecklist from "react-password-checklist"
 
-axios.defaults.baseURL = 'http://64.227.177.238/';
+axios.defaults.baseURL = 'https://electronic-envelope.com/';
 
 function LoginPage() { 
     const navigate  = useNavigate ();

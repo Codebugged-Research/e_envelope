@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import SearchIcon from '@material-ui/icons/Search';
-import PersonIcon from '@material-ui/icons/Person';
 import { Link } from 'react-router-dom';
-import EmailIcon from '@material-ui/icons/Email';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useNavigate } from 'react-router-dom';
-import logo from "../assets/logo.png"
-import Other from '../assets/other.jpeg'
-import Male1 from '../assets/male1.png'
-import Male2 from '../assets/male2.jpg'
-import Female1 from '../assets/female1.png'
-import Female2 from '../assets/female2.jpg'
+import logo from "../assets/logo.png";
+import Other from '../assets/other.jpeg';
+import Male1 from '../assets/male1.png';
+import Male2 from '../assets/male2.jpg';
+import Female1 from '../assets/female1.png';
+import Female2 from '../assets/female2.jpg';
 import axios from 'axios';
-import { ReactSearchAutocomplete } from 'react-search-autocomplete';
+import AutoComplete from '@material-ui/lab/Autocomplete';
+import { TextField } from '@material-ui/core';
 function Header() {
     const navigate = useNavigate();
     const token = sessionStorage.getItem('token');
     const [user, setUser] = useState({});
     const [userSearchList, setUserSearchList] = useState([]);
-    const IMG = user.gender==="other" ? Other :(user.gender === 'male' ? (user.photoType===1?Male1:Male2):(user.photoType===1?Female1:Female2));
+    const IMG = user.gender === "other" ? Other : (user.gender === 'male' ? (user.photoType === 1 ? Male1 : Male2) : (user.photoType === 1 ? Female1 : Female2));
     useEffect(() => {
         data();
     }, []);
@@ -32,64 +30,48 @@ function Header() {
         sessionStorage.setItem('user', '');
         navigate('/')
     }
-    const search = async (value) => {
-        var resp = await axios.post(`http://64.227.177.238/api/mail/searchquery`,{from:value, self:user.email},
+    const search = async (e) => {
+        var value = e.target.value;
+        var resp = await axios.post(`http://64.227.177.238/api/mail/searchquery`, { from: value, self: user.email },
             {
                 headers: {
                     "x-access-token": token,
                 },
             });
-
-            setUserSearchList(resp.data);
-            console.log(resp.data)
+        var lis = [];
+        resp.data.forEach(element => {
+            lis.push({ "from": element.from, "to": element.to, "subject": element.subject, "body": element.body, "id": element._id });
+        });
+        setUserSearchList(lis);
     }
-
-    const handleOnSearch = (string, results) => {
-        search(string);
-    }
-
-    const handleOnHover = (result) => {
-        // the item hovered
-        // console.log(result)
-    }
-
-    const handleOnSelect = (item) => {
-        // the item selected
-        console.log(item);
-    }
-
-    const handleOnFocus = () => {
-        // console.log('Focused')
-    }
-
-    const formatResult = (item) => {
-        return (
-            <>
-                <span style={{ display: 'block', textAlign: 'left' }}>{item.from}</span>
-                <span style={{ display: 'block', textAlign: 'left' }}>{item.body}</span>
-            </>
-        )
-    }
-
-
     return (
         <Wrapper>
             <LogoWrapper>
-                <Logo><img src={logo}/></Logo>
+                <Logo><img src={logo} /></Logo>
                 <Text className='text-dark d-none d-md-block'>E-Envelope</Text>
             </LogoWrapper>
             <SearchWrapper>
                 <SearchBarWrapper className='text-dark mx-1 mx-md-3'>
                     <div style={{ width: "100%" }}>
-                        <ReactSearchAutocomplete
-                            items={userSearchList}
-                            onSearch={handleOnSearch}
-                            onHover={handleOnHover}
-                            onSelect={handleOnSelect}
-                            onFocus={handleOnFocus}
-                            autoFocus
-                            formatResult={formatResult}
-                        />
+                        <AutoComplete
+                            id="autocompleteLocations"
+                            options={userSearchList}
+                            fullWidth
+                            getOptionLabel={option => option.from || ''}
+                            renderOption={(option) => (
+                                <div key={option._id}>
+                                    <span style={{ display: 'block', textAlign: 'left' }}>{option.from}</span>
+                                    <span style={{ display: 'block', textAlign: 'left', fontWeight: 'bold' }}>{'#'.repeat(option.subject.length)}</span>
+                                </div>
+                            )}
+                            autoHighlight={false}
+                            autoSelect={false}
+                            clearOnEscape
+                            onChange={(event, autocompleteValue) => {
+                                console.log(autocompleteValue);
+                                // jump to mail detail
+                            }}
+                            renderInput={params => <TextField {...params} label="" InputProps={{ ...params.InputProps, disableUnderline: true, className: "height: 40" }} size="small" className="" variant="filled" onChange={(e) => { search(e) }} />} />
                     </div>
                 </SearchBarWrapper>
             </SearchWrapper>

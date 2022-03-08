@@ -14,8 +14,8 @@ const SendItem = ({id, to, subject, body, createdAt}) => {
         <Link to={`/sent/${id}`} className="main-msg d-flex flex-row flex-wrap text-white text-decoration-none">
             <p className={ 'text-truncate w-25 unread'}>{to}</p>
             <div className="d-flex flex-column mx-3 w-25  subject-msg">
-            <p className='unread'>{subject.substring(0,5)+'...'}</p> 
-            <p className={'unread'}>{body.substring(0,5)+'...'}</p> 
+            <p className={'unread text-truncate w-25'}>{subject.substring(0,5)+'...'}</p> 
+            <p className={'unread text-truncate w-25'}>{body.substring(0,5)+'...'}</p> 
             </div>
             <p className={'unread'}>{createdAt}</p>
         </Link>

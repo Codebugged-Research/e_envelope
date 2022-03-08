@@ -24,25 +24,23 @@ const DraftItem = ({id, to, subject, body, createdAt, onClick}) => {
         window.location.reload();
     }
     return (
-        <>
         <Wrapper>
         <Link to={`/draft/${id}`} id={id} className="main-msg d-flex flex-row text-white text-decoration-none">
-            <p className={ 'unread'}>{to}</p>
+            <p className={'unread text-truncate w-25'}>{to}</p>
             <div className="d-flex flex-column mx-3 subject-msg">
-            <p className={'unread'}>{subject.substring(0,3)+'...'}</p> 
-            <p className={'unread'}>{body.substring(0,3)+'...'}</p> 
+            <p className={'unread text-truncate w-25'}>{subject.substring(0,3)+'...'}</p> 
+            <p className={'unread text-truncate w-25'}>{body.substring(0,3)+'...'}</p> 
             </div>
             <p className={'unread'}>{createdAt.substring(11,16)}</p>
         </Link>
         </Wrapper>
-        </>
     )
 }
 
 export default DraftItem
 
 const Wrapper = styled.div`
-    padding-left: 20px;
+    padding-left: 5px;
     height:10vh;
     border-bottom: 1px solid lightgray;
     display: flex;
@@ -52,7 +50,7 @@ const Wrapper = styled.div`
     border-radius:0.25rem;
     margin-top:5px;
     cursor: pointer;
-    padding-right: 20px;
+    padding-right: 5px;
     div {
         display: flex;
 
@@ -60,14 +58,25 @@ const Wrapper = styled.div`
             color: white;
         }
     }
+    @media (max-width: 767.98px)  { 
+        height:15vh;
+        }
     .main-msg{
-        flex:2;
-        justify-content: space-between;
+        flex:1;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: space-evenly;
         align-items: center;
         .subject-msg{
-            flex: 2;
         align-items: flex-start;
+    }
+        @media (max-width: 767.98px)  { 
+        .subject-msg{
+            flex: 1;
         }
+    }
     }
     .unread{
         color: black;

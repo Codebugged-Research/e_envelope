@@ -168,7 +168,7 @@ const DraftView = (props) => {
     }
   return (
 
-    <Wrapper>
+    <Wrapper> { !checked ?<Alert className='p-2 my-0' variant={'primary'}>To Access Content, Enter Sub Password</Alert>:''}
       <TopWrapper className='d-flex flex-row justify-content-start align-items-center'>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
          { showSubPassword ? <><div><Switch checked={checked} onChange={subPassword} /> 
@@ -185,7 +185,7 @@ const DraftView = (props) => {
                             onClick={event => { handleClick(event, {_id,to,subject,body})} }
                             key={_id}
                             id={_id}
-                            to={ checked ? to : '#'.repeat(to.length) }
+                            to={ checked ? to : '#'.repeat(5)+'EE.com' }
                             subject={ checked ? subject : '#'.repeat(subject.length)}
                             body={ checked ? body : '#'.repeat(body.length)}
                             createdAt={createdAt}

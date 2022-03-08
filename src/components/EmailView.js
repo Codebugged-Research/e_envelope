@@ -5,7 +5,7 @@ import SubPassword from './SubPassword';
 import { Switch } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
 import axios from 'axios';
-
+import { Alert } from 'react-bootstrap';
 
 const EmailView = (props) => {
   const messeges = props.messeges.data
@@ -39,6 +39,7 @@ const EmailView = (props) => {
     }
   return (
     <Wrapper>
+      { !checked ?<Alert className='p-2 my-0' variant={'primary'}>To Access Content, Enter Sub Password</Alert>:''}
       <TopWrapper className='d-flex flex-row justify-content-start align-items-center'>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
          { showSubPassword ? <div><Switch checked={checked} onChange={subPassword} /> 
@@ -53,10 +54,11 @@ const EmailView = (props) => {
                         <EmailItem 
                             key={_id}
                             id={_id}
-                            from={ checked ? from : '#'.repeat(from.length) }
+                            from={ checked ? from : '#'.repeat(5)+'EE.com' }
                             subject={ checked ? subject : '#'.repeat(subject.length)}
                             body={ checked ? body : '#'.repeat(body.length)}
                             createdAt={createdAt}
+                            
                         />
                         
                     )):null

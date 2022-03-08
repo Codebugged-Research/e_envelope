@@ -85,7 +85,7 @@ const Wrapper = styled.div`
         }
     .main-msg{
         flex:1;
-
+        max-width: 80vw;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;

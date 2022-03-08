@@ -12,7 +12,7 @@ import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import ArticleIcon from '@material-ui/icons/FileCopy';
 import AudioFileIcon from '@material-ui/icons/Audiotrack';
 import Attachment from '@material-ui/icons/Attachment';
-import { Card } from 'react-bootstrap';
+import { Alert, Card } from 'react-bootstrap';
 const SingleEmail = (props) => 
 {
     const [showSubPassword, setShowSubPassword] = useState(false)
@@ -76,6 +76,7 @@ const SingleEmail = (props) =>
 return (
     <>
     <div className='d-flex flex-column w-80'>
+        { !checked?<Alert className='p-2 my-0' variant={'primary'}>To Access Content, Enter Sub Password</Alert>:''}
     <TopWrapper className='d-flex flex-row justify-content-start align-items-center '>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
          { showSubPassword ? <div className='p-0' ><Switch checked={checked} onChange={subPassword} /> 
@@ -88,14 +89,15 @@ return (
         <ImageAddressWrapper className='d-flex flex-row mx-1'>
         <Person/>
         <AddressTimeWrapper className='d-flex flex-column mx-3'>
-            <AddressID>{ checked ? messeges.from : '#'.repeat(messeges.from.length) }</AddressID>
+            <AddressID>{ checked ? messeges.from : '#'.repeat(5)+'EE.com' }</AddressID>
             <DateTime>{new Date(messeges.createdAt).toLocaleString()}</DateTime>
         </AddressTimeWrapper>
         </ImageAddressWrapper>
         <MessegeWrapper className="d-flex flex-column mx-5 my-3">
             <Messege className='line-break-anywhere' >{ checked ? messeges.body : '#'.repeat(messeges.body.length) }</Messege>
+            <hr/>
          {/*show attachments  */}
-         <div className='d-flex flex-row justify-content-between align-items-center'>
+         <div className='d-flex flex-row justify-content-start-start align-items-center'>
                         <span className='mx-2 my-1'>Attachments</span>
                         <span className='mx-2 my-1'>{messeges.attachments.length}</span>
                     </div>
@@ -104,7 +106,7 @@ return (
                         {messeges.attachments.map((item, index) => (
                             <div key={index} className='d-flex flex-column align-items-center'>
                                 <div className='d-flex flex-row align-items-center'>
-                                    <Card variant="outlined"><a target={checked ?"_blank":''} href={checked ? item.fileUrl:'#'} className="p-3"> {getAttachmentIcon(item.fileType)} </a></Card>
+                                    <Card variant="outlined"><a target={checked ?"_blank":''} href={checked ? item.fileUrl:'#'}  className="p-3"> {getAttachmentIcon(item.fileType)} </a></Card>
                                 </div>
                             </div>
                         ))}

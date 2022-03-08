@@ -213,19 +213,13 @@ function LoginPage() {
                                     <div  className='mx-2'>
                                         <label htmlFor='repeatPassword'> Sub Password </label>
                                         <input placeholder='******' onChange={HandleSignUpInput} type='password' maxLength='2' className='form-control' name="subPassword"/>
-                                        {error.subPassword?'':<span className='text-danger'><CloseIcon/> Sub Password Invalid</span>}
+                                        {error.subPassword?'':<span className='text-danger'><CloseIcon/> Sub Password Invalid eg. v@, vk, v3</span>}
                                     </div>
-                                    {/* <div  className='mx-2'>
-                                        <label htmlFor='email'>Email Address</label>
-                                        <input type='email' disabled
-                                         value={email!=='#EE.com'?email:''} placeholder='' className='form-control' name="email"/>
-                                    </div> */}
-                                    
                                 </div>
                                 <div className='d-flex flex-row justify-content-between align-items-center mx-2 my-3'>
                                     <div  className='mx-2'>
                                         <label htmlFor='password'>Password</label>
-                                        <input type='password' onChange={HandleSignUpInput} placeholder='******' className='form-control' name="password"/>
+                                        <input type='password' onChange={HandleSignUpInput} placeholder='eg. Vivek@1234' className='form-control' name="password"/>
                                         <PasswordChecklist
                                             rules={["minLength","specialChar","number","capital","lowercase"]}
                                             minLength={6}
@@ -238,11 +232,6 @@ function LoginPage() {
                                                }}
                                         />
                                     </div>
-                                    {/* <div  className='mx-2'>
-                                        <label htmlFor='repeatPassword'> Sub Password </label>
-                                        <input placeholder='******' onChange={HandleSignUpInput} type='password' maxLength='2' className='form-control' name="subPassword"/>
-                                        {error.subPassword?'':<span className='text-danger'><CloseIcon/> Sub Password Invalid</span>}
-                                    </div> */}
                                 </div>
                                 <div className='d-flex flex-row justify-content-start align-items-start mx-2 my-1'>
                                 <div className="form-check form-check-inline mx-2">

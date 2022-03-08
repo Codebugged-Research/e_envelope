@@ -5,7 +5,7 @@ import emailData  from '../data/emailData';
 import SendItem from './SendItem';
 import LockIcon from '@material-ui/icons/Lock';
 import axios from 'axios';
-
+import { Alert } from 'react-bootstrap';
 const SendView = (props) => {
   const messeges = props.messeges.data
   // let SubPassword = sessionStorage.getItem('subpassword')
@@ -39,7 +39,7 @@ const SendView = (props) => {
     }
     
   return (
-    <Wrapper>
+    <Wrapper> { !checked ?<Alert className='p-2 my-0' variant={'primary'}>To Access Content, Enter Sub Password</Alert>:''}
       <TopWrapper className='d-flex flex-row justify-content-start align-items-center'>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
          { showSubPassword ? <div><Switch checked={checked} onChange={subPassword} /> 
@@ -54,7 +54,7 @@ const SendView = (props) => {
                         <SendItem 
                             key={_id}
                             id={_id}
-                            to={ checked ? to : '#'.repeat(to.length)}
+                            to={ checked ? to : '#'.repeat(5)+'EE.com'}
                             subject={ checked ? subject : '#'.repeat(subject.length)}
                             body={ checked ? body : '#'.repeat(body.length)}
                             createdAt={createdAt}

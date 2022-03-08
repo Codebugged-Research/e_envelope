@@ -23,6 +23,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "react-search-autocomplete": "^6.0.0",
+    "serve": "^13.0.2",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
@@ -31,7 +32,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "bnr": "react-scripts build && serve -s build",
+    "r": "serve -s build"
   },
   "eslintConfig": {
     "extends": [

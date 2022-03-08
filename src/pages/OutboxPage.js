@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import SidePanel from '../components/SidePanel';
 import EmailView from '../components/EmailView';
@@ -9,33 +9,34 @@ import SentView from '../components/SendView'
 function OutboxPage() {
   let timer = JSON.parse(JSON.parse(sessionStorage.getItem('user')).timmer)
 
-  if( new Date().getTime() - sessionStorage.getItem('time') > timer*60*1000){
+  if (new Date().getTime() - sessionStorage.getItem('time') > timer * 60 * 1000) {
     sessionStorage.setItem('SubPassword', false)
   }
-  const [messeges,setMesseges] = useState([]);
+  const [messeges, setMesseges] = useState([]);
   useEffect(() => {
-      data();
+    data();
   }, [])
   const data = async () => {
-      const res = JSON.parse(sessionStorage.getItem('user'))
-      const token = await sessionStorage.getItem('token')
+    const res = JSON.parse(sessionStorage.getItem('user'))
+    const token = sessionStorage.getItem('token')
 
-      const messege = await axios.post(axios.defaults.baseURL+`api/mail/user/label`,{"id": res.email, "label": "outbox"}, {"headers":{ 
-          "x-access-token": token,
-        }
-      })
-      console.log(messege)
-        setMesseges(messege)
+    const messege = await axios.post(axios.defaults.baseURL + `api/mail/outbox/`, { "id": res.email }, {
+      "headers": {
+        "x-access-token": token,
       }
+    })
+    console.log(messege)
+    setMesseges(messege)
+  }
 
 
   return (<>
-    <Header/>
+    <Header />
     <Wrapper>
-      <SidePanel/>
-      <SentView messeges={messeges} />
+      <SidePanel />
+      <EmailView messeges={messeges} />
     </Wrapper>
-    </>
+  </>
   )
 }
 

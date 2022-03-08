@@ -4,7 +4,7 @@ import SidePanel from '../components/SidePanel';
 import EmailView from '../components/EmailView';
 import Header from '../components/Header';
 import axios from 'axios';
-import SentView from '../components/SendView'
+import SendView from '../components/SendView';
 
 function OutboxPage() {
   let timer = JSON.parse(JSON.parse(sessionStorage.getItem('user')).timmer)
@@ -34,7 +34,7 @@ function OutboxPage() {
     <Header />
     <Wrapper>
       <SidePanel />
-      <EmailView messeges={messeges} />
+      <SendView messeges={messeges} />
     </Wrapper>
   </>
   )

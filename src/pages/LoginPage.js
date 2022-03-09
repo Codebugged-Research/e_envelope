@@ -144,10 +144,14 @@ function LoginPage() {
 
   return (
         <Wrapper className='row col-12 vh-100'>
-            <div className='col-12 col-md-6 col-lg-5 d-flex flex-column justify-content-evenly shadow'>
-                <div className='d-flex flex-row justify-content-center align-items-center '>
+            <div className='col-12 col-md-6 col-lg-5 d-flex flex-column justify-content-center shadow'>
+                <div className='d-flex flex-row justify-content-center align-items-center my-4'>
                     <img src={Logo} className="img-fluid d-block img-50 "/>
+                    <div>
                     <h3>E-Envelope</h3>
+                    <p><i>Simpler, Safer, Secure Mail Service</i></p>
+
+                    </div>
                 </div>
             <form id='loginForm' className='container text-center mx-1 px-5' onSubmit={submitLoginForm}>
             <h1 className='text-dark text-start'>Sign In</h1>

@@ -60,7 +60,6 @@ const EmailView = (props) => {
                             createdAt={createdAt}
                             
                         />
-                        
                     )):null
                 }
             </EmailsContainer>

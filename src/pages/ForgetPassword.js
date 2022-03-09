@@ -23,6 +23,10 @@ function ForgetPassword() {
             console.log(res)
             sessionStorage.setItem('token', res.data.token);
             sessionStorage.setItem('user', JSON.stringify(res.data.user));
+            sessionStorage.setItem('SubPassword', false)
+            sessionStorage.setItem('time', new Date().getTime())
+            let username = res.data.user.email.substring(1,res.data.user.email.length-6)
+            sessionStorage.setItem('username', username)
             setVerified(true);
         }).catch(err=>{
             console.log(err)
@@ -39,6 +43,7 @@ function ForgetPassword() {
             }})
             .then(res => {
                 console.log(res)
+               
                 navigate('/inbox');
             }).catch(err=>{
                 console.log(err)

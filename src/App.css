@@ -78,3 +78,18 @@ p{
 .fw-12{
   font-size: 12px!important;
 }
+#installContainer {
+  position: fixed;
+  top:0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#installContainer button {
+  background-color: inherit;
+  border: 1px solid black;
+  color: black;
+  font-size: 1em;
+  padding: 0.5em;
+}

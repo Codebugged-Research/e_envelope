@@ -32,7 +32,7 @@ function Header() {
     }
     const search = async (e) => {
         var value = e.target.value;
-        var resp = await axios.post(`http://64.227.177.238/api/mail/searchquery`, { from: value, self: user.email },
+        var resp = await axios.post(`https://electronic-envelope.com/api/mail/searchquery`, { from: value, self: user.email },
             {
                 headers: {
                     "x-access-token": token,

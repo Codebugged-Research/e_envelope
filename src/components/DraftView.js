@@ -20,6 +20,8 @@ import SendMail from './SendMail';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FileUploader } from "react-drag-drop-files";
+import { green } from '@material-ui/core/colors';
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 const fileTypes = ["JPG", "PNG", "GIF", "PDF", "MP3", "MP4", "DOC", "DOCX", "XLS", "XLSX", "PPT", "PPTX", "TXT", "ZIP", "RAR"];
 
 const DraftView = (props) => {
@@ -166,12 +168,39 @@ const DraftView = (props) => {
           messege: body,
       })
     }
+    
+  const useStyles = makeStyles({
+    switchBase: {
+      "&$checked": {
+        color: green[500]
+      },
+      "&$checked + $track": {
+        backgroundColor: green[500]
+      }
+    },
+    checked: {},
+    track: {}
+  });
+  const classes = useStyles();
   return (
 
     <Wrapper> { !checked ?<Alert className='p-2 my-0' variant={'primary'}>To Access Content, Enter Sub Password</Alert>:''}
       <TopWrapper className='d-flex flex-row justify-content-start align-items-center'>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
-         { showSubPassword ? <><div><Switch checked={checked} onChange={subPassword} /> 
+         { showSubPassword ? <><div>
+            <Switch
+            checked={checked}
+            onChange={subPassword}
+            focusVisibleClassName={classes.focusVisible}
+            disableRipple
+            classes={{
+              root: classes.root,
+              switchBase: classes.switchBase,
+              thumb: classes.thumb,
+              track: classes.track,
+              checked: classes.checked
+            }}
+          />
         <input autoComplete="new-password" className='form-control w-50 d-inline' placeholder='Sub Password' 
         value={SubPassword} onChange={(e)=> setSubPassword(e.target.value)}
         type="password" maxLength='2' /></div></>

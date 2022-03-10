@@ -2,11 +2,11 @@ import { React, useState } from 'react'
 import styled from 'styled-components';
 import EmailItem from './EmailItem';
 import SubPassword from './SubPassword';
-import { green } from '@material-ui/core/colors';
 import LockIcon from '@material-ui/icons/Lock';
 import axios from 'axios';
 import { Alert } from 'react-bootstrap';
 import { Switch } from "@material-ui/core";
+import { green } from '@material-ui/core/colors';
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 const EmailView = (props) => {

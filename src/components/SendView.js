@@ -6,9 +6,11 @@ import SendItem from './SendItem';
 import LockIcon from '@material-ui/icons/Lock';
 import axios from 'axios';
 import { Alert } from 'react-bootstrap';
+import { green } from '@material-ui/core/colors';
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+
 const SendView = (props) => {
   const messeges = props.messeges.data
-  // let SubPassword = sessionStorage.getItem('subpassword')
   const [showSubPassword, setShowSubPassword] = useState(false)
   const [checked,setChecked] = useState(JSON.parse(sessionStorage.getItem('SubPassword')))
   const [SubPassword,setSubPassword] = useState('')
@@ -37,12 +39,37 @@ const SendView = (props) => {
       setChecked(false)
     } 
     }
-    
+    const useStyles = makeStyles({
+      switchBase: {
+        "&$checked": {
+          color: green[500]
+        },
+        "&$checked + $track": {
+          backgroundColor: green[500]
+        }
+      },
+      checked: {},
+      track: {}
+    });
+    const classes = useStyles();
   return (
     <Wrapper> { !checked ?<Alert className='p-2 my-0' variant={'primary'}>To Access Content, Enter Sub Password</Alert>:''}
       <TopWrapper className='d-flex flex-row justify-content-start align-items-center'>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
-         { showSubPassword ? <div><Switch checked={checked} onChange={subPassword} /> 
+         { showSubPassword ? <div> 
+           <Switch
+            checked={checked}
+            onChange={subPassword}
+            focusVisibleClassName={classes.focusVisible}
+            disableRipple
+            classes={{
+              root: classes.root,
+              switchBase: classes.switchBase,
+              thumb: classes.thumb,
+              track: classes.track,
+              checked: classes.checked
+            }}
+          />
         <input autoComplete="new-password" className='form-control w-50 d-inline' placeholder='Sub Password' 
         value={SubPassword} onChange={(e)=> setSubPassword(e.target.value)}
         type="password" name="subpassword" maxLength='2' /></div> : null }

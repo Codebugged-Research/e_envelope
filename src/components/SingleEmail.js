@@ -13,6 +13,11 @@ import ArticleIcon from '@material-ui/icons/FileCopy';
 import AudioFileIcon from '@material-ui/icons/Audiotrack';
 import Attachment from '@material-ui/icons/Attachment';
 import { Alert, Card } from 'react-bootstrap';
+import { green } from '@material-ui/core/colors';
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { Link } from 'react-router-dom';
+
 const SingleEmail = (props) => 
 {
     const [showSubPassword, setShowSubPassword] = useState(false)
@@ -73,19 +78,48 @@ const SingleEmail = (props) =>
         }).then(res=>{console.log(res); setMesseges(res.data);
         })
         }
+        const useStyles = makeStyles({
+            switchBase: {
+              "&$checked": {
+                color: green[500]
+              },
+              "&$checked + $track": {
+                backgroundColor: green[500]
+              }
+            },
+            checked: {},
+            track: {}
+          });
+          const classes = useStyles();
 return (
     <>
     <div className='d-flex flex-column w-80'>
         { !checked?<Alert className='p-2 my-0' variant={'primary'}>To Access Content, Enter Sub Password</Alert>:''}
     <TopWrapper className='d-flex flex-row justify-content-start align-items-center '>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
-         { showSubPassword ? <div className='p-0' ><Switch checked={checked} onChange={subPassword} /> 
+         { showSubPassword ? <div className='p-0' >
+            <Switch
+            checked={checked}
+            onChange={subPassword}
+            focusVisibleClassName={classes.focusVisible}
+            disableRipple
+            classes={{
+              root: classes.root,
+              switchBase: classes.switchBase,
+              thumb: classes.thumb,
+              track: classes.track,
+              checked: classes.checked
+            }}
+          />
         <input autoComplete="new-password" className='form-control w-50 d-inline' placeholder='Sub Password' 
         value={SubPassword} onChange={(e)=> setSubPassword(e.target.value)}
         type="password" maxLength='2' /></div> : null }
       </TopWrapper>
     <Wrapper key={messeges._id} className='d-flex flex-column mx-3 rounded my-3'>
+        <div>
+        <Link to='/inbox'><ArrowBackIcon color="action" /></Link>
         <Subject className='mx-5 my-3'>{ checked ? messeges.subject : '#'.repeat(messeges.subject.length) }</Subject>
+        </div>
         <ImageAddressWrapper className='d-flex flex-row mx-1'>
         <Person/>
         <AddressTimeWrapper className='d-flex flex-column mx-3'>

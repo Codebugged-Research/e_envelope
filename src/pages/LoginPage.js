@@ -149,7 +149,7 @@ function LoginPage() {
                     <img src={Logo} className="img-fluid d-block img-50 "/>
                     <div>
                     <h3>E-envelope</h3>
-                    <p><i>Simpler, Safer, Secure Mail Service</i></p>
+                    <p><i>"Simpler, Safer, Secure Mail Service"</i></p>
 
                     </div>
                 </div>

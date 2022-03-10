@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FileUploader } from "react-drag-drop-files";
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const fileTypes = ["JPG", "PNG", "GIF", "PDF", "MP3", "MP4", "DOC", "DOCX", "XLS", "XLSX", "PPT", "PPTX", "TXT", "ZIP", "RAR"];
 
 const DraftSinglePage = (props) => 
@@ -133,6 +134,7 @@ return (
     <Wrapper className='d-flex flex-column container my-3'>
     <SendMailWrapper className='send-mail-wrapper container d-flex flex-column p-0'>
                 <SendMailHeader className='bg-dark text-white p-1 d-flex flex-row justify-content-between align-items-center'>
+                    <Link to='/draft'><ArrowBackIcon /></Link>
                     <Heading className='mx-2 my-1'>Confidential</Heading>
                 </SendMailHeader>
                 <form onSubmit={sendMail} className='d-flex flex-column shadow justify-content-center align-items-start'>

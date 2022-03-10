@@ -148,7 +148,7 @@ function LoginPage() {
                 <div className='d-flex flex-row justify-content-center align-items-center my-4'>
                     <img src={Logo} className="img-fluid d-block img-50 "/>
                     <div>
-                    <h3>E-Envelope</h3>
+                    <h3>E-envelope</h3>
                     <p><i>Simpler, Safer, Secure Mail Service</i></p>
 
                     </div>

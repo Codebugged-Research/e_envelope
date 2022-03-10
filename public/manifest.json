@@ -1,6 +1,6 @@
 {
-  "name": "E-Envelope",
-  "short_name": "E-Envelope",
+  "name": "E-envelope",
+  "short_name": "E-envelope",
   "theme_color": "#000000",
   "background_color": "#000000",
   "display": "standalone",

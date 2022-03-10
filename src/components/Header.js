@@ -48,7 +48,7 @@ function Header() {
         <Wrapper>
             <LogoWrapper>
                 <Logo><img src={logo} /></Logo>
-                <Text className='text-dark d-none d-md-block'>E-Envelope</Text>
+                <Text className='text-dark d-none d-md-block'>E-envelope</Text>
             </LogoWrapper>
             <SearchWrapper>
                 <SearchBarWrapper className='text-dark mx-1 mx-md-3'>

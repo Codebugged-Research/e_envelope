@@ -161,7 +161,7 @@ function SidePanel() {
 
     return (
         <>
-            <Wrapper className='text-white'>
+            <Wrapper className='text-white fixed-side'>
                 <MainWrapper>
                     <ComposeLetter onClick={showComposeOnClick} className="d-flex flex-row">
                         <CreateIcon className="sideBarIcon" />
@@ -242,8 +242,9 @@ export default SidePanel
 const Wrapper = styled.div`
     // height:  calc( 100vh - 70px );
     display:flex;
+    
     flex-direction:column;
-    width:20vw;
+    width:20%;
     border-left:1px solid darkgray;
     `
 
@@ -300,6 +301,10 @@ display:flex;
 
 
 const MainWrapper = styled.div`
+position:fixed !important;
+    position: -webkit-fixed !important;
+    top:70px;
+    width:19%;
 background:linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
     height:100%;
     border-radius:1rem;

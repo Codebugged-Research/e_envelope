@@ -56,8 +56,8 @@ const EmailView = (props) => {
   const classes = useStyles();
   return (
     <Wrapper>
-      {!checked ? <Alert className='p-2 my-0' variant={'primary'}>To Access Content, Enter Sub Password</Alert> : ''}
-      <TopWrapper className='d-flex flex-row justify-content-start align-items-center'>
+      {!checked ? <Alert className='p-2 my-0 sticky-alert' variant={'primary'}>To Access Content, Enter Sub Password</Alert> : ''}
+      <TopWrapper className='d-flex flex-row justify-content-start align-items-center sticky-sub'>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
         {showSubPassword ? <div>
           <Switch
@@ -110,7 +110,6 @@ const Wrapper = styled.div`
 const TopWrapper = styled.div`
     font-size:16px;
     padding: 10px 20px;
-    background-color:#e3e3e3a1;
     border-radius:0.5rem;
 `
 

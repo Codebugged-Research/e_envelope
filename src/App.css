@@ -93,3 +93,18 @@ p{
   font-size: 1em;
   padding: 0.5em;
 }
+
+.sticky-sub{
+  background-color:#e3e3e3;
+  position:sticky !important;
+  position: -webkit-sticky !important;
+  top: 110px;
+  z-index: 999;
+}
+.sticky-alert{
+  height: 40px !important;
+  position:sticky !important;
+  position: -webkit-sticky !important;
+  top: 70px;
+  z-index: 999;
+}

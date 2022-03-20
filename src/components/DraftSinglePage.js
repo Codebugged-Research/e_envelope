@@ -1,6 +1,5 @@
 import { React,useEffect,useState } from 'react';
 import styled from 'styled-components'
-import InsertPhoto from '@material-ui/icons/InsertPhoto';
 import ImageIcon from '@material-ui/icons/Image';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import ArticleIcon from '@material-ui/icons/FileCopy';
@@ -8,9 +7,10 @@ import AudioFileIcon from '@material-ui/icons/Audiotrack';
 import Attachment from '@material-ui/icons/Attachment';
 import Close from '@material-ui/icons/Close';
 import { Button, Modal, ProgressBar, Card } from 'react-bootstrap';
+import InsertPhoto from '@material-ui/icons/InsertPhoto';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { FileUploader } from "react-drag-drop-files";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const fileTypes = ["JPG", "PNG", "GIF", "PDF", "MP3", "MP4", "DOC", "DOCX", "XLS", "XLSX", "PPT", "PPTX", "TXT", "ZIP", "RAR"];
@@ -260,7 +260,6 @@ const SendMailHeader = styled.div`
 const Heading = styled.h6``
 const MessegeWrapper = styled.div`
     flex:auto;
-    textarea{       
 `
 
 const SendMailButton = styled(Button)`
@@ -270,7 +269,6 @@ background:linear-gradient(195deg, rgb(73, 163, 241), rgb(26, 115, 232));
     box-shadow: rgb(26 115 232 / 40%) 0rem 0.875rem 1.625rem -0.75rem, rgb(26 115 232 / 15%) 0rem 0.25rem 1.4375rem 0rem, rgb(26 115 232 / 20%) 0rem 0.5rem 0.625rem -0.3125rem;
 
 }
-
 `
 
 const SendButtonWrapper = styled.div`

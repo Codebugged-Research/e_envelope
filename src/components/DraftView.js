@@ -184,7 +184,9 @@ const DraftView = (props) => {
   const classes = useStyles();
   return (
 
-    <Wrapper> { !checked ?<Alert className='p-2 my-0 sticky-alert' variant={'primary'}>To Access Content, Enter Sub Password</Alert>:''}
+    <Wrapper> {!checked ? 
+        <Alert className='p-2 my-0 sticky-alert' variant={'primary'}>To Access Content, Enter Sub Password</Alert> :
+         <Alert className='p-2 my-0 sticky-alert' variant={'success'}>Sub Password Activated!</Alert>}
       <TopWrapper className='d-flex flex-row justify-content-start align-items-center sticky-sub'>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
          { showSubPassword ? <><div>
@@ -287,7 +289,7 @@ const Wrapper = styled.div`
     height:  calc( 100vh - 70px );
     display:flex;
     flex-direction:column;
-    width:80vw;
+    width:85vw;
     background-color:white;
     border-left:3px solid white;
     `

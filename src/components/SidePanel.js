@@ -244,7 +244,7 @@ const Wrapper = styled.div`
     display:flex;
     
     flex-direction:column;
-    width:20%;
+    width:16%;
     border-left:1px solid darkgray;
     `
 
@@ -304,7 +304,7 @@ const MainWrapper = styled.div`
 position:fixed !important;
     position: -webkit-fixed !important;
     top:70px;
-    width:19%;
+    width:15%;
 background:linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
     height:100%;
     border-radius:1rem;

@@ -8,7 +8,7 @@ import axios from 'axios';
 import SubPassword from '../components/SubPassword';
 
 
-function InboxPage() {
+function InboxPage(props) {
   let timer = JSON.parse(JSON.parse(sessionStorage.getItem('user')).timmer)
 
   if( new Date().getTime() - sessionStorage.getItem('time') > timer*60*1000){
@@ -19,7 +19,7 @@ function InboxPage() {
   const [messeges, setMesseges] = useState([]);
   useEffect(() => {
     data();
-  }, [])
+  }, [props])
   const data = async () => {
     const res = JSON.parse(sessionStorage.getItem('user'))
     setUser(res);

@@ -15,18 +15,18 @@ import { green } from '@material-ui/core/colors';
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
-import { Button, Modal, ProgressBar } from 'react-bootstrap';
 import InsertPhoto from '@material-ui/icons/InsertPhoto';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { useNavigate } from 'react-router-dom';
 import { FileUploader } from "react-drag-drop-files";
+import { Button, Modal, ProgressBar } from 'react-bootstrap';
 const fileTypes = ["JPG", "PNG", "GIF", "PDF", "MP3", "MP4", "DOC", "DOCX", "XLS", "XLSX", "PPT", "PPTX", "TXT", "ZIP", "RAR"];
 
 const SingleEmail = (props) => 
 {
     const navigate = useNavigate();
-    const [showSubPassword, setShowSubPassword] = useState(false)
     const [showReply, setShowReply] = useState(false)
+    const [showSubPassword, setShowSubPassword] = useState(false)
     const [checked,setChecked] = useState(JSON.parse(sessionStorage.getItem('SubPassword')))
     const [SubPassword,setSubPassword] = useState('')
     const [messeges,setMesseges] = useState({
@@ -184,11 +184,13 @@ const SingleEmail = (props) =>
 return (
     <>
     <div className='d-flex flex-column w-80'>
-        { !checked?<Alert className='p-2 my-0' variant={'primary'}>To Access Content, Enter Sub Password</Alert>:''}
-    <TopWrapper className='d-flex flex-row justify-content-start align-items-center '>
+    {!checked ? 
+      <Alert className='p-2 my-0 sticky-alert' variant={'primary'}>To Access Content, Enter Sub Password</Alert> :
+       <Alert className='p-2 my-0 sticky-alert' variant={'success'}>Sub Password Activated!</Alert>}
+    <TopWrapper className='d-flex flex-row justify-content-start align-items-center sticky-sub'>
         <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
-         { showSubPassword ? <div className='p-0' >
-            <Switch
+        {showSubPassword ? <div>
+          <Switch
             checked={checked}
             onChange={subPassword}
             focusVisibleClassName={classes.focusVisible}
@@ -201,9 +203,9 @@ return (
               checked: classes.checked
             }}
           />
-        <input autoComplete="new-password" className='form-control w-50 d-inline' placeholder='Sub Password' 
-        value={SubPassword} onChange={(e)=> setSubPassword(e.target.value)}
-        type="password" maxLength='2' /></div> : null }
+          <input className='form-control w-50 d-inline' autoComplete="new-password" placeholder='Sub Password'
+            value={SubPassword} onChange={(e) => setSubPassword(e.target.value)}
+            type="password" name="subpassword" maxLength='2' /></div> : null}
       </TopWrapper>
     <Wrapper key={messeges._id} className='d-flex flex-column mx-3 rounded my-3'>
         <div>
@@ -462,5 +464,4 @@ const ReplyBox = styled.div`
     background:#e6e6e6;
     padding:0.5rem;
     margin:0.25rem;
-
     `

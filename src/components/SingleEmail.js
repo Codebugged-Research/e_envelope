@@ -4,7 +4,7 @@ import Person from '@material-ui/icons/Person'
 import { Switch } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
 import axios from 'axios';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import ImageIcon from '@material-ui/icons/Image';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import ArticleIcon from '@material-ui/icons/FileCopy';
@@ -22,18 +22,17 @@ import { FileUploader } from "react-drag-drop-files";
 import { Button, Modal, ProgressBar } from 'react-bootstrap';
 const fileTypes = ["JPG", "PNG", "GIF", "PDF", "MP3", "MP4", "DOC", "DOCX", "XLS", "XLSX", "PPT", "PPTX", "TXT", "ZIP", "RAR"];
 
-const SingleEmail = (props) => 
-{
+const SingleEmail = (props) => {
     const navigate = useNavigate();
     const [showReply, setShowReply] = useState(false)
     const [showSubPassword, setShowSubPassword] = useState(false)
-    const [checked,setChecked] = useState(JSON.parse(sessionStorage.getItem('SubPassword')))
-    const [SubPassword,setSubPassword] = useState('')
-    const [messeges,setMesseges] = useState({
-        from:'',
-        subject:'',
-        body:'',
-        attachments:[],
+    const [checked, setChecked] = useState(JSON.parse(sessionStorage.getItem('SubPassword')))
+    const [SubPassword, setSubPassword] = useState('')
+    const [messeges, setMesseges] = useState({
+        from: '',
+        subject: '',
+        body: '',
+        attachments: [],
     })
     const user = JSON.parse(sessionStorage.getItem('user'))
     const token = sessionStorage.getItem('token')
@@ -65,27 +64,26 @@ const SingleEmail = (props) =>
             attachments: attachments,
         }
         console.log(newReply.reply, newReply.attachments)
-        if(newReply.reply !=='' || newReply.attachments.length > 0)
-            {
-        let newMail = messeges
-        newMail.reply.push(newReply);
-        setMesseges(newMail);
-        await axios.put(axios.defaults.baseURL + `api/mail/${props.id}`, newMail, {
-            "headers": {
-                "x-access-token": token
-            }
-        }).then(res => {
-            console.log(res)
-            setMail({
-                recipient: '',
-                subject: '',
-                messege: '',
-                attachments: []
-            })
-            window.location.reload();
-        }).catch(err => console.log(err))
-            }
-        
+        if (newReply.reply !== '' || newReply.attachments.length > 0) {
+            let newMail = messeges
+            newMail.reply.push(newReply);
+            setMesseges(newMail);
+            await axios.put(axios.defaults.baseURL + `api/mail/${props.id}`, newMail, {
+                "headers": {
+                    "x-access-token": token
+                }
+            }).then(res => {
+                console.log(res)
+                setMail({
+                    recipient: '',
+                    subject: '',
+                    messege: '',
+                    attachments: []
+                })
+                window.location.reload();
+            }).catch(err => console.log(err))
+        }
+
     }
     const [progress, setProgress] = useState();
     const uploadUrl = axios.defaults.baseURL + 'api/upload/uploadfile';
@@ -135,200 +133,202 @@ const SingleEmail = (props) =>
                 return <ArticleIcon />;
         }
     }
-    const subPassword = async () =>{
-    if (checked === false)
-    {
-    console.log(user._id ,token)
-    const data = {
-    _id:user._id, 
-    subpassword:SubPassword,
-    }
-    await axios.post(axios.defaults.baseURL+`api/auth/chkSubPassword/`, data, {"headers":{ 
-    "x-access-token": token,
-    }
-    }).then(res=> {
-    sessionStorage.setItem('SubPassword', true)
-    sessionStorage.setItem('time', new Date().getTime())
-    setChecked(true)}).catch(err=> console.log(err))
-    }
-    else 
-    {
-    sessionStorage.setItem('SubPassword', false)
-    setChecked(false)
-    } 
+    const subPassword = async () => {
+        if (checked === false) {
+            console.log(user._id, token)
+            const data = {
+                _id: user._id,
+                subpassword: SubPassword,
+            }
+            await axios.post(axios.defaults.baseURL + `api/auth/chkSubPassword/`, data, {
+                "headers": {
+                    "x-access-token": token,
+                }
+            }).then(res => {
+                sessionStorage.setItem('SubPassword', true)
+                sessionStorage.setItem('time', new Date().getTime())
+                setChecked(true)
+            }).catch(err => console.log(err))
+        }
+        else {
+            sessionStorage.setItem('SubPassword', false)
+            setChecked(false)
+        }
     }
     useEffect(() => {
         data();
     }, [])
     const data = async () => {
         const res = JSON.parse(sessionStorage.getItem('user'))
-        await axios.get(axios.defaults.baseURL+`api/mail/${props.id}`, {"headers":{ 
-            "x-access-token": token,
-          }
-        }).then(res=>{console.log(res); setMesseges(res.data);
+        await axios.get(axios.defaults.baseURL + `api/mail/${props.id}`, {
+            "headers": {
+                "x-access-token": token,
+            }
+        }).then(res => {
+            console.log(res); setMesseges(res.data);
         })
-        }
-        const useStyles = makeStyles({
-            switchBase: {
-              "&$checked": {
+    }
+    const useStyles = makeStyles({
+        switchBase: {
+            "&$checked": {
                 color: green[500]
-              },
-              "&$checked + $track": {
-                backgroundColor: green[500]
-              }
             },
-            checked: {},
-            track: {}
-          });
-          const classes = useStyles();
-return (
-    <>
-    <div className='d-flex flex-column w-80'>
-    {!checked ? 
-      <Alert className='p-2 my-0 sticky-alert' variant={'primary'}>To Access Content, Enter Sub Password</Alert> :
-       <Alert className='p-2 my-0 sticky-alert' variant={'success'}>Sub Password Activated!</Alert>}
-    <TopWrapper className='d-flex flex-row justify-content-start align-items-center sticky-sub'>
-        <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
-        {showSubPassword ? <div>
-          <Switch
-            checked={checked}
-            onChange={subPassword}
-            focusVisibleClassName={classes.focusVisible}
-            disableRipple
-            classes={{
-              root: classes.root,
-              switchBase: classes.switchBase,
-              thumb: classes.thumb,
-              track: classes.track,
-              checked: classes.checked
-            }}
-          />
-          <input className='form-control w-50 d-inline' autoComplete="new-password" placeholder='Sub Password'
-            value={SubPassword} onChange={(e) => setSubPassword(e.target.value)}
-            type="password" name="subpassword" maxLength='2' /></div> : null}
-      </TopWrapper>
-    <Wrapper key={messeges._id} className='d-flex flex-column mx-3 rounded my-3'>
-        <div>
-        <Link to='/inbox'><ArrowBackIcon color="action" /></Link>
-        <Subject className='mx-5 my-3'>{ checked ? messeges.subject : '#'.repeat(messeges.subject.length) }</Subject>
-        </div>
-        <ImageAddressWrapper className='d-flex flex-row mx-1'>
-        <Person/>
-        <AddressTimeWrapper className='d-flex flex-column mx-3'>
-            <AddressID>{ checked ? messeges.from : '#'.repeat(5)+'EE.com' }</AddressID>
-            <DateTime>{new Date(messeges.createdAt).toLocaleString()}</DateTime>
-        </AddressTimeWrapper>
-        <button className='btn-sm btn-dark' onClick={ShowReply}>Reply</button>
-        </ImageAddressWrapper>
-        <MessegeWrapper className="d-flex flex-column mx-5 my-3">
-            <Messege className='line-break-anywhere' >{ checked ? messeges.body : '#'.repeat(messeges.body.length) }</Messege>
-            <hr/>
-         {/*show attachments  */}
-         <div className='d-flex flex-row justify-content-start-start align-items-center'>
-                        <span className='mx-2 my-1'>Attachments</span>
-                        <span className='mx-2 my-1'>{messeges.attachments.length}</span>
+            "&$checked + $track": {
+                backgroundColor: green[500]
+            }
+        },
+        checked: {},
+        track: {}
+    });
+    const classes = useStyles();
+    return (
+        <>
+            <div className='d-flex flex-column w-80'>
+                {!checked ?
+                    <Alert className='p-2 my-0 sticky-alert' variant={'primary'}>To Access Content, Enter Sub Password</Alert> :
+                    <Alert className='p-2 my-0 sticky-alert' variant={'success'}>Sub Password Activated!</Alert>}
+                <TopWrapper className='d-flex flex-row justify-content-start align-items-center sticky-sub'>
+                    <LockIcon onClick={() => (setShowSubPassword(showSubPassword ? false : true))} />
+                    {showSubPassword ? <div>
+                        <Switch
+                            checked={checked}
+                            onChange={subPassword}
+                            focusVisibleClassName={classes.focusVisible}
+                            disableRipple
+                            classes={{
+                                root: classes.root,
+                                switchBase: classes.switchBase,
+                                thumb: classes.thumb,
+                                track: classes.track,
+                                checked: classes.checked
+                            }}
+                        />
+                        <input className='form-control w-50 d-inline' autoComplete="new-password" placeholder='Sub Password'
+                            value={SubPassword} onChange={(e) => setSubPassword(e.target.value)}
+                            type="password" name="subpassword" maxLength='2' /></div> : null}
+                </TopWrapper>
+                <Wrapper key={messeges._id} className='d-flex flex-column mx-3 rounded my-3'>
+                    <div>
+                        <Link to='/inbox'><ArrowBackIcon color="action" /></Link>
+                        <Subject className='mx-5 my-3'>{checked ? messeges.subject : '#'.repeat(messeges.subject.length)}</Subject>
                     </div>
-                    {/* attachments grid */}
-                    <div className='d-flex flex-row justify-content-between align-items-center'>
-                        {messeges.attachments.map((item, index) => (
-                            <div key={index} className='d-flex flex-column align-items-center'>
-                                <div className='d-flex flex-row align-items-center'>
-                                    <Card variant="outlined"><a target={checked ?"_blank":''} href={checked ? item.fileUrl:'#'}  className="p-3"> {getAttachmentIcon(item.fileType)} </a></Card>
+                    <ImageAddressWrapper className='d-flex flex-row mx-1'>
+                        <Person />
+                        <AddressTimeWrapper className='d-flex flex-column mx-3'>
+                            <AddressID>{checked ? messeges.from : '#'.repeat(messeges.from.length - 5) + 'EE.com'}</AddressID>
+                            <DateTime>{new Date(messeges.createdAt).toLocaleString()}</DateTime>
+                        </AddressTimeWrapper>
+                        <button className='btn-sm btn-dark' onClick={ShowReply}>Reply</button>
+                    </ImageAddressWrapper>
+                    <MessegeWrapper className="d-flex flex-column mx-5 my-3">
+                        <Messege className='line-break-anywhere' >{checked ? messeges.body : '#'.repeat(messeges.body.length)}</Messege>
+                        <hr />
+                        {/*show attachments  */}
+                        <div className='d-flex flex-row justify-content-start-start align-items-center'>
+                            <span className='mx-2 my-1'>Attachments</span>
+                            <span className='mx-2 my-1'>{messeges.attachments.length}</span>
+                        </div>
+                        {/* attachments grid */}
+                        <div className='d-flex flex-row justify-content-between align-items-center'>
+                            {messeges.attachments.map((item, index) => (
+                                <div key={index} className='d-flex flex-column align-items-center'>
+                                    <div className='d-flex flex-row align-items-center'>
+                                        <Card variant="outlined"><a target={checked ? "_blank" : ''} href={checked ? item.fileUrl : '#'} className="p-3"> {getAttachmentIcon(item.fileType)} </a></Card>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-        </MessegeWrapper>
-        <MessegeReplyWrapper>
-            <h4>REPLIES:</h4>
-        {
-                  messeges.reply?
-                    messeges.reply.map(({reply, from, attachments})=>(
-                        <ReplyBox><b>From: {from}</b>
-                                <p> Messege: {reply} </p>
-                                <div className='d-flex flex-row justify-content-start-start align-items-center'>
-                        <span className='my-1'>Attachments:</span><span className='mx-1 my-1'>{attachments.length}</span>
-                    </div>
-                    {/* attachments grid */}
-                    <div className='d-flex flex-row justify-content-between align-items-center'>
-                        {attachments.map((item, index) => (
-                            <div key={index} className='d-flex flex-column align-items-center'>
-                                <div className='d-flex flex-row align-items-center'>
-                                    <Card variant="outlined"><a target={checked ?"_blank":''} href={checked ? item.fileUrl:'#'}  className="p-3"> {getAttachmentIcon(item.fileType)} </a></Card>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                                </ReplyBox>
-                    )):''
-                }
-        
-        </MessegeReplyWrapper>
-        {showReply? <div className='d-flex flex-column w-100 '>
-    <ReplyWrapper className='d-flex flex-column container w-100 my-3'>
-    <ReplySendMailWrapper className='send-mail-wrapper d-flex w-100 flex-column p-0'>
-                <ReplySendMailHeader className='bg-dark text-white p-1 d-flex flex-row justify-content-between align-items-center'>
-                    <ReplyHeading className='mx-2 my-1'>Reply</ReplyHeading>
-                    <CancelIcon onClick={()=> setShowReply(false)} />
-                </ReplySendMailHeader>
-                <form onSubmit={sendMail} className='d-flex flex-column shadow justify-content-center align-items-start'>
-                    <ReplyToSubjectWrapper className='w-100'>
-                        <input type='text' onChange={handleInput} disabled value={'To: '+ mail.recipient} placeholder='To' name='recipient' className='form-control' />
-                        <input type='text' onChange={handleInput} disabled value={'Subject: '+ mail.subject} placeholder='Subject' name='subject' className='form-control' />
-                    </ReplyToSubjectWrapper>
-                    <ReplyMessegeWrapper className='w-100'>
-                        <textarea onChange={handleInput} value={mail.messege} placeholder='Reply Messege' name='messege' className='form-control' />
-                    </ReplyMessegeWrapper>
-                    {/*show attachments  */}
-                    <div className='d-flex flex-row justify-content-between align-items-center'>
-                        <span className='mx-2 my-1'>Attachments</span>
-                        <span className='mx-2 my-1'>{attachments.length}</span>
-                    </div>
-                    {/* attachments grid */}
-                    <div className='d-flex flex-row justify-content-between align-items-center'>
-                        {attachments.map((item, index) => (
-                            <div key={index} className='d-flex flex-column align-items-center'>
-                                <div className='d-flex flex-row align-items-center'>
-                                    <Card variant="outlined"><a target="_blank" href={
-                                        item.fileUrl} className="p-3"> {getAttachmentIcon(item.fileType)} </a></Card>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    <ReplySendButtonWrapper>
-                        <ReplySendMailButton type="submit" className='btn-primary me-3'>Envelope &amp; Send</ReplySendMailButton>
-                        <InsertPhoto className="text-muted me-1" onClick={() => setLgShow(true)} />
-                        <Attachment className="text-muted mx-1" onClick={() => setLgShow(true)} />
-                    </ReplySendButtonWrapper>
-                </form>
-            </ReplySendMailWrapper>
-            <Modal
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                show={lgShow}
-                onHide={() => setLgShow(false)}
-                centered
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        Add Attachments
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <FileUploader handleChange={handleChange} name="file" types={fileTypes} /><br></br>
-                    {progress > 0.0 ? <ProgressBar animated now={progress} label={`${progress}%`} variant="success" /> : null}<br></br>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={() => setLgShow(false)}>Close</Button>
-                </Modal.Footer>
-            </Modal>
-    </ReplyWrapper>
-    </div> : ''}
-    </Wrapper>
-    
-    </div>
-    </>
-  )
+                            ))}
+                        </div>
+                    </MessegeWrapper>
+                    <MessegeReplyWrapper>
+                        <h4>REPLIES:</h4>
+                        {
+                            messeges.reply ?
+                                messeges.reply.map(({ reply, from, attachments }) => (
+                                    <ReplyBox><b>From: {checked ? from : '#'.repeat(from.length-5) + 'EE.com'}</b>
+                                        <p> Messege: {checked ? reply : '#'.repeat(reply.length)} </p>
+                                        <div className='d-flex flex-row justify-content-start-start align-items-center'>
+                                            <span className='my-1'>Attachments:</span><span className='mx-1 my-1'>{attachments.length}</span>
+                                        </div>
+                                        {/* attachments grid */}
+                                        <div className='d-flex flex-row justify-content-between align-items-center'>
+                                            {attachments.map((item, index) => (
+                                                <div key={index} className='d-flex flex-column align-items-center'>
+                                                    <div className='d-flex flex-row align-items-center'>
+                                                        <Card variant="outlined"><a target={checked ? "_blank" : ''} href={checked ? item.fileUrl : '#'} className="p-3"> {getAttachmentIcon(item.fileType)} </a></Card>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </ReplyBox>
+                                )) : ''
+                        }
+
+                    </MessegeReplyWrapper>
+                    {showReply ? <div className='d-flex flex-column w-100 '>
+                        <ReplyWrapper className='d-flex flex-column container w-100 my-3'>
+                            <ReplySendMailWrapper className='send-mail-wrapper d-flex w-100 flex-column p-0'>
+                                <ReplySendMailHeader className='bg-dark text-white p-1 d-flex flex-row justify-content-between align-items-center'>
+                                    <ReplyHeading className='mx-2 my-1'>Reply</ReplyHeading>
+                                    <CancelIcon onClick={() => setShowReply(false)} />
+                                </ReplySendMailHeader>
+                                <form onSubmit={sendMail} className='d-flex flex-column shadow justify-content-center align-items-start'>
+                                    <ReplyToSubjectWrapper className='w-100'>
+                                        <input type='text' onChange={handleInput} disabled value={'To: ' + mail.recipient} placeholder='To' name='recipient' className='form-control' />
+                                        <input type='text' onChange={handleInput} disabled value={'Subject: ' + mail.subject} placeholder='Subject' name='subject' className='form-control' />
+                                    </ReplyToSubjectWrapper>
+                                    <ReplyMessegeWrapper className='w-100'>
+                                        <textarea onChange={handleInput} value={mail.messege} placeholder='Reply Messege' name='messege' className='form-control' />
+                                    </ReplyMessegeWrapper>
+                                    {/*show attachments  */}
+                                    <div className='d-flex flex-row justify-content-between align-items-center'>
+                                        <span className='mx-2 my-1'>Attachments</span>
+                                        <span className='mx-2 my-1'>{attachments.length}</span>
+                                    </div>
+                                    {/* attachments grid */}
+                                    <div className='d-flex flex-row justify-content-between align-items-center'>
+                                        {attachments.map((item, index) => (
+                                            <div key={index} className='d-flex flex-column align-items-center'>
+                                                <div className='d-flex flex-row align-items-center'>
+                                                    <Card variant="outlined"><a target="_blank" href={
+                                                        item.fileUrl} className="p-3"> {getAttachmentIcon(item.fileType)} </a></Card>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <ReplySendButtonWrapper>
+                                        <ReplySendMailButton type="submit" className='btn-primary me-3'>Envelope &amp; Send</ReplySendMailButton>
+                                        <InsertPhoto className="text-muted me-1" onClick={() => setLgShow(true)} />
+                                        <Attachment className="text-muted mx-1" onClick={() => setLgShow(true)} />
+                                    </ReplySendButtonWrapper>
+                                </form>
+                            </ReplySendMailWrapper>
+                            <Modal
+                                size="lg"
+                                aria-labelledby="contained-modal-title-vcenter"
+                                show={lgShow}
+                                onHide={() => setLgShow(false)}
+                                centered
+                            >
+                                <Modal.Header closeButton>
+                                    <Modal.Title id="contained-modal-title-vcenter">
+                                        Add Attachments
+                                    </Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <FileUploader handleChange={handleChange} name="file" types={fileTypes} /><br></br>
+                                    {progress > 0.0 ? <ProgressBar animated now={progress} label={`${progress}%`} variant="success" /> : null}<br></br>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button onClick={() => setLgShow(false)}>Close</Button>
+                                </Modal.Footer>
+                            </Modal>
+                        </ReplyWrapper>
+                    </div> : ''}
+                </Wrapper>
+
+            </div>
+        </>
+    )
 }
 
 export default SingleEmail
@@ -341,7 +341,7 @@ const Wrapper = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     `
-    const TopWrapper = styled.div`
+const TopWrapper = styled.div`
     font-size:16px;
     padding: 20px;
     background-color:#e3e3e3a1;
@@ -382,7 +382,7 @@ const ReplyWrapper = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     `
-    const ReplyTopWrapper = styled.div`
+const ReplyTopWrapper = styled.div`
     font-size:16px;
     padding: 20px;
     background-color:#e3e3e3a1;

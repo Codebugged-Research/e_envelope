@@ -79,8 +79,10 @@ function LoginPage() {
                     console.log(response)
                     navigate("/inbox")
                 })
-                .catch(err => setError({ ...error, ['LoginAuthentication']: true }))
+                .catch(err => setError({ ...error, ['LoginAuthentication']: true })
+                )
         }
+        navigate("/inbox")
     }
     // SIGNUP FUNCTIONALITIES
     const [email, setEmail] = useState('')
@@ -183,9 +185,9 @@ function LoginPage() {
                         <Link to='/forget' className='text-decoration-none'>Forget Password</Link>
                     </div>
 
-                    <a className='text-primary float-end text-decoration-none' onClick={() => setLgShow(true)}>
+                    <Link to="/" className='text-primary float-end text-decoration-none' onClick={() => setLgShow(true)} >
                         Create an account?
-                    </a>
+                    </Link>
 
                 </form>
                 <Modal
